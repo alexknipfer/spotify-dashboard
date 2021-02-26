@@ -1,10 +1,10 @@
-import Button from '@/components/button';
-import Heading from '@/components/heading';
-import AuthLayout from '@/layouts/auth-layout';
-import { NextPage } from 'next';
+import Button from '@/components/Button';
+import Heading from '@/components/Heading';
+import AuthLayout from '@/layouts/AuthLayout';
+import { CustomPage } from '@/interfaces/CustomPage';
 import { signIn } from 'next-auth/client';
 
-const Login: NextPage = () => {
+const LoginPage: CustomPage = () => {
   return (
     <AuthLayout>
       <Heading level="h1" className="mb-10">
@@ -20,4 +20,6 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+LoginPage.redirectAuthenticatedTo = '/';
+
+export default LoginPage;

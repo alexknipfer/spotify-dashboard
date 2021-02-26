@@ -1,27 +1,11 @@
-import { NextPage } from 'next';
-import { signIn, signOut, useSession } from 'next-auth/client';
-import withAuthentication from 'hoc/withAuthentication';
+import { CustomPage } from '@/interfaces/CustomPage';
+import Dashboard from '@/components/dashboard/Dashboard';
 
-const Home: NextPage = () => {
-  const [session] = useSession();
-
-  return (
-    <>
-      <div className="font-bold text-white text-5xl">alexanderknipfer</div>
-      {!session && (
-        <div className="text-white">
-          Not signed in <br />
-          <button onClick={() => signIn()}>Sign in</button>
-        </div>
-      )}
-      {session && (
-        <div className="text-white">
-          Signed in as {session.user.email} <br />
-          <button onClick={() => signOut()}>Sign out</button>
-        </div>
-      )}
-    </>
-  );
+const Home: CustomPage = () => {
+  return <Dashboard />;
 };
 
-export default withAuthentication(Home);
+Home.redirectUnauthenticatedTo = '/login';
+Home.skeletonLoader = <Dashboard isLoading />;
+
+export default Home;

@@ -24,6 +24,7 @@ const options: InitOptions = {
     },
     async session(session, user) {
       session.user = user;
+      session.accessToken = (user as any).accessToken;
 
       return session;
     },
