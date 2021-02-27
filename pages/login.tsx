@@ -38,6 +38,4 @@ const LoginPage: CustomPage = () => {
   );
 };
 
-LoginPage.redirectAuthenticatedTo = '/';
-
 export default LoginPage;
