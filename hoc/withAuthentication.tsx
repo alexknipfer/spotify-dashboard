@@ -1,3 +1,4 @@
+import { NoPageFlicker } from '@/components/NoPageFlicker';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -15,13 +16,7 @@ function withAuthentication<Props>(
       }
     }, [session, router, loading]);
 
-    return session ? (
-      <WrappedComponent {...props} />
-    ) : (
-      <div className="flex items-center justify-center h-screen w-full">
-        loading...
-      </div>
-    );
+    return session ? <WrappedComponent {...props} /> : <NoPageFlicker />;
   };
 
   return RequiresAuthentication;
