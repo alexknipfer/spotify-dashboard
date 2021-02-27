@@ -9,6 +9,7 @@ const authToken = Buffer.from(
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const ME_ENDPOINT = 'https://api.spotify.com/v1/me';
+const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
 
 export const getAccessToken = async (
   refreshToken: string,
@@ -30,6 +31,23 @@ export const getAccessToken = async (
 
 export const getProfile = async (accessToken: string) => {
   return fetch(ME_ENDPOINT, {
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+  });
+};
+
+export const getTopTracksOrArtists = async (
+  accessToken: string,
+  type: 'artists' | 'tracks',
+  limit = 50,
+) => {
+  const queryParams = querystring.stringify({
+    limit,
+    time_range: 'long_term',
+  });
+
+  return fetch(`${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?${queryParams}`, {
     headers: {
       Authorization: `Bearer ${accessToken}`,
     },
