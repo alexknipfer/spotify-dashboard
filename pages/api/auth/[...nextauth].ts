@@ -1,7 +1,34 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { InitOptions } from 'next-auth';
+import NextAuth, { InitOptions, User } from 'next-auth';
 import Providers from 'next-auth/providers';
 import { appConfig } from '@/lib/appConfig';
+import { getAccessToken } from '@/lib/spotify';
+
+interface JWT {
+  accessToken: string;
+  accessTokenExpires: number;
+  refreshToken: string;
+  user: User;
+  error?: string;
+}
+
+const refreshToken = async (token: JWT) => {
+  try {
+    const refreshedTokens = await getAccessToken(token.refreshToken);
+
+    return {
+      ...token,
+      accessToken: refreshedTokens.access_token,
+      accessTokenExpires: Date.now() + refreshedTokens.expires_in * 1000,
+      refreshToken: refreshedTokens.refresh_token ?? token.refreshToken,
+    };
+  } catch (error) {
+    return {
+      ...token,
+      error: 'RefreshAccessTokenError',
+    };
+  }
+};
 
 const options: InitOptions = {
   providers: [
@@ -14,17 +41,30 @@ const options: InitOptions = {
     signIn: '/login',
   },
   callbacks: {
-    async jwt(token, _, account) {
-      if (account) {
-        token.id = account.id;
-        token.accessToken = account.accessToken;
+    async jwt(token: JWT, user, account) {
+      if (account && user) {
+        return {
+          accessToken: account.accessToken,
+          accessTokenExpires: Date.now() + account.expires_in * 1000,
+          refreshToken: account.refresh_token,
+          user,
+        };
       }
 
-      return token;
+      if (Date.now() < token.accessTokenExpires) {
+        return token;
+      }
+
+      return refreshToken(token);
     },
-    async session(session, user) {
-      session.user = user;
-      session.accessToken = (user as any).accessToken;
+    async session(session, token) {
+      if (token) {
+        return {
+          user: token.user,
+          accessToken: token.accessToken,
+          error: token.error,
+        };
+      }
 
       return session;
     },
