@@ -6,6 +6,5 @@ const Home: CustomPage = () => {
 };
 
 Home.redirectUnauthenticatedTo = '/login';
-Home.skeletonLoader = <Dashboard isLoading />;
 
 export default Home;

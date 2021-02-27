@@ -19,7 +19,7 @@ const DashboardHeader: React.FC<Props> = ({ isLoading, profile }) => {
         <Fragment>
           <div className="rounded-full bg-gray-600 h-40 w-40 mb-6" />
           <div className="text-white font-bold text-5xl mb-6">
-            {profile.display_name}
+            {profile?.display_name}
           </div>
           <div className="animate-pulse bg-gray-600 w-96 h-11 rounded mb-6" />
         </Fragment>
