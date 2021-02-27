@@ -12,6 +12,8 @@ interface JWT {
   error?: string;
 }
 
+const SPOTIFY_SCOPES = ['user-read-email', 'user-top-read'];
+
 const refreshToken = async (token: JWT) => {
   try {
     const refreshedTokens = await getAccessToken(token.refreshToken);
@@ -35,6 +37,7 @@ const options: InitOptions = {
     Providers.Spotify({
       clientId: appConfig.spotify.clientId,
       clientSecret: appConfig.spotify.clientSecret,
+      scope: SPOTIFY_SCOPES.join(' '),
     }),
   ],
   pages: {
