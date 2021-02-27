@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Dashboard: React.FC<Props> = () => {
-  const { data, error } = useSWR<SpotifyProfile>('/api/get-profile');
+  const { data } = useSWR<SpotifyProfile>('/api/get-profile');
 
   return <DashboardHeader isLoading={!data} profile={data} />;
 };
