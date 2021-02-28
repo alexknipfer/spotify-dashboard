@@ -19,7 +19,7 @@
       "@/components/*": ["components/*"],
       "@/layouts/*": ["layouts/*"],
       "@/lib/*": ["lib/*"],
-      "@/interfaces/*": ["interfaces/*"],
+      "@/models/*": ["models/*"],
       "@/styles/*": ["styles/*"]
     }
   },

@@ -1,5 +1,5 @@
 import { Provider } from 'next-auth/client';
-import { CustomAppProps } from '@/interfaces/CustomPage';
+import { CustomAppProps } from '@/models/CustomPage';
 import { NextPage } from 'next';
 import { SWRConfig } from 'swr';
 

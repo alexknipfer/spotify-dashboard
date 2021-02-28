@@ -1,7 +1,7 @@
 import Button from '@/components/Button';
 import Heading from '@/components/Heading';
 import AuthLayout from '@/layouts/AuthLayout';
-import { CustomPage } from '@/interfaces/CustomPage';
+import { CustomPage } from '@/models/CustomPage';
 import { signIn, useSession } from 'next-auth/client';
 import {
   NoPageFlicker,

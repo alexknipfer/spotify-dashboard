@@ -1,4 +1,4 @@
-import { CustomPage } from '@/interfaces/CustomPage';
+import { CustomPage } from '@/models/CustomPage';
 import Dashboard from '@/components/dashboard/Dashboard';
 import withAuthentication from 'hoc/WithAuthentication';
 import DashboardLayout from '@/layouts/DashboardLayout';
