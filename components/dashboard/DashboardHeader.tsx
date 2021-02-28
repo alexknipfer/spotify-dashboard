@@ -1,9 +1,9 @@
-import { SpotifyProfile } from '@/interfaces/Spotify';
+import { SpotifyProfile } from '@/models/Spotify';
 import { Fragment } from 'react';
 import classnames from 'classnames';
+import Statistic from '@/components/dashboard/Statistic';
 
 import ProfileIcon from '../../public/static/icons/profile_icon.svg';
-import Statistic from './Statistic';
 
 interface Props {
   isLoading: boolean;
@@ -28,9 +28,9 @@ const DashboardHeader: React.FC<Props> = ({ isLoading, profile }) => {
           <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7 mb-6">
             <ProfileIcon fill="#fff" />
           </div>
-          <div className="text-white font-bold text-5xl mb-6">
+          <h1 className="text-white font-bold text-3xl md:text-5xl mb-6">
             {profile.display_name}
-          </div>
+          </h1>
           <div className="flex">
             <Statistic label="Followers" count={profile.followers.total} />
             <Statistic label="Following" count={44} />

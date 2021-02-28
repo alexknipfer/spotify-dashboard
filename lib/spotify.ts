@@ -1,6 +1,6 @@
 import querystring from 'querystring';
 
-import { SpotifyTokenResponse } from '@/interfaces/Spotify';
+import { SpotifyTokenResponse } from '@/models/Spotify';
 import { appConfig } from '@/lib/appConfig';
 
 const authToken = Buffer.from(
