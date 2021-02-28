@@ -3,14 +3,36 @@ import { millisToMinutesAndSeconds } from '@/lib/utils';
 import Image from 'next/image';
 
 interface Props {
-  name: string;
-  album: SpotifyAlbum;
-  duration: number;
-  artists: Artist[];
+  name?: string;
+  album?: SpotifyAlbum;
+  duration?: number;
+  artists?: Artist[];
+  isLoading?: boolean;
 }
 
-const TrackCard: React.FC<Props> = ({ name, album, duration, artists }) => {
+const TrackCard: React.FC<Props> = ({
+  name,
+  album,
+  duration,
+  artists = [],
+  isLoading,
+}) => {
   const artistNames = artists.map((artist) => artist.name).join(', ');
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center py-4 animate-pulse">
+        <div className="h-12 w-12 bg-gray-600 mr-4" />
+        <div className="w-9/12">
+          <div className="flex justify-between w-full">
+            <div className="h-4 w-40 rounded bg-gray-600 mb-2" />
+            <div className="h-3 w-6 rounded bg-gray-600" />
+          </div>
+          <div className="h-3 w-56 rounded bg-gray-600" />
+        </div>
+      </div>
+    );
+  }
 
   return (
     <article className="flex items-center py-4">
