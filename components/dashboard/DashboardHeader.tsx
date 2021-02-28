@@ -20,13 +20,13 @@ const DashboardHeader: React.FC<Props> = ({ isLoading, profile }) => {
       {isLoading ? (
         <Fragment>
           <div className="rounded-full bg-gray-600 h-40 w-40 mb-6" />
-          <div className="animate-pulse bg-gray-600 w-60 h-11 rounded mb-6" />
-          <div className="animate-pulse bg-gray-600 w-96 h-11 rounded mb-6" />
+          <div className=" bg-gray-600 w-7/12 md:w-60 h-7 md:h-11 rounded mb-6" />
+          <div className=" bg-gray-600 w-9/12 md:w-96 h-11 rounded mb-6" />
         </Fragment>
       ) : (
         <Fragment>
           <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7 mb-6">
-            <ProfileIcon fill="#fff" />
+            <ProfileIcon fill="#fff" width="100%" height="100%" />
           </div>
           <h1 className="text-white font-bold text-3xl md:text-5xl mb-6">
             {profile.display_name}
