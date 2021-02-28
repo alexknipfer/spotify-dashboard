@@ -14,7 +14,7 @@ module.exports = {
     extend: {
       colors: {
         'spotify-gray': 'rgb(24, 24, 24)',
-        'spotify-green': 'rgb(29, 185, 84)',
+        'spotify-green': '#1db954',
         'spotify-light-green': 'rgb(30, 215, 96)',
       },
       fontFamily: {
