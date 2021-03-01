@@ -3,15 +3,20 @@ import querystring from 'querystring';
 import { SpotifyTokenResponse } from '@/models/Spotify';
 import { appConfig } from '@/lib/appConfig';
 
-const authToken = Buffer.from(
-  `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
-).toString('base64');
-
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const ME_ENDPOINT = 'https://api.spotify.com/v1/me';
 const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
 const FOLLOWED_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/following`;
 const PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
+
+const authToken = Buffer.from(
+  `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
+).toString('base64');
+
+const getHeaders = (accessToken: string) =>
+  new Headers({
+    Authorization: `Bearer ${accessToken}`,
+  });
 
 export const getAccessToken = async (
   refreshToken: string,
@@ -33,9 +38,7 @@ export const getAccessToken = async (
 
 export const getProfile = async (accessToken: string) => {
   return fetch(ME_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: getHeaders(accessToken),
   });
 };
 
@@ -50,24 +53,18 @@ export const getTopTracksOrArtists = async (
   });
 
   return fetch(`${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?${queryParams}`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: getHeaders(accessToken),
   });
 };
 
 export const getFollowedArtists = async (accessToken: string) => {
   return fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: getHeaders(accessToken),
   });
 };
 
 export const getPlaylists = async (accessToken: string) => {
   return fetch(PLAYLISTS_ENDPOINT, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
+    headers: getHeaders(accessToken),
   });
 };
