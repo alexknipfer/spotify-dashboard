@@ -1,7 +1,7 @@
 import classnames from 'classnames';
 
 interface CustomProps {
-  variant: 'primary';
+  variant: 'primary' | 'ghost';
   buttonSize?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit';
   href?: string;
@@ -18,10 +18,13 @@ const Button: React.FC<Props> = ({
   ...props
 }) => {
   const className = classnames(
-    'bg-spotify-green hover:bg-spotify-light-green transition duration-200 text-white rounded-full uppercase tracking-widest font-bold',
+    'transition duration-200 text-white rounded-full uppercase tracking-widest font-bold',
     {
       'py-3 px-6 text-xs': buttonSize === 'small',
       'py-4 px-10 text-base': buttonSize === 'medium',
+      'bg-spotify-green hover:bg-spotify-light-green': variant === 'primary',
+      'bg-transparent border border-white hover:bg-white hover:text-spotify-gray':
+        variant === 'ghost',
     },
   );
 
@@ -34,11 +37,7 @@ const Button: React.FC<Props> = ({
   }
 
   return (
-    <button
-      type={type}
-      {...props}
-      className="bg-spotify-green hover:bg-spotify-light-green transition duration-200 text-white py-4 px-10 rounded-full uppercase tracking-widest font-bold"
-    >
+    <button type={type} {...props} className={className}>
       {children}
     </button>
   );
