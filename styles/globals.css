@@ -18,11 +18,7 @@
   src: url(/fonts/CircularStd-Book.woff2) format('woff2');
 }
 
-html,
-body,
-body > div:first-child,
-div#__next,
-div#__next > div {
+body {
   min-height: 100%;
 }
 
