@@ -36,8 +36,10 @@ const TrackCard: React.FC<Props> = ({
 
   return (
     <article className="flex items-center py-4">
-      <Image src={album.images[0].url} width={50} height={50} layout="fixed" />
-      <div className="ml-5 truncate w-9/12">
+      <div className="flex-shrink-0 h-thumbnail w-thumbnail">
+        <Image src={album.images[0].url} width={50} height={50} />
+      </div>
+      <div className="ml-5 truncate w-full">
         <div className="flex justify-between">
           <div className="text-base text-white truncate mr-2">{name}</div>
           <span className="text-gray-400 text-sm">

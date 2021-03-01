@@ -39,41 +39,45 @@ const Dashboard: React.FC<Props> = () => {
         followingCount={data?.followingCount}
         playlistCount={data?.playlistCount}
       />
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-20">
-        <ul>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-20">
+        <section>
           <h2 className="text-xl font-bold mb-5">Top Artists of All Time</h2>
-          {topStats ? (
-            topStats?.topArtists?.items?.map((artistDetails) => (
-              <li key={artistDetails.id}>
-                <ArtistCard
-                  id={artistDetails.id}
-                  name={artistDetails.name}
-                  image={artistDetails.images[0]}
-                />
-              </li>
-            ))
-          ) : (
-            <SkeletonList skeletonComponent={<ArtistCard isLoading />} />
-          )}
-        </ul>
-        <ul>
+          <ul>
+            {topStats ? (
+              topStats?.topArtists?.items?.map((artistDetails) => (
+                <li key={artistDetails.id}>
+                  <ArtistCard
+                    id={artistDetails.id}
+                    name={artistDetails.name}
+                    image={artistDetails.images[0]}
+                  />
+                </li>
+              ))
+            ) : (
+              <SkeletonList skeletonComponent={<ArtistCard isLoading />} />
+            )}
+          </ul>
+        </section>
+        <section>
           <h2 className="text-xl font-bold mb-5">Top Tracks of All Time</h2>
-          {topStats ? (
-            topStats?.topTracks?.items?.map((trackDetails) => (
-              <li key={trackDetails.id}>
-                <TrackCard
-                  name={trackDetails.name}
-                  duration={trackDetails.duration_ms}
-                  artists={trackDetails.artists}
-                  album={trackDetails.album}
-                />
-              </li>
-            ))
-          ) : (
-            <SkeletonList skeletonComponent={<TrackCard isLoading />} />
-          )}
-        </ul>
-      </section>
+          <ul>
+            {topStats ? (
+              topStats?.topTracks?.items?.map((trackDetails) => (
+                <li key={trackDetails.id}>
+                  <TrackCard
+                    name={trackDetails.name}
+                    duration={trackDetails.duration_ms}
+                    artists={trackDetails.artists}
+                    album={trackDetails.album}
+                  />
+                </li>
+              ))
+            ) : (
+              <SkeletonList skeletonComponent={<TrackCard isLoading />} />
+            )}
+          </ul>
+        </section>
+      </div>
     </Fragment>
   );
 };
