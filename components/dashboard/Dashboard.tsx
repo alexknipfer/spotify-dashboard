@@ -6,8 +6,8 @@ import {
 } from '@/models/Spotify';
 import { Fragment } from 'react';
 import useSWR from 'swr';
-import ArtistCard from '@/components/dashboard/ArtistCard';
-import TrackCard from '@/components/dashboard/TrackCard';
+import ArtistCard from '@/components/ArtistCard';
+import TrackCard from '@/components/TrackCard';
 import { APIRoute } from '@/models/APIRoute.enum';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';

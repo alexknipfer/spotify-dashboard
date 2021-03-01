@@ -9,7 +9,7 @@ import {
   SpotifyRecentlyPlayed,
 } from '@/models/Spotify';
 import SkeletonList from '@/components/SkeletonList';
-import TrackCard from '@/components/dashboard/TrackCard';
+import TrackCard from '@/components/TrackCard';
 
 const Recent: NextPage = () => {
   const { data: recentlyPlayed } = useSWR<
