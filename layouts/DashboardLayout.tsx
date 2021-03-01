@@ -3,6 +3,7 @@ import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
 
+import HistoryIcon from '../public/static/icons/history.svg';
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
 import SpotifyLogo from '../public/static/icons/spotify_logo.svg';
 
@@ -11,6 +12,11 @@ const navItems = [
     name: 'Profile',
     href: '/',
     icon: <ProfileIcon className="fill-current" />,
+  },
+  {
+    name: 'Recent',
+    href: '/recent',
+    icon: <HistoryIcon className="fill-current" />,
   },
 ];
 
@@ -28,7 +34,7 @@ const DashboardLayout: React.FC = ({ children }) => {
             <Link key={navItem.href} href={navItem.href}>
               <a
                 className={classnames(
-                  'text-xs flex items-center flex-col justify-center h-full px-8 hover:bg-spotify-gray hover:text-white',
+                  'text-xs flex items-center flex-col justify-center h-full px-8 border-b-2 border-black hover:bg-spotify-gray hover:text-white hover:border-spotify-green transition duration-200',
                   {
                     'text-white bg-spotify-gray border-b-2 border-spotify-green':
                       router.pathname === navItem.href,

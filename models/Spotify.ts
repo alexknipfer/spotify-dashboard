@@ -6,6 +6,31 @@ export interface SpotifyTokenResponse {
   scope: string;
 }
 
+export interface SpotifyPaginatedResponse<ItemType> {
+  items: ItemType[];
+  total: number;
+  limit: number;
+  offset: number;
+  previous: null;
+  href: string;
+  next: null;
+}
+
+export interface SpotifyCursorPaginatedResponse<ItemType> {
+  items: ItemType[];
+  cursors: SpotifyCursor;
+  href: string;
+  limit: number;
+  next: string;
+  total: number;
+}
+
+export interface SpotifyRecentlyPlayed {
+  context: SpotifyContext;
+  played_at: string;
+  track: SpotifyTrack;
+}
+
 export interface SpotifyProfile {
   display_name: string;
   email: string;
@@ -16,21 +41,6 @@ export interface SpotifyProfile {
   images: string[];
   type: string;
   uri: string;
-}
-
-export interface Followers {
-  href: null;
-  total: number;
-}
-
-export interface SpotifyPaginatedResponse<ItemType> {
-  items: ItemType[];
-  total: number;
-  limit: number;
-  offset: number;
-  previous: null;
-  href: string;
-  next: null;
 }
 
 export interface SpotifyArtist {
@@ -44,6 +54,11 @@ export interface SpotifyArtist {
   popularity: number;
   type: Type;
   uri: string;
+}
+
+export interface Followers {
+  href: null;
+  total: number;
 }
 
 export interface ExternalUrls {
@@ -106,4 +121,16 @@ export interface Artist {
 }
 export interface ExternalIDS {
   isrc: string;
+}
+
+export interface SpotifyContext {
+  external_urls: ExternalUrls;
+  href: string;
+  type: string;
+  uri: string;
+}
+
+export interface SpotifyCursor {
+  before: string;
+  after: string;
 }
