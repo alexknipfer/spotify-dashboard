@@ -2,6 +2,7 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 import HistoryIcon from '../public/static/icons/history.svg';
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
@@ -10,12 +11,12 @@ import SpotifyLogo from '../public/static/icons/spotify_logo.svg';
 const navItems = [
   {
     name: 'Profile',
-    href: '/',
+    href: RoutePath.DASHBOARD,
     icon: <ProfileIcon className="fill-current" />,
   },
   {
     name: 'Recent',
-    href: '/recent',
+    href: RoutePath.RECENT,
     icon: <HistoryIcon className="fill-current" />,
   },
 ];
@@ -34,7 +35,7 @@ const DashboardLayout: React.FC = ({ children }) => {
             <Link key={navItem.href} href={navItem.href}>
               <a
                 className={classnames(
-                  'text-xs flex items-center flex-col justify-center h-full px-8 border-b-2 border-black hover:bg-spotify-gray hover:text-white hover:border-spotify-green transition duration-200',
+                  'text-xs flex items-center flex-col justify-center h-full px-6 md:px-8 border-b-2 border-black hover:bg-spotify-gray hover:text-white hover:border-spotify-green transition duration-200',
                   {
                     'text-white bg-spotify-gray border-b-2 border-spotify-green':
                       router.pathname === navItem.href,
@@ -49,7 +50,7 @@ const DashboardLayout: React.FC = ({ children }) => {
           ))}
         </div>
       </nav>
-      <main className="px-5 md:px-16 lg:px-28 py-10 max-w-screen-2xl mx-auto min-h-screen">
+      <main className="px-6 md:px-16 lg:px-28 py-10 max-w-screen-2xl mx-auto min-h-screen">
         {children}
       </main>
     </Fragment>
