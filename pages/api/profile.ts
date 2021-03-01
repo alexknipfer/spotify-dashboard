@@ -26,9 +26,11 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const profile = await profileResponse.json();
-  const following = await followingResponse.json();
-  const playlists = await playlistsResponse.json();
+  const [profile, following, playlists] = await Promise.all([
+    profileResponse.json(),
+    followingResponse.json(),
+    playlistsResponse.json(),
+  ]);
 
   return res.status(200).json({
     profile,
