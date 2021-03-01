@@ -1,5 +1,7 @@
+import { RoutePath } from '@/models/RoutePath.enum';
 import { SpotifyImage } from '@/models/Spotify';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface Props {
   id?: string;
@@ -8,7 +10,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ArtistCard: React.FC<Props> = ({ name, image, isLoading }) => {
+const ArtistCard: React.FC<Props> = ({ name, image, isLoading, id }) => {
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">
@@ -21,7 +23,9 @@ const ArtistCard: React.FC<Props> = ({ name, image, isLoading }) => {
   return (
     <article className="flex items-center py-4">
       <Image src={image.url} height={50} width={50} className="rounded-full" />
-      <div className="text-white text-base ml-5">{name}</div>
+      <Link href={`${RoutePath.ARTIST}/${id}`}>
+        <a className="text-white text-base ml-5 hover:underline">{name}</a>
+      </Link>
     </article>
   );
 };
