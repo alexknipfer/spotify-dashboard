@@ -1,6 +1,7 @@
 import { SpotifyArtist } from '@/models/Spotify';
 import Image from 'next/image';
 import Heading from '@/components/Heading';
+import Button from './Button';
 
 interface Props {
   artist: SpotifyArtist;
@@ -30,7 +31,7 @@ const ArtistDetails: React.FC<Props> = ({ artist, isLoading }) => {
       />
       <div className="mt-5 text-center md:text-left md:ml-5">
         <Heading level="h1">{artist.name}</Heading>
-        <div className="flex mt-5 flex-wrap justify-center md:justify-start">
+        <div className="flex my-5 flex-wrap justify-center md:justify-start">
           {artist.genres.map((genre) => (
             <div
               key={genre}
@@ -40,6 +41,13 @@ const ArtistDetails: React.FC<Props> = ({ artist, isLoading }) => {
             </div>
           ))}
         </div>
+        <Button
+          variant="primary"
+          buttonSize="small"
+          href={artist.external_urls.spotify}
+        >
+          Listen on Spotify
+        </Button>
       </div>
     </article>
   );
