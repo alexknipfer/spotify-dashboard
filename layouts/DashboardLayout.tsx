@@ -26,7 +26,7 @@ const DashboardLayout: React.FC = ({ children }) => {
 
   return (
     <Fragment>
-      <nav className="fixed bottom-0 md:sticky md:top-0 z-20 h-16 md:h-20 bg-black w-full shadow-lg px-0 md:px-16 lg:px-28 flex items-center justify-between">
+      <nav className="sticky top-0 z-20 h-16 md:h-20 bg-black w-full shadow-lg px-0 md:px-16 lg:px-28 flex items-center justify-between">
         <div className="hidden md:block w-36 py-4">
           <SpotifyLogo />
         </div>
