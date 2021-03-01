@@ -28,6 +28,7 @@ const ArtistDetails: React.FC<Props> = ({ artist, isLoading }) => {
         height={208}
         src={artist.images[0].url}
         className="rounded-full"
+        priority
       />
       <div className="mt-5 text-center md:text-left md:ml-5">
         <Heading level="h1">{artist.name}</Heading>
