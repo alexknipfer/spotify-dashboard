@@ -1,19 +1,38 @@
-import { getProfile } from '@/lib/spotify';
+import { getFollowedArtists, getPlaylists, getProfile } from '@/lib/spotify';
+import { isBadStatusCode } from '@/lib/utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  const response = await getProfile(session.accessToken);
+  const [
+    profileResponse,
+    followingResponse,
+    playlistsResponse,
+  ] = await Promise.all([
+    getProfile(session.accessToken),
+    getFollowedArtists(session.accessToken),
+    getPlaylists(session.accessToken),
+  ]);
 
-  if (response.status === 204 || response.status > 400) {
+  if (
+    isBadStatusCode(profileResponse) ||
+    isBadStatusCode(followingResponse) ||
+    isBadStatusCode(playlistsResponse)
+  ) {
     return res.status(400).json({
       error: 'Failed to get spotify user profile.',
     });
   }
 
-  const profile = await response.json();
+  const profile = await profileResponse.json();
+  const following = await followingResponse.json();
+  const playlists = await playlistsResponse.json();
 
-  return res.status(200).json(profile);
+  return res.status(200).json({
+    profile,
+    followingCount: following.artists.items.length,
+    playlistCount: playlists.total,
+  });
 };

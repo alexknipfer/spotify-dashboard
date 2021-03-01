@@ -21,13 +21,24 @@ interface TopStatsResponse {
   topArtists: SpotifyPaginatedResponse<SpotifyArtist>;
 }
 
+interface ProfileResponse {
+  profile: SpotifyProfile;
+  followingCount: number;
+  playlistCount: number;
+}
+
 const Dashboard: React.FC<Props> = () => {
-  const { data } = useSWR<SpotifyProfile>(APIRoute.PROFILE);
+  const { data } = useSWR<ProfileResponse>(APIRoute.PROFILE);
   const { data: topStats } = useSWR<TopStatsResponse>(APIRoute.TOP_STATS);
 
   return (
     <Fragment>
-      <DashboardHeader isLoading={!data} profile={data} />
+      <DashboardHeader
+        isLoading={!data}
+        profile={data?.profile}
+        followingCount={data?.followingCount}
+        playlistCount={data?.playlistCount}
+      />
       <section className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-20">
         <ul>
           <h2 className="text-xl font-bold mb-5">Top Artists of All Time</h2>

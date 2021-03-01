@@ -12,7 +12,12 @@ interface JWT {
   error?: string;
 }
 
-const SPOTIFY_SCOPES = ['user-read-email', 'user-top-read'];
+const SPOTIFY_SCOPES = [
+  'user-read-email',
+  'user-top-read',
+  'user-follow-modify',
+  'user-follow-read',
+];
 
 const refreshToken = async (token: JWT) => {
   try {

@@ -8,9 +8,16 @@ import ProfileIcon from '../../public/static/icons/profile_icon.svg';
 interface Props {
   isLoading: boolean;
   profile: SpotifyProfile;
+  followingCount: number;
+  playlistCount: number;
 }
 
-const DashboardHeader: React.FC<Props> = ({ isLoading, profile }) => {
+const DashboardHeader: React.FC<Props> = ({
+  isLoading,
+  profile,
+  followingCount,
+  playlistCount,
+}) => {
   return (
     <header
       className={classnames('flex flex-col justify-center items-center', {
@@ -33,8 +40,8 @@ const DashboardHeader: React.FC<Props> = ({ isLoading, profile }) => {
           </h1>
           <div className="flex">
             <Statistic label="Followers" count={profile.followers.total} />
-            <Statistic label="Following" count={44} />
-            <Statistic label="Playlists" count={34} />
+            <Statistic label="Following" count={followingCount} />
+            <Statistic label="Playlists" count={playlistCount} />
           </div>
         </Fragment>
       )}
