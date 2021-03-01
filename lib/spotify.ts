@@ -5,6 +5,7 @@ import { appConfig } from '@/lib/appConfig';
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const ME_ENDPOINT = 'https://api.spotify.com/v1/me';
+const ARTISTS_ENDPOINT = 'https://api.spotify.com/v1/artists';
 const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
 const FOLLOWED_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/following`;
 const PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
@@ -72,6 +73,12 @@ export const getPlaylists = async (accessToken: string) => {
 
 export const getRecentlyPlayed = async (accessToken: string) => {
   return fetch(RECENTLY_PLAYED_ENDPOINT, {
+    headers: getHeaders(accessToken),
+  });
+};
+
+export const getArtistById = async (accessToken: string, artistId: string) => {
+  return fetch(`${ARTISTS_ENDPOINT}/${artistId}`, {
     headers: getHeaders(accessToken),
   });
 };
