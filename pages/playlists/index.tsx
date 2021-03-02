@@ -2,6 +2,7 @@ import { NextPage } from 'next';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import withAuthentication from '@/hoc/WithAuthentication';
 import Heading from '@/components/Heading';
+import PlaylistDetails from '@/components/PlaylistDetails';
 import useSWR from 'swr';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyPaginatedResponse, SpotifyPlaylist } from '@/models/Spotify';
@@ -16,6 +17,7 @@ const Playlist: NextPage = () => {
       <Heading level="h1" className="mb-5">
         Recently Played
       </Heading>
+      <PlaylistDetails />
       {/* <ul>
         {recentlyPlayed ? (
           recentlyPlayed.items.map(({ track }, index) => (

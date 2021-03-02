@@ -4,8 +4,8 @@ import Heading from '@/components/Heading';
 import Button from './Button';
 
 interface Props {
-  playlist: SpotifyPlaylist;
-  isLoading: boolean;
+  playlist?: SpotifyPlaylist;
+  isLoading?: boolean;
 }
 
 const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
@@ -22,19 +22,11 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   }
 
   return (
-    <article className="flex flex-col md:flex-row items-center">
-      <div className="mt-5 text-center md:text-left md:ml-5">
-        <Heading level="h1">{playlist.name}</Heading>
-
-        <Button
-          variant="primary"
-          buttonSize="small"
-          href={playlist.external_urls.spotify}
-        >
-          Listen on Spotify
-        </Button>
-      </div>
-    </article>
+    <div className="grid grid-cols-3 gap-2">
+      <div>1</div>
+      {playlist.id}
+      <div>9</div>
+    </div>
   );
 };
 
