@@ -41,6 +41,7 @@ const TimeRangeControls: React.FC<Props> = ({
           key={value}
           className="ml-2 md:ml-5"
           onClick={() => onChange(value)}
+          aria-pressed={value === currentTimeFilter}
         >
           <span
             className={classnames(
