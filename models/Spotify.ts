@@ -134,3 +134,22 @@ export interface SpotifyCursor {
   before: string;
   after: string;
 }
+
+export interface PlaylistTrack {
+  href: string;
+  total: number;
+}
+
+export interface SpotifyPlaylist {
+  collaborative: boolean;
+  external_urls: ExternalUrls;
+  href: string;
+  id: string;
+  images: SpotifyImage[];
+  name: string;
+  public: string;
+  snapshot_id: string;
+  tracks: PlaylistTrack;
+  type: string;
+  uri: string;
+}
