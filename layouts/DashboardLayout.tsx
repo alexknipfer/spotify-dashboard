@@ -8,6 +8,7 @@ import HistoryIcon from '../public/static/icons/history.svg';
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
 import SpotifyLogo from '../public/static/icons/spotify_logo.svg';
 import TracksIcon from '../public/static/icons/tracks.svg';
+import MicrophoneIcon from '../public/static/icons/mic.svg';
 
 const navItems = [
   {
@@ -19,6 +20,11 @@ const navItems = [
     name: 'Top Tracks',
     href: RoutePath.TRACKS,
     icon: <TracksIcon className="fill-current" />,
+  },
+  {
+    name: 'Top Artists',
+    href: RoutePath.ARTISTS,
+    icon: <MicrophoneIcon className="fill-current" />,
   },
   {
     name: 'Recent',
@@ -33,7 +39,7 @@ const DashboardLayout: React.FC = ({ children }) => {
   return (
     <Fragment>
       <nav className="sticky top-0 z-20 h-16 md:h-20 bg-black w-full shadow-lg">
-        <div className="flex items-center justify-between max-w-screen-2xl mx-auto px-0 md:px-16 lg:px-28 h-full">
+        <div className="flex items-center sm:justify-around md:justify-between max-w-screen-2xl mx-auto px-0 md:px-16 lg:px-28 h-full">
           <div className="hidden md:block w-36 py-4">
             <SpotifyLogo />
           </div>
@@ -42,7 +48,7 @@ const DashboardLayout: React.FC = ({ children }) => {
               <Link key={navItem.href} href={navItem.href}>
                 <a
                   className={classnames(
-                    'text-xs flex items-center flex-col justify-center h-full px-6 md:px-8 border-b-2 border-black hover:bg-spotify-gray hover:text-white hover:border-spotify-green transition duration-200',
+                    'text-xs flex items-center flex-col justify-center h-full px-4 md:px-8 border-b-2 border-black hover:bg-spotify-gray hover:text-white hover:border-spotify-green transition duration-200',
                     {
                       'text-white bg-spotify-gray border-b-2 border-spotify-green':
                         router.pathname === navItem.href,

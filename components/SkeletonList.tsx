@@ -12,13 +12,13 @@ const SkeletonList: React.FC<Props> = ({
   skeletonComponent,
 }) => {
   return (
-    <div>
+    <Fragment>
       {Array(rows)
         .fill(0)
         .map((_, index) => (
           <Fragment key={index}>{skeletonComponent}</Fragment>
         ))}
-    </div>
+    </Fragment>
   );
 };
 
