@@ -39,7 +39,7 @@ const DashboardLayout: React.FC = ({ children }) => {
   return (
     <Fragment>
       <nav className="sticky top-0 z-20 h-16 md:h-20 bg-black w-full shadow-lg">
-        <div className="flex items-center sm:justify-around md:justify-between max-w-screen-2xl mx-auto px-0 md:px-16 lg:px-28 h-full">
+        <div className="flex items-center justify-between max-w-screen-2xl mx-auto px-0 md:px-16 lg:px-28 h-full">
           <Link href={RoutePath.DASHBOARD}>
             <a
               className="hidden md:block w-36 py-4"
@@ -48,7 +48,7 @@ const DashboardLayout: React.FC = ({ children }) => {
               <SpotifyLogo />
             </a>
           </Link>
-          <div className="flex items-center h-full">
+          <div className="flex items-center justify-around md:justify-end h-full w-full">
             {navItems.map((navItem) => (
               <Link key={navItem.href} href={navItem.href}>
                 <a
