@@ -134,3 +134,5 @@ export interface SpotifyCursor {
   before: string;
   after: string;
 }
+
+export type SpotifyTimeRange = 'long_term' | 'medium_term' | 'short_term';

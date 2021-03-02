@@ -46,7 +46,7 @@ const ArtistDetails: React.FC<Props> = ({ artist, isLoading }) => {
         <Button
           variant="primary"
           buttonSize="small"
-          href={artist.external_urls.spotify}
+          hrefExternal={artist.external_urls.spotify}
         >
           Listen on Spotify
         </Button>

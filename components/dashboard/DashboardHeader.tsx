@@ -46,7 +46,11 @@ const DashboardHeader: React.FC<Props> = ({
             <Statistic label="Following" count={followingCount} />
             <Statistic label="Playlists" count={playlistCount} />
           </div>
-          <Button variant="ghost" buttonSize="small" onClick={() => signOut()}>
+          <Button
+            variant="outline"
+            buttonSize="small"
+            onClick={() => signOut()}
+          >
             Logout
           </Button>
         </Fragment>

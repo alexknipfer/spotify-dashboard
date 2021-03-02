@@ -48,10 +48,11 @@ export const getTopTracksOrArtists = async (
   accessToken: string,
   type: 'artists' | 'tracks',
   limit = 50,
+  range = 'long_term',
 ) => {
   const queryParams = querystring.stringify({
     limit,
-    time_range: 'long_term',
+    time_range: range,
   });
 
   return fetch(`${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?${queryParams}`, {

@@ -11,6 +11,8 @@ import TrackCard from '@/components/TrackCard';
 import { APIRoute } from '@/models/APIRoute.enum';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';
+import Button from '@/components/Button';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
   isLoading?: boolean;
@@ -41,7 +43,9 @@ const Dashboard: React.FC<Props> = () => {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-20">
         <section>
-          <h2 className="text-xl font-bold mb-5">Top Artists of All Time</h2>
+          <h2 className="text-lg md:text-xl font-bold mb-5">
+            Top Artists of All Time
+          </h2>
           <ul>
             {topStats ? (
               topStats?.topArtists?.items?.map((artistDetails) => (
@@ -59,7 +63,18 @@ const Dashboard: React.FC<Props> = () => {
           </ul>
         </section>
         <section>
-          <h2 className="text-xl font-bold mb-5">Top Tracks of All Time</h2>
+          <div className="flex justify-between items-center mb-5">
+            <h2 className="text-lg md:text-xl font-bold">
+              Top Tracks of All Time
+            </h2>
+            <Button
+              variant="outline"
+              buttonSize="small"
+              hrefInternal={RoutePath.TRACKS}
+            >
+              See More
+            </Button>
+          </div>
           <ul>
             {topStats ? (
               topStats?.topTracks?.items?.map((trackDetails) => (
