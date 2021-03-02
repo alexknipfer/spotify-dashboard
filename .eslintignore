@@ -3,3 +3,4 @@ node_modules/
 types/
 scripts/
 tailwind.config.js
+next.config.js
