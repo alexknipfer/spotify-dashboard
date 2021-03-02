@@ -7,12 +7,18 @@ import { RoutePath } from '@/models/RoutePath.enum';
 import HistoryIcon from '../public/static/icons/history.svg';
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
 import SpotifyLogo from '../public/static/icons/spotify_logo.svg';
+import TracksIcon from '../public/static/icons/tracks.svg';
 
 const navItems = [
   {
     name: 'Profile',
     href: RoutePath.DASHBOARD,
     icon: <ProfileIcon className="fill-current" />,
+  },
+  {
+    name: 'Top Tracks',
+    href: RoutePath.TRACKS,
+    icon: <TracksIcon className="fill-current" />,
   },
   {
     name: 'Recent',
