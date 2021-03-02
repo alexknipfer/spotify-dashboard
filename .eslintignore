@@ -1,4 +1,5 @@
 .next/
+.husky/
 node_modules/
 types/
 scripts/
