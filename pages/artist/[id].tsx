@@ -1,6 +1,5 @@
 import ArtistDetails from '@/components/ArtistDetails';
 import ArtistStatistic from '@/components/ArtistStatistic';
-import Heading from '@/components/Heading';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyArtist } from '@/models/Spotify';

@@ -1,6 +1,7 @@
 import { SpotifyArtist } from '@/models/Spotify';
 import Image from 'next/image';
 import Heading from '@/components/Heading';
+
 import Button from './Button';
 
 interface Props {
