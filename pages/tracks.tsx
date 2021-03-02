@@ -23,7 +23,7 @@ const Tracks: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <div className="flex justify-between items-center flex-col mb-5 md:flex-row">
+      <div className="flex justify-between items-center flex-col mb-10 md:flex-row">
         <Heading level="h1">Top Tracks</Heading>
         <TimeRangeControls
           currentTimeFilter={currentTimeRange}
