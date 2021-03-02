@@ -2,6 +2,7 @@ import { SpotifyProfile } from '@/models/Spotify';
 import { Fragment } from 'react';
 import classnames from 'classnames';
 import Statistic from '@/components/dashboard/Statistic';
+import { RoutePath } from '@/models/RoutePath.enum';
 import { signOut } from 'next-auth/client';
 
 import ProfileIcon from '../../public/static/icons/profile_icon.svg';
@@ -44,7 +45,11 @@ const DashboardHeader: React.FC<Props> = ({
           <div className="flex mb-10">
             <Statistic label="Followers" count={profile.followers.total} />
             <Statistic label="Following" count={followingCount} />
-            <Statistic label="Playlists" count={playlistCount} />
+            <Statistic
+              label="Playlists"
+              count={playlistCount}
+              href={RoutePath.PLAYLIST}
+            />
           </div>
           <Button variant="ghost" buttonSize="small" onClick={() => signOut()}>
             Logout
