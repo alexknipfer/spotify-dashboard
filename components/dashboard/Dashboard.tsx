@@ -11,7 +11,7 @@ import TrackCard from '@/components/TrackCard';
 import { APIRoute } from '@/models/APIRoute.enum';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';
-import Button from '../Button';
+import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
