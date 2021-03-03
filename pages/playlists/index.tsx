@@ -17,7 +17,7 @@ const Playlist: NextPage = () => {
       <Heading level="h1" className="mb-5">
         Recently Played
       </Heading>
-      <PlaylistDetails />
+      <PlaylistDetails playlist={playlists} />
       {/* <ul>
         {recentlyPlayed ? (
           recentlyPlayed.items.map(({ track }, index) => (

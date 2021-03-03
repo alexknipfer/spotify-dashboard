@@ -24,7 +24,6 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   return (
     <div className="grid grid-cols-3 gap-2">
       <div>1</div>
-      {playlist.id}
       <div>9</div>
     </div>
   );
