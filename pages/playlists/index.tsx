@@ -7,46 +7,28 @@ import useSWR from 'swr';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyPaginatedResponse, SpotifyPlaylist } from '@/models/Spotify';
 import SkeletonList from '@/components/SkeletonList';
-import { Fragment } from 'react';
 
 const Playlist: NextPage = () => {
   const { data: playlists } = useSWR<SpotifyPaginatedResponse<SpotifyPlaylist>>(
     APIRoute.PLAYLISTS,
   );
-
-  console.log(playlists);
   return (
     <DashboardLayout>
       <Heading level="h1" className="mb-5">
-        Recently Played
+        Your Playlists
       </Heading>
-      {playlists ? (
-        playlists.items.map((playlist, index) => (
-          <PlaylistDetails key={index} playlist={playlist} />
-        ))
-      ) : (
-        <SkeletonList
-          rows={20}
-          skeletonComponent={<PlaylistDetails isLoading />}
-        />
-      )}
-
-      {/* <ul>
-        {recentlyPlayed ? (
-          recentlyPlayed.items.map(({ track }, index) => (
-            <li key={`${track.id}-${index}`}>
-              <TrackCard
-                name={track.name}
-                album={track.album}
-                duration={track.duration_ms}
-                artists={track.artists}
-              />
-            </li>
+      <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 my-16">
+        {playlists ? (
+          playlists.items.map((playlist, index) => (
+            <PlaylistDetails key={index} playlist={playlist} />
           ))
         ) : (
-          <SkeletonList skeletonComponent={<TrackCard isLoading />} />
+          <SkeletonList
+            rows={20}
+            skeletonComponent={<PlaylistDetails isLoading />}
+          />
         )}
-      </ul> */}
+      </div>
     </DashboardLayout>
   );
 };
