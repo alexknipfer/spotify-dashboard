@@ -41,11 +41,20 @@ const Dashboard: React.FC<Props> = () => {
         followingCount={data?.followingCount}
         playlistCount={data?.playlistCount}
       />
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-20">
         <section>
-          <h2 className="text-lg md:text-xl font-bold mb-5">
-            Top Artists of All Time
-          </h2>
+          <div className="flex justify-between items-center mb-5">
+            <h2 className="text-lg md:text-xl font-bold">
+              Top Artists of All Time
+            </h2>
+            <Button
+              variant="outline"
+              buttonSize="small"
+              hrefInternal={RoutePath.ARTISTS}
+            >
+              See More
+            </Button>
+          </div>
           <ul>
             {topStats ? (
               topStats?.topArtists?.items?.map((artistDetails) => (
