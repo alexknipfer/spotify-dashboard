@@ -10,7 +10,7 @@ import {
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-const LoginPage: CustomPage = () => {
+const Login: CustomPage = () => {
   const [session] = useSession();
   const router = useRouter();
 
@@ -38,4 +38,4 @@ const LoginPage: CustomPage = () => {
   );
 };
 
-export default LoginPage;
+export default Login;

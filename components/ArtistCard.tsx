@@ -1,7 +1,7 @@
 import { RoutePath } from '@/models/RoutePath.enum';
 import { SpotifyImage } from '@/models/Spotify';
 import Image from 'next/image';
-import Link from 'next/link';
+import Anchor from '@/components/Anchor';
 
 interface Props {
   id?: string;
@@ -23,9 +23,9 @@ const ArtistCard: React.FC<Props> = ({ name, image, isLoading, id }) => {
   return (
     <article className="flex items-center py-4">
       <Image src={image.url} height={50} width={50} className="rounded-full" />
-      <Link href={`${RoutePath.ARTIST}/${id}`}>
-        <a className="text-white text-base ml-5 hover:underline">{name}</a>
-      </Link>
+      <Anchor href={`${RoutePath.ARTIST}/${id}`} className="ml-5">
+        {name}
+      </Anchor>
     </article>
   );
 };

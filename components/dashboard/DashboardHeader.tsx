@@ -51,7 +51,11 @@ const DashboardHeader: React.FC<Props> = ({
               href={RoutePath.PLAYLIST}
             />
           </div>
-          <Button variant="ghost" buttonSize="small" onClick={() => signOut()}>
+          <Button
+            variant="outline"
+            buttonSize="small"
+            onClick={() => signOut()}
+          >
             Logout
           </Button>
         </Fragment>

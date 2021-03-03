@@ -23,7 +23,7 @@ const TrackCard: React.FC<Props> = ({
     return (
       <div className="flex items-center py-4 animate-pulse">
         <div className="h-12 w-12 bg-gray-600 mr-4" />
-        <div className="w-9/12">
+        <div className="w-full">
           <div className="flex justify-between w-full">
             <div className="h-4 w-40 rounded bg-gray-600 mb-2" />
             <div className="h-3 w-6 rounded bg-gray-600" />

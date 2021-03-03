@@ -152,3 +152,4 @@ export interface SpotifyPlaylist {
   type: string;
   uri: string;
 }
+export type SpotifyTimeRange = 'long_term' | 'medium_term' | 'short_term';
