@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Anchor from './Anchor';
 
 interface Props {
   name?: string;
@@ -32,14 +33,9 @@ const ArtistPreviewCard: React.FC<Props> = ({
   return (
     <div className="text-center">
       <Image src={imageSrc} width={208} height={208} className="rounded-full" />
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        className="block text-base text-white hover:underline mt-2"
-      >
+      <Anchor isExternal href={href} className="block mt-2">
         {name}
-      </a>
+      </Anchor>
     </div>
   );
 };
