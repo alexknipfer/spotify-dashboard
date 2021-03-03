@@ -1,8 +1,11 @@
 import { Artist, SpotifyAlbum } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
 import Image from 'next/image';
+import Anchor from '@/components/Anchor';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
+  id?: string;
   name?: string;
   album?: SpotifyAlbum;
   duration?: number;
@@ -11,6 +14,7 @@ interface Props {
 }
 
 const TrackCard: React.FC<Props> = ({
+  id,
   name,
   album,
   duration,
@@ -22,7 +26,7 @@ const TrackCard: React.FC<Props> = ({
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">
-        <div className="h-12 w-12 bg-gray-600 mr-4" />
+        <div className="h-thumbnail w-thumbnail bg-gray-600 mr-4 flex-shrink-0" />
         <div className="w-full">
           <div className="flex justify-between w-full">
             <div className="h-4 w-40 rounded bg-gray-600 mb-2" />
@@ -41,7 +45,9 @@ const TrackCard: React.FC<Props> = ({
       </div>
       <div className="ml-5 truncate w-full">
         <div className="flex justify-between">
-          <div className="text-base text-white truncate mr-2">{name}</div>
+          <Anchor href={`${RoutePath.TRACKS}/${id}`} className="truncate mr-2">
+            {name}
+          </Anchor>
           <span className="text-gray-400 text-sm">
             {millisToMinutesAndSeconds(duration)}
           </span>

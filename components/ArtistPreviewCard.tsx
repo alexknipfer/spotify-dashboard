@@ -1,16 +1,19 @@
 import Image from 'next/image';
 import Anchor from '@/components/Anchor';
+import { SpotifyImage } from '@/models/Spotify';
+
+import ProfileIcon from '../public/static/icons/profile_icon.svg';
 
 interface Props {
   name?: string;
-  imageSrc?: string;
+  images?: SpotifyImage[];
   href?: string;
   isLoading?: boolean;
 }
 
 const ArtistPreviewCard: React.FC<Props> = ({
   name,
-  imageSrc,
+  images,
   href,
   isLoading,
 }) => {
@@ -32,7 +35,18 @@ const ArtistPreviewCard: React.FC<Props> = ({
 
   return (
     <div className="text-center">
-      <Image src={imageSrc} width={208} height={208} className="rounded-full" />
+      {images.length ? (
+        <Image
+          src={images[0].url}
+          width={208}
+          height={208}
+          className="rounded-full"
+        />
+      ) : (
+        <div className="flex justify-center items-center border border-white rounded-full p-7 w-52 h-52">
+          <ProfileIcon fill="#fff" width="100%" height="100%" />
+        </div>
+      )}
       <Anchor isExternal href={href} className="block mt-2">
         {name}
       </Anchor>

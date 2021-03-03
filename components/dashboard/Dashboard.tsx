@@ -89,6 +89,7 @@ const Dashboard: React.FC<Props> = () => {
               topStats?.topTracks?.items?.map((trackDetails) => (
                 <li key={trackDetails.id}>
                   <TrackCard
+                    id={trackDetails.id}
                     name={trackDetails.name}
                     duration={trackDetails.duration_ms}
                     artists={trackDetails.artists}

@@ -26,6 +26,7 @@ const Recent: NextPage = () => {
           recentlyPlayed.items.map(({ track }, index) => (
             <li key={`${track.id}-${index}`}>
               <TrackCard
+                id={track.id}
                 name={track.name}
                 album={track.album}
                 duration={track.duration_ms}

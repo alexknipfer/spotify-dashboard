@@ -39,7 +39,7 @@ const Artists: NextPage = () => {
               key={artist.id}
               name={artist.name}
               href={artist.external_urls.spotify}
-              imageSrc={artist.images[0].url}
+              images={artist.images}
             />
           ))
         ) : (
