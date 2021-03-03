@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Anchor from './Anchor';
+import Anchor from '@/components/Anchor';
 
 interface Props {
   name?: string;
