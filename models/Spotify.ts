@@ -141,16 +141,6 @@ export interface PlaylistTrack {
 }
 
 export interface SpotifyPlaylist {
-  href: string;
-  items: SpotifyItems;
-  limit: number;
-  next: null;
-  offset: number;
-  previous: null;
-  total: number;
-}
-
-export interface SpotifyItems {
   collaborative: boolean;
   external_urls: ExternalUrls;
   id: string;

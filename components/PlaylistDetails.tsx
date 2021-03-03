@@ -1,7 +1,7 @@
 import { SpotifyPlaylist } from '@/models/Spotify';
-import Heading from '@/components/Heading';
-
-import Button from './Button';
+import { SpotifyImage } from '@/models/Spotify';
+import Image from 'next/image';
+import { Fragment } from 'react';
 
 interface Props {
   playlist?: SpotifyPlaylist;
@@ -22,10 +22,25 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-2">
-      <div>1</div>
-      <div>9</div>
-    </div>
+    <article className="flex flex-col md:flex-row items-center">
+      <div className="flex flex-row space-x-4">
+        {playlist.name}
+        <div>{playlist.tracks.total}</div>
+        {playlist.images.length > 0 && (
+          <Image
+            src={playlist.images[0]?.url}
+            width={208}
+            height={208}
+            className="rounded-full"
+          />
+        )}
+        <div>3</div>
+
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+      </div>
+    </article>
   );
 };
 
