@@ -1,3 +1,5 @@
+export type SpotifyTimeRange = 'long_term' | 'medium_term' | 'short_term';
+
 export interface SpotifyTokenResponse {
   access_token: string;
   token_type: string;
@@ -135,4 +137,24 @@ export interface SpotifyCursor {
   after: string;
 }
 
-export type SpotifyTimeRange = 'long_term' | 'medium_term' | 'short_term';
+export interface SpotifyAudioFeatures {
+  danceability: number;
+  energy: number;
+  key: number;
+  loudness: number;
+  mode: number;
+  speechiness: number;
+  acousticness: number;
+  instrumentalness: number;
+  liveness: number;
+  valence: number;
+  tempo: number;
+  type: string;
+  id: string;
+  uri: string;
+  track_href: string;
+  analysis_url: string;
+  duration_ms: number;
+  time_signature: number;
+  [key: string]: number | string;
+}
