@@ -12,6 +12,7 @@ const Playlist: NextPage = () => {
   const { data: playlists } = useSWR<SpotifyPaginatedResponse<SpotifyPlaylist>>(
     APIRoute.PLAYLISTS,
   );
+
   return (
     <DashboardLayout>
       <Heading level="h1" className="mb-5">
