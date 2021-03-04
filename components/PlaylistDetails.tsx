@@ -30,11 +30,11 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
           src={playlist.images[0]?.url}
           width={208}
           height={208}
-          className="rounded-full"
+          className="rounded-none"
         />
       )}
-      <div className="block mt-2">{playlist.name}</div>
-      <div className="block mt-1 text-gray-500 text-xs">
+      <div>{playlist.name}</div>
+      <div className="text-gray-500 text-xs">
         {playlist.tracks.total} TRACKS
       </div>
     </div>

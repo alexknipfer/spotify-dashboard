@@ -3,9 +3,7 @@ import { isBadStatusCode } from '@/lib/utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 
-type NextAPIRequestWithId = NextApiRequest;
-
-export default async (req: NextAPIRequestWithId, res: NextApiResponse) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
   const playlistResponse = await getPlaylists(session.accessToken);

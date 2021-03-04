@@ -14,7 +14,7 @@ const Statistic: React.FC<Props> = ({ count, label, href }) => {
   if (href) {
     return (
       <Link href={href} passHref>
-        {content}
+        <div className="cursor-pointer">{content}</div>
       </Link>
     );
   }
