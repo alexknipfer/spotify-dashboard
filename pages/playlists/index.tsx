@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import withAuthentication from '@/hoc/WithAuthentication';
 import Heading from '@/components/Heading';
-import PlaylistDetails from '@/components/PlaylistDetails';
+import PlayListPreviewCard from '@/components/PlaylistPreviewCard';
 import useSWR from 'swr';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyPaginatedResponse, SpotifyPlaylist } from '@/models/Spotify';
@@ -21,12 +21,12 @@ const Playlist: NextPage = () => {
       <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 my-16">
         {playlists ? (
           playlists.items.map((playlist, index) => (
-            <PlaylistDetails key={index} playlist={playlist} />
+            <PlayListPreviewCard key={index} playlist={playlist} />
           ))
         ) : (
           <SkeletonList
             rows={20}
-            skeletonComponent={<PlaylistDetails isLoading />}
+            skeletonComponent={<PlayListPreviewCard isLoading />}
           />
         )}
       </div>

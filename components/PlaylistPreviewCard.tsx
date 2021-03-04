@@ -1,12 +1,13 @@
 import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
+import Heading from './Heading';
 
 interface Props {
   playlist?: SpotifyPlaylist;
   isLoading?: boolean;
 }
 
-const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
+const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">
@@ -21,7 +22,7 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
       {playlist.images.length > 0 && (
         <Image src={playlist.images[0]?.url} width={208} height={208} />
       )}
-      <div>{playlist.name}</div>
+      <Heading level="h3">{playlist.name}</Heading>
       <div className="text-gray-500 text-xs">
         {playlist.tracks.total} TRACKS
       </div>
@@ -29,4 +30,4 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   );
 };
 
-export default PlayListDetails;
+export default PlayListPreviewCard;
