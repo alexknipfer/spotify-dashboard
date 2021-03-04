@@ -135,4 +135,21 @@ export interface SpotifyCursor {
   after: string;
 }
 
+export interface PlaylistTrack {
+  href: string;
+  total: number;
+}
+
+export interface SpotifyPlaylist {
+  collaborative: boolean;
+  external_urls: ExternalUrls;
+  id: string;
+  images: SpotifyImage[];
+  name: string;
+  public: string;
+  snapshot_id: string;
+  tracks: PlaylistTrack;
+  type: string;
+  uri: string;
+}
 export type SpotifyTimeRange = 'long_term' | 'medium_term' | 'short_term';
