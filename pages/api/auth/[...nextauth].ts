@@ -18,6 +18,7 @@ const SPOTIFY_SCOPES = [
   'user-follow-modify',
   'user-follow-read',
   'user-read-recently-played',
+  'playlist-read-private',
 ];
 
 const refreshToken = async (token: JWT) => {
