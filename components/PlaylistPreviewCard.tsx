@@ -1,5 +1,6 @@
 import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
+
 import Heading from './Heading';
 
 interface Props {
@@ -13,6 +14,13 @@ const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
       <div className="animate-pulse flex flex-col items-center">
         <div className="w-full bg-gray-600" />
         <div className="h-4 w-8/12 bg-gray-600 mt-2" />
+        <style jsx>{`
+          .square::before {
+            content: '';
+            display: block;
+            padding-bottom: 100%;
+          }
+        `}</style>
       </div>
     );
   }
