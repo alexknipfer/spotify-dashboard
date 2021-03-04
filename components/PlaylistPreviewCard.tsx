@@ -1,8 +1,6 @@
 import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
 
-import Heading from './Heading';
-
 interface Props {
   playlist?: SpotifyPlaylist;
   isLoading?: boolean;
@@ -30,7 +28,7 @@ const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
       {playlist.images.length > 0 && (
         <Image src={playlist.images[0]?.url} width={208} height={208} />
       )}
-      <Heading level="h3">{playlist.name}</Heading>
+      <div>{playlist.name}</div>
       <div className="text-gray-500 text-xs">
         {playlist.tracks.total} TRACKS
       </div>
