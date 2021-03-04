@@ -11,16 +11,16 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
 const Login: CustomPage = () => {
-  const [session] = useSession();
+  const [session, loading] = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session) {
+    if (!session && !loading) {
       document.documentElement.classList.add(NO_PAGE_FLICKER_CLASSNAME);
     } else {
       router.replace('/');
     }
-  }, [session, router]);
+  }, [session, router, loading]);
 
   return (
     <AuthLayout>
