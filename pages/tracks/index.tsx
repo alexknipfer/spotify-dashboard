@@ -36,6 +36,7 @@ const Tracks: NextPage = () => {
           topTracks.items.map((track) => (
             <li key={track.id}>
               <TrackCard
+                id={track.id}
                 name={track.name}
                 album={track.album}
                 duration={track.duration_ms}

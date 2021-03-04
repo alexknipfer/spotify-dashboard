@@ -3,13 +3,16 @@ import querystring from 'querystring';
 import { SpotifyTokenResponse } from '@/models/Spotify';
 import { appConfig } from '@/lib/appConfig';
 
+const BASE_URL = `https://api.spotify.com/v1`;
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-const ME_ENDPOINT = 'https://api.spotify.com/v1/me';
-const ARTISTS_ENDPOINT = 'https://api.spotify.com/v1/artists';
+const ME_ENDPOINT = `${BASE_URL}/me`;
+const ARTISTS_ENDPOINT = `${BASE_URL}/artists`;
 const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
 const FOLLOWED_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/following`;
 const PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
 const RECENTLY_PLAYED_ENDPOINT = `${ME_ENDPOINT}/player/recently-played`;
+const AUDIO_FEATURES_ENDPOINT = `${BASE_URL}/audio-features`;
+const TRACKS_ENDPOINT = `${BASE_URL}/tracks`;
 
 const authToken = Buffer.from(
   `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
@@ -80,6 +83,21 @@ export const getRecentlyPlayed = async (accessToken: string) => {
 
 export const getArtistById = async (accessToken: string, artistId: string) => {
   return fetch(`${ARTISTS_ENDPOINT}/${artistId}`, {
+    headers: getHeaders(accessToken),
+  });
+};
+
+export const getTrackAudioFeaturesById = async (
+  accessToken: string,
+  trackId: string,
+) => {
+  return fetch(`${AUDIO_FEATURES_ENDPOINT}/${trackId}`, {
+    headers: getHeaders(accessToken),
+  });
+};
+
+export const getTrackById = async (accessToken: string, trackId: string) => {
+  return fetch(`${TRACKS_ENDPOINT}/${trackId}`, {
     headers: getHeaders(accessToken),
   });
 };

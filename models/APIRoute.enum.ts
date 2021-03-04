@@ -6,4 +6,5 @@ export enum APIRoute {
   PLAYLISTS = '/api/playlists',
   TOP_TRACKS = '/api/top-tracks',
   TOP_ARTISTS = '/api/top-artists',
+  TRACK_DETAILS = '/api/track-details',
 }

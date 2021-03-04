@@ -1,5 +1,5 @@
 import ArtistDetails from '@/components/ArtistDetails';
-import ArtistStatistic from '@/components/ArtistStatistic';
+import HeadlineStatistic from '@/components/HeadlineStatistic';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyArtist } from '@/models/Spotify';
@@ -15,13 +15,13 @@ const Artist: NextPage = () => {
     <DashboardLayout>
       <ArtistDetails isLoading={!data} artist={data} />
       <div className="mb-10" />
-      <ArtistStatistic
+      <HeadlineStatistic
         label="Monthly Listeners"
         value={Number(data?.followers?.total).toLocaleString()}
         isLoading={!data}
       />
       <div className="mb-10" />
-      <ArtistStatistic
+      <HeadlineStatistic
         label="Popularity"
         value={`${data?.popularity}%`}
         isLoading={!data}
