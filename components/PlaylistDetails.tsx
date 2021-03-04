@@ -1,15 +1,15 @@
-import { SpotifyArtist } from '@/models/Spotify';
+import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
 import Heading from '@/components/Heading';
-
-import Button from './Button';
+import Anchor from '@/components/Anchor';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
-  artist: SpotifyArtist;
+  playlist: SpotifyPlaylist;
   isLoading: boolean;
 }
 
-const PlaylistDetails: React.FC<Props> = ({ artist, isLoading }) => {
+const PlaylistDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   if (isLoading) {
     return (
       <div className="flex flex-col md:flex-row items-center animate-pulse">
@@ -27,29 +27,18 @@ const PlaylistDetails: React.FC<Props> = ({ artist, isLoading }) => {
       <Image
         width={208}
         height={208}
-        src={artist.images[0].url}
-        className="rounded-full"
+        src={playlist.images[0].url}
+        className="rounded-none"
         priority
       />
       <div className="mt-5 text-center md:text-left md:ml-5">
-        <Heading level="h1">{artist.name}</Heading>
-        <div className="flex my-5 flex-wrap justify-center md:justify-start">
-          {artist.genres.map((genre) => (
-            <div
-              key={genre}
-              className="px-2 py-1 bg-black text-white text-xs rounded inline-block mr-2 mb-2"
-            >
-              {genre}
-            </div>
-          ))}
-        </div>
-        <Button
-          variant="primary"
-          buttonSize="small"
-          hrefExternal={artist.external_urls.spotify}
+        <Heading level="h1">{playlist.name}</Heading>
+        <Anchor
+          href={`${RoutePath.PLAYLIST}/${playlist.id}`}
+          className="truncate mr-2"
         >
-          Listen on Spotify
-        </Button>
+          {name}
+        </Anchor>
       </div>
     </article>
   );

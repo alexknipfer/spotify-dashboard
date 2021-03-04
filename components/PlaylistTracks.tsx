@@ -1,4 +1,4 @@
-import { Artist, SpotifyAlbum } from '@/models/Spotify';
+import { Artist, SpotifyAlbum, SpotifyPlaylist } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
 import Image from 'next/image';
 import Anchor from '@/components/Anchor';
@@ -39,11 +39,8 @@ const PlaylistTracks: React.FC<Props> = ({
   }
 
   return (
-    <article className="flex items-center py-4">
-      <div className="flex-shrink-0 h-thumbnail w-thumbnail">
-        <Image src={album.images[0].url} width={50} height={50} />
-      </div>
-      <div className="ml-5 truncate w-full">
+    <div className="ml-5 truncate w-full">
+      <div className="flex justify-between">
         <div className="flex justify-between">
           <Anchor href={`${RoutePath.TRACKS}/${id}`} className="truncate mr-2">
             {name}
@@ -56,7 +53,7 @@ const PlaylistTracks: React.FC<Props> = ({
           {artistNames}&nbsp;·&nbsp;{album.name}
         </div>
       </div>
-    </article>
+    </div>
   );
 };
 
