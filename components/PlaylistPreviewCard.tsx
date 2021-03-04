@@ -10,7 +10,7 @@ const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">
-        <div className="w-full bg-gray-60 square" />
+        <div className="w-full bg-gray-600 square" />
         <div className="h-4 w-8/12 bg-gray-600 mt-2" />
         <style jsx>{`
           .square::before {
