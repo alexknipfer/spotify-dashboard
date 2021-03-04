@@ -19,6 +19,7 @@ const Track: NextPage = () => {
   const { data } = useSWR<TrackDetailsResponse>(
     `${APIRoute.TRACK_DETAILS}/${query.id}`,
   );
+  console.log(data);
 
   return (
     <DashboardLayout>

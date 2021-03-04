@@ -11,6 +11,7 @@ import {
 import TrackCard from '@/components/TrackCard';
 import SkeletonList from '@/components/SkeletonList';
 import TimeRangeControls from '@/components/TimeRangeControls';
+import TrackDetails from '@/components/TrackDetails';
 import { useState } from 'react';
 
 const Tracks: NextPage = () => {
@@ -20,6 +21,7 @@ const Tracks: NextPage = () => {
   const { data: topTracks } = useSWR<SpotifyPaginatedResponse<SpotifyTrack>>(
     `${APIRoute.TOP_TRACKS}?range=${currentTimeRange}`,
   );
+  console.log(topTracks);
 
   return (
     <DashboardLayout>

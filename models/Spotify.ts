@@ -161,6 +161,10 @@ export interface SpotifyAudioFeatures {
 export interface PlaylistTrack {
   href: string;
   total: number;
+  added_at: string;
+  added_by: SpotifyProfile;
+  is_local: boolean;
+  track: SpotifyTrack;
 }
 
 export interface SpotifyPlaylist {
@@ -171,7 +175,7 @@ export interface SpotifyPlaylist {
   name: string;
   public: string;
   snapshot_id: string;
-  tracks: PlaylistTrack;
+  tracks: SpotifyPaginatedResponse<PlaylistTrack>;
   type: string;
   uri: string;
 }
