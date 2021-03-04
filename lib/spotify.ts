@@ -69,8 +69,18 @@ export const getFollowedArtists = async (accessToken: string) => {
   });
 };
 
-export const getPlaylists = async (accessToken: string) => {
-  return fetch(PLAYLISTS_ENDPOINT, {
+export const getPlaylists = async (
+  accessToken: string,
+  limit?: string,
+  offset?: string,
+) => {
+  let url = PLAYLISTS_ENDPOINT;
+
+  if (limit && offset) {
+    url = `${PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
+  }
+
+  return fetch(url, {
     headers: getHeaders(accessToken),
   });
 };
