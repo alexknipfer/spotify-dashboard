@@ -10,15 +10,8 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">
-        <div className="w-full rounded-full bg-gray-600 circle" />
+        <div className="w-full bg-gray-600" />
         <div className="h-4 w-8/12 bg-gray-600 mt-2" />
-        <style jsx>{`
-          .circle::before {
-            content: '';
-            display: block;
-            padding-bottom: 100%;
-          }
-        `}</style>
       </div>
     );
   }
@@ -26,12 +19,7 @@ const PlayListDetails: React.FC<Props> = ({ playlist, isLoading }) => {
   return (
     <div className="text-center">
       {playlist.images.length > 0 && (
-        <Image
-          src={playlist.images[0]?.url}
-          width={208}
-          height={208}
-          className="rounded-none"
-        />
+        <Image src={playlist.images[0]?.url} width={208} height={208} />
       )}
       <div>{playlist.name}</div>
       <div className="text-gray-500 text-xs">
