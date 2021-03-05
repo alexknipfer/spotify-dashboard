@@ -73,7 +73,7 @@ const DashboardLayout: React.FC = ({ children }) => {
           </div>
         </div>
       </nav>
-      <main className="px-6 md:px-16 lg:px-28 py-10 max-w-screen-2xl mx-auto">
+      <main className="px-6 md:px-16 lg:px-28 pt-10 pb-20 max-w-screen-2xl mx-auto">
         {children}
       </main>
     </Fragment>
