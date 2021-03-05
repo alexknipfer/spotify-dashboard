@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { useRouter } from 'next/router';
 import { RoutePath } from '@/models/RoutePath.enum';
 import Meta from '@/components/Meta';
+import NowPlaying from '@/components/NowPlaying';
 
 import HistoryIcon from '../public/static/icons/history.svg';
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
@@ -40,6 +41,7 @@ const DashboardLayout: React.FC = ({ children }) => {
   return (
     <Fragment>
       <Meta />
+      <NowPlaying />
       <nav className="sticky top-0 z-20 h-16 md:h-20 bg-black w-full shadow-lg">
         <div className="flex items-center justify-between max-w-screen-2xl mx-auto px-0 md:px-16 lg:px-28 h-full">
           <Link href={RoutePath.DASHBOARD}>
@@ -73,7 +75,7 @@ const DashboardLayout: React.FC = ({ children }) => {
           </div>
         </div>
       </nav>
-      <main className="px-6 md:px-16 lg:px-28 py-10 max-w-screen-2xl mx-auto">
+      <main className="px-6 md:px-16 lg:px-28 pt-10 pb-20 max-w-screen-2xl mx-auto">
         {children}
       </main>
     </Fragment>
