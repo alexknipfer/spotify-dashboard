@@ -175,3 +175,21 @@ export interface SpotifyPlaylist {
   type: string;
   uri: string;
 }
+
+export interface SpotifyNowPlayingResponse {
+  timestamp: number;
+  context: SpotifyContext;
+  progress_ms: number;
+  item: SpotifyTrack;
+  currently_playing_type: string;
+  actions: Actions;
+  is_playing: boolean;
+}
+
+export interface Actions {
+  disallows: Disallows;
+}
+
+export interface Disallows {
+  resuming: boolean;
+}
