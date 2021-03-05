@@ -3,16 +3,18 @@ import { NowPlayingResponse } from 'pages/api/now-playing';
 import useSWR from 'swr';
 import Image from 'next/image';
 import classnames from 'classnames';
+import { useSession } from 'next-auth/client';
+import { useState } from 'react';
 
 import Chevron from '../public/static/icons/chevron.svg';
+import SpotifyIcon from '../public/static/icons/spotify_icon.svg';
 
-interface Props {
-  isVisible: boolean;
-  onToggleVisible: () => void;
-}
-
-const NowPlaying: React.FC<Props> = ({ isVisible, onToggleVisible }) => {
-  const { data } = useSWR<NowPlayingResponse>(APIRoute.NOW_PLAYING);
+const NowPlaying: React.FC = () => {
+  const [session] = useSession();
+  const { data } = useSWR<NowPlayingResponse>(
+    session ? APIRoute.NOW_PLAYING : null,
+  );
+  const [isVisible, setVisible] = useState(false);
 
   const isPlaying = data && data.isPlaying;
 
@@ -21,41 +23,23 @@ const NowPlaying: React.FC<Props> = ({ isVisible, onToggleVisible }) => {
   }
 
   return (
-    <div
-      className={classnames(
-        'fixed bg-spotify-gray border-gray-700 border-t h-24 text-white z-10 shadow-2xl rounded-md transition-bottom duration-200 w-full',
-        {
-          'bottom-0': isVisible,
-          '-bottom-24': !isVisible,
-        },
-      )}
-    >
-      <div className="inset-center -top-8 bg-spotify-green rounded-t-md py-1 px-3 shadow-2xl">
-        <button
-          onClick={onToggleVisible}
-          className="flex items-center focus:outline-none text-sm text-white"
-        >
-          <span className="pr-2">Now Playing</span>
-          <Chevron
-            className={classnames(
-              'fill-current transform transition-transform',
-              {
-                'rotate-180': isVisible,
-                'rotate-0': !isVisible,
-              },
-            )}
-          />
-        </button>
-      </div>
-      <div className="w-full h-full max-w-screen-2xl flex items-center px-5 md:px-16 lg:px-28 mx-auto">
+    <article className="fixed z-10 bottom-5 right-5 md:bottom-10 md:right-10">
+      <div
+        className={classnames(
+          'absolute right-0 bottom-20 py-6 px-10 bg-spotify-gray border border-gray-700 w-72 rounded-md transition-opacity',
+          {
+            'opacity-0 invisible': !isVisible,
+            'opacity-100 visible': isVisible,
+          },
+        )}
+      >
+        <div className="text-gray-400 text-lg mb-5">Now Playing:</div>
         <Image
-          src={data.albumImage}
-          width={57}
-          height={57}
-          className="rounded block"
-          alt={`Spotify album cover for ${data.artists}`}
+          src={data.albumImage.url}
+          width={data.albumImage.width}
+          height={data.albumImage.height}
         />
-        <div className="pl-4 text-white text-sm md:text-base w-full truncate">
+        <div className="text-white text-sm md:text-base w-full truncate mt-5">
           <a
             href={data.songUrl}
             target="_blank"
@@ -64,10 +48,17 @@ const NowPlaying: React.FC<Props> = ({ isVisible, onToggleVisible }) => {
           >
             {data.songName}
           </a>
-          <div className="text-gray-40 truncate">{data.artists}</div>
+          <div className="text-gray-400 truncate">{data.artists}</div>
         </div>
       </div>
-    </div>
+      <button
+        className="p-4 flex justify-center items-center w-16 h-16 bg-spotify-green rounded-full shadow-2xl focus:outline-none focus:ring-2 focus:ring-spotify-light-green text-white"
+        onClick={() => setVisible((prev) => !prev)}
+      >
+        {!isVisible && <SpotifyIcon />}
+        {isVisible && <Chevron className="transform rotate-180 fill-current" />}
+      </button>
+    </article>
   );
 };
 

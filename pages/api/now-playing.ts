@@ -1,6 +1,6 @@
 import { getNowPlayingTrack } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
-import { SpotifyNowPlayingResponse } from '@/models/Spotify';
+import { SpotifyImage, SpotifyNowPlayingResponse } from '@/models/Spotify';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
 
@@ -9,7 +9,7 @@ export interface NowPlayingResponse {
   songName: string;
   artists: string;
   album: string;
-  albumImage: string;
+  albumImage: SpotifyImage;
   songUrl: string;
 }
 
@@ -37,7 +37,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     .map((artist) => artist.name)
     .join(', ');
   const album = songDetails.item.album.name;
-  const albumImage = songDetails.item.album.images[0].url;
+  const albumImage = songDetails.item.album.images[0];
   const songUrl = songDetails.item.external_urls.spotify;
 
   return res.status(200).json({
