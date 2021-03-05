@@ -29,9 +29,6 @@ module.exports = {
       fontFamily: {
         sans: ['Circular Std', ...fontFamily.sans],
       },
-      transitionProperty: {
-        bottom: 'bottom',
-      },
     },
   },
   variants: {
