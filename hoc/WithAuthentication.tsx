@@ -1,7 +1,8 @@
+import Meta from '@/components/Meta';
 import { NoPageFlicker } from '@/components/NoPageFlicker';
 import { useSession } from 'next-auth/client';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 
 function withAuthentication<Props>(
   WrappedComponent: React.ComponentType<Props>,
@@ -16,7 +17,12 @@ function withAuthentication<Props>(
       }
     }, [session, router, loading]);
 
-    return session ? <WrappedComponent {...props} /> : <NoPageFlicker />;
+    return (
+      <Fragment>
+        <Meta />
+        {session ? <WrappedComponent {...props} /> : <NoPageFlicker />}
+      </Fragment>
+    );
   };
 
   return RequiresAuthentication;
