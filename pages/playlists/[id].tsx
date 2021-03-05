@@ -14,7 +14,6 @@ const Playlist: NextPage = () => {
   const { data: playlist } = useSWR<SpotifyPlaylist>(
     `${APIRoute.PLAYLISTS}/${query.id}`,
   );
-
   return (
     <Fragment>
       <DashboardLayout>

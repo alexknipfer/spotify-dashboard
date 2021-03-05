@@ -179,4 +179,5 @@ export interface SpotifyPlaylist {
   type: string;
   uri: string;
   description: string;
+  followers: Followers;
 }

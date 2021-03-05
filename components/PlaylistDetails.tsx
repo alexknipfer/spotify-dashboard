@@ -29,11 +29,14 @@ const PlaylistDetails: React.FC<Props> = ({ playlist, isLoading }) => {
         className="rounded-none"
         priority
       />
-      <div className="mt-5 text-center md:text-left md:ml-5">
+      <div className="text-center md:text-left md:ml-5">
         <Heading level="h1">{playlist.name}</Heading>
         <h2 className="text-gray-400 text-xl mt-2">{playlist.description}</h2>
         <h3 className="text-gray-400 text-base mb-5">
           Total Songs: {playlist.tracks.total}
+          <h3 className="text-gray-400 text-base mb-5">
+            Followers: {playlist.followers.total}
+          </h3>
         </h3>
       </div>
     </article>
