@@ -10,6 +10,11 @@ const App: NextPage<CustomAppProps> = ({ Component, pageProps }) => {
   return (
     <Provider session={pageProps.session}>
       <Head>
+        <title>Spotify Dashboard</title>
+        <meta
+          name="description"
+          content="The place to view your Spotify statistics."
+        />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
