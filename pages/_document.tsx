@@ -5,6 +5,7 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document';
+import Meta from '@/components/Meta';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -58,6 +59,7 @@ class MyDocument extends Document {
           <meta name="msapplication-TileColor" content="#da532c" />
           <meta name="theme-color" content="rgb(24, 24, 24)" />
           <meta charSet="utf-8" />
+          <Meta />
         </Head>
         <body className="bg-spotify-gray text-white">
           <Main />
