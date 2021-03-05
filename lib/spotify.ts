@@ -13,6 +13,7 @@ const PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
 const RECENTLY_PLAYED_ENDPOINT = `${ME_ENDPOINT}/player/recently-played`;
 const AUDIO_FEATURES_ENDPOINT = `${BASE_URL}/audio-features`;
 const TRACKS_ENDPOINT = `${BASE_URL}/tracks`;
+const NOW_PLAYING_ENDPOINT = `${ME_ENDPOINT}/player/currently-playing`;
 
 const authToken = Buffer.from(
   `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
@@ -108,6 +109,12 @@ export const getTrackAudioFeaturesById = async (
 
 export const getTrackById = async (accessToken: string, trackId: string) => {
   return fetch(`${TRACKS_ENDPOINT}/${trackId}`, {
+    headers: getHeaders(accessToken),
+  });
+};
+
+export const getNowPlayingTrack = async (accessToken: string) => {
+  return fetch(`${NOW_PLAYING_ENDPOINT}`, {
     headers: getHeaders(accessToken),
   });
 };
