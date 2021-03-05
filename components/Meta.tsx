@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 
 interface Props {
   title?: string;
@@ -8,8 +7,6 @@ interface Props {
 }
 
 const Meta: React.FC<Props> = (customMeta) => {
-  const router = useRouter();
-
   const meta = {
     title: 'Spotify Dashboard - The place to find your Spotify statistics.',
     description:
@@ -23,15 +20,19 @@ const Meta: React.FC<Props> = (customMeta) => {
   return (
     <Head>
       <title>{meta.title}</title>
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+      />
       <meta name="description" content={meta.description} />
       <meta name="og:title" content={meta.title} />
       <meta
         property="og:url"
-        content={`https://spotify-dashboard-alexknipfer.vercel.app${router.asPath}`}
+        content={`https://spotify-dashboard-alexknipfer.vercel.app`}
       />
       <link
         rel="canonical"
-        href={`https://spotify-dashboard-alexknipfer.vercel.app${router.asPath}`}
+        href={`https://spotify-dashboard-alexknipfer.vercel.app`}
       />
       <meta property="og:type" content={meta.type} />
       <meta property="og:site_name" content="Spotify Dashboard" />
