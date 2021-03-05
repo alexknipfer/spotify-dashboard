@@ -20,6 +20,10 @@ const Meta: React.FC<Props> = (customMeta) => {
   return (
     <Head>
       <title>{meta.title}</title>
+      <meta
+        name="viewport"
+        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no"
+      />
       <meta name="description" content={meta.description} />
       <meta name="og:title" content={meta.title} />
       <meta
