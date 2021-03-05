@@ -52,7 +52,7 @@ const NowPlaying: React.FC = () => {
         </div>
       </div>
       <button
-        className="p-4 flex justify-center items-center w-16 h-16 bg-spotify-green rounded-full shadow-2xl focus:outline-none focus:ring-2 focus:ring-spotify-light-green text-white"
+        className="p-4 flex justify-center items-center w-16 h-16 bg-spotify-green rounded-full shadow-inner focus:outline-none focus:ring-2 focus:ring-spotify-light-green text-white"
         onClick={() => setVisible((prev) => !prev)}
       >
         {!isVisible && <SpotifyIcon />}
