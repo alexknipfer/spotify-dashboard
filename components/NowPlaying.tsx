@@ -30,7 +30,7 @@ const NowPlaying: React.FC<Props> = ({ isVisible, onToggleVisible }) => {
         },
       )}
     >
-      <div className="absolute -top-8 left-1/2 bg-spotify-green rounded-t-md py-1 px-2 shadow-2xl">
+      <div className="inset-center -top-8 bg-spotify-green rounded-t-md py-1 px-3 shadow-2xl">
         <button
           onClick={onToggleVisible}
           className="flex items-center focus:outline-none text-sm text-white"
@@ -47,7 +47,7 @@ const NowPlaying: React.FC<Props> = ({ isVisible, onToggleVisible }) => {
           />
         </button>
       </div>
-      <div className="w-full h-full max-w-screen-2xl flex items-center px-16 lg:px-28 mx-auto">
+      <div className="w-full h-full max-w-screen-2xl flex items-center px-5 md:px-16 lg:px-28 mx-auto">
         <Image
           src={data.albumImage}
           width={57}
@@ -55,16 +55,16 @@ const NowPlaying: React.FC<Props> = ({ isVisible, onToggleVisible }) => {
           className="rounded block"
           alt={`Spotify album cover for ${data.artists}`}
         />
-        <div className="pl-4 text-white">
+        <div className="pl-4 text-white text-sm md:text-base w-full truncate">
           <a
             href={data.songUrl}
             target="_blank"
             rel="noreferrer"
-            className="block hover:underline"
+            className="hover:underline truncate"
           >
             {data.songName}
           </a>
-          <div className="text-gray-400">{data.artists}</div>
+          <div className="text-gray-40 truncate">{data.artists}</div>
         </div>
       </div>
     </div>

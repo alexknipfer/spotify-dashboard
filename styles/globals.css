@@ -35,3 +35,9 @@ img {
   max-width: 100%;
   height: auto;
 }
+
+.inset-center {
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+}
