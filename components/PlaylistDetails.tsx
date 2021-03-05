@@ -1,8 +1,6 @@
 import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
 import Heading from '@/components/Heading';
-import Anchor from '@/components/Anchor';
-import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
   playlist: SpotifyPlaylist;
@@ -33,12 +31,10 @@ const PlaylistDetails: React.FC<Props> = ({ playlist, isLoading }) => {
       />
       <div className="mt-5 text-center md:text-left md:ml-5">
         <Heading level="h1">{playlist.name}</Heading>
-        <Anchor
-          href={`${RoutePath.PLAYLIST}/${playlist.id}`}
-          className="truncate mr-2"
-        >
-          {name}
-        </Anchor>
+        <h2 className="text-gray-400 text-xl mt-2">{playlist.description}</h2>
+        <h3 className="text-gray-400 text-base mb-5">
+          Total Songs: {playlist.tracks.total}
+        </h3>
       </div>
     </article>
   );

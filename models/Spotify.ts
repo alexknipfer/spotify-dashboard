@@ -178,4 +178,5 @@ export interface SpotifyPlaylist {
   tracks: SpotifyPaginatedResponse<PlaylistTrack>;
   type: string;
   uri: string;
+  description: string;
 }

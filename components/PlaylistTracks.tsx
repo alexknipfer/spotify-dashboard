@@ -1,11 +1,8 @@
-import { Artist, SpotifyAlbum, SpotifyPlaylist } from '@/models/Spotify';
+import { Artist, SpotifyAlbum } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
 import Image from 'next/image';
-import Anchor from '@/components/Anchor';
-import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
-  id?: string;
   name?: string;
   album?: SpotifyAlbum;
   duration?: number;
@@ -14,7 +11,6 @@ interface Props {
 }
 
 const PlaylistTracks: React.FC<Props> = ({
-  id,
   name,
   album,
   duration,
@@ -39,12 +35,13 @@ const PlaylistTracks: React.FC<Props> = ({
   }
 
   return (
-    <div className="ml-5 truncate w-full">
-      <div className="flex justify-between">
+    <article className="flex items-center py-4">
+      <div className="flex-shrink-0 h-thumbnail w-thumbnail">
+        <Image src={album.images[0].url} width={50} height={50} />
+      </div>
+      <div className="ml-5 truncate w-full">
         <div className="flex justify-between">
-          <Anchor href={`${RoutePath.TRACKS}/${id}`} className="truncate mr-2">
-            {name}
-          </Anchor>
+          <div className="truncate mr-2">{name}</div>
           <span className="text-gray-400 text-sm">
             {millisToMinutesAndSeconds(duration)}
           </span>
@@ -53,7 +50,7 @@ const PlaylistTracks: React.FC<Props> = ({
           {artistNames}&nbsp;·&nbsp;{album.name}
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 
