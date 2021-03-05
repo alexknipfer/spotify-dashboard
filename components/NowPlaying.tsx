@@ -3,17 +3,13 @@ import { NowPlayingResponse } from 'pages/api/now-playing';
 import useSWR from 'swr';
 import Image from 'next/image';
 import classnames from 'classnames';
-import { useSession } from 'next-auth/client';
 import { useState } from 'react';
 
 import Chevron from '../public/static/icons/chevron.svg';
 import SpotifyIcon from '../public/static/icons/spotify_icon.svg';
 
 const NowPlaying: React.FC = () => {
-  const [session] = useSession();
-  const { data } = useSWR<NowPlayingResponse>(
-    session ? APIRoute.NOW_PLAYING : null,
-  );
+  const { data } = useSWR<NowPlayingResponse>(APIRoute.NOW_PLAYING);
   const [isVisible, setVisible] = useState(false);
 
   const isPlaying = data && data.isPlaying;
