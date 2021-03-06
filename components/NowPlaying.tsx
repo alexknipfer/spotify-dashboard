@@ -22,7 +22,7 @@ const NowPlaying: React.FC = () => {
     <article className="fixed z-10 bottom-5 right-5 md:bottom-10 md:right-10">
       <div
         className={classnames(
-          'absolute right-0 bottom-20 py-6 px-10 bg-spotify-gray border border-gray-700 w-72 rounded-md transition-opacity',
+          'absolute right-0 bottom-20 py-5 px-8 bg-spotify-gray border border-gray-700 w-72 rounded-md transition-opacity',
           {
             'opacity-0 invisible': !isVisible,
             'opacity-100 visible': isVisible,
@@ -51,7 +51,7 @@ const NowPlaying: React.FC = () => {
         className="p-4 flex justify-center items-center w-16 h-16 bg-spotify-green rounded-full shadow-inner focus:outline-none focus:ring-2 focus:ring-spotify-light-green text-white"
         onClick={() => setVisible((prev) => !prev)}
       >
-        {!isVisible && <SpotifyIcon />}
+        {!isVisible && <SpotifyIcon className="w-full" />}
         {isVisible && <Chevron className="transform rotate-180 fill-current" />}
       </button>
     </article>
