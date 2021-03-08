@@ -34,12 +34,12 @@ const PlaylistDetails: React.FC<Props> = ({ playlist, isLoading }) => {
         <h2 className="text-gray-400 text-xl mt-2">{playlist.description}</h2>
         <h3 className="text-gray-400 text-base">
           {playlist.tracks.total}{' '}
-          {playlist.tracks.total > 1 ? 'Tracks' : 'Track'}
+          {playlist.tracks.total === 1 ? 'Track' : 'Tracks'}
         </h3>
 
         <h3 className="text-gray-400 text-base mb-5">
           {playlist.followers.total}{' '}
-          {playlist.followers.total > 1 ? 'Followers' : 'Follower'}
+          {playlist.followers.total === 1 ? 'Follower' : 'Followers'}
         </h3>
       </div>
     </article>

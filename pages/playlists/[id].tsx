@@ -16,10 +16,7 @@ const Playlist: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <PlaylistDetails
-        isLoading={!playlist}
-        playlist={playlist}
-      ></PlaylistDetails>
+      <PlaylistDetails isLoading={!playlist} playlist={playlist} />
       <div className="mt-10"></div>
       <ul>
         {playlist ? (
