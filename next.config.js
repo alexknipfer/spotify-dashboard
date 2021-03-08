@@ -19,6 +19,7 @@ module.exports = {
       't.scdn.co',
       'dailymix-images.scdn.co',
       'newjams-images.scdn.co',
+      'seeded-session-images.scdn.co',
     ],
   },
 };

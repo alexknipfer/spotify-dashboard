@@ -33,7 +33,7 @@ const PlaylistPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
 
       <Anchor
         href={`${RoutePath.PLAYLIST}/${playlist.id}`}
-        className="truncate mr-2"
+        className="truncate"
       >
         {playlist.name}
       </Anchor>

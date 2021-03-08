@@ -14,15 +14,15 @@ export default async (req: NextAPIRequestWithId, res: NextApiResponse) => {
 
   const { id } = req.query;
 
-  const playlistIdResponse = await getPlaylistById(session.accessToken, id);
+  const playlistResponse = await getPlaylistById(session.accessToken, id);
 
-  if (isBadStatusCode(playlistIdResponse)) {
+  if (isBadStatusCode(playlistResponse)) {
     return res.status(400).json({
-      error: 'Failed to fetch recently played tracks.',
+      error: 'Failed to fetch playlist.',
     });
   }
 
-  const playlistId = await playlistIdResponse.json();
+  const playlist = await playlistResponse.json();
 
-  return res.status(200).json(playlistId);
+  return res.status(200).json(playlist);
 };
