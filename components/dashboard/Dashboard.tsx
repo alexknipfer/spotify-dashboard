@@ -41,7 +41,7 @@ const Dashboard: React.FC<Props> = () => {
         followingCount={data?.followingCount}
         playlistCount={data?.playlistCount}
       />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-20">
         <section>
           <div className="flex justify-between items-center mb-5">
             <h2 className="text-lg md:text-xl font-bold">
