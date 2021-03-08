@@ -40,7 +40,7 @@ export interface SpotifyProfile {
   followers: Followers;
   href: string;
   id: string;
-  images: string[];
+  images: SpotifyImage[];
   type: string;
   uri: string;
 }

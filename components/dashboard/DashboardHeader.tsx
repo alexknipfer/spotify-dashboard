@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import Statistic from '@/components/dashboard/Statistic';
 import { RoutePath } from '@/models/RoutePath.enum';
 import { signOut } from 'next-auth/client';
+import Image from 'next/image';
 
 import ProfileIcon from '../../public/static/icons/profile_icon.svg';
 import Button from '../Button';
@@ -36,10 +37,19 @@ const DashboardHeader: React.FC<Props> = ({
         </Fragment>
       ) : (
         <Fragment>
-          <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7 mb-6">
-            <ProfileIcon fill="#fff" width="100%" height="100%" />
-          </div>
-          <h1 className="text-white font-bold text-3xl md:text-5xl mb-6">
+          {profile.images.length ? (
+            <Image
+              src={profile.images[0].url}
+              width={160}
+              height={160}
+              className="rounded-full"
+            />
+          ) : (
+            <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7">
+              <ProfileIcon fill="#fff" width="100%" height="100%" />
+            </div>
+          )}
+          <h1 className="text-white font-bold text-3xl md:text-5xl my-6">
             {profile.display_name}
           </h1>
           <div className="flex mb-10">
