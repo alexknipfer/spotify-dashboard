@@ -1,12 +1,14 @@
 import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
+import Anchor from '@/components/Anchor';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
   playlist?: SpotifyPlaylist;
   isLoading?: boolean;
 }
 
-const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
+const PlaylistPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">
@@ -28,7 +30,13 @@ const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
       {playlist.images.length > 0 && (
         <Image src={playlist.images[0]?.url} width={208} height={208} />
       )}
-      <div>{playlist.name}</div>
+
+      <Anchor
+        href={`${RoutePath.PLAYLIST}/${playlist.id}`}
+        className="truncate"
+      >
+        {playlist.name}
+      </Anchor>
       <div className="text-gray-500 text-xs">
         {playlist.tracks.total} TRACKS
       </div>
@@ -36,4 +44,4 @@ const PlayListPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
   );
 };
 
-export default PlayListPreviewCard;
+export default PlaylistPreviewCard;
