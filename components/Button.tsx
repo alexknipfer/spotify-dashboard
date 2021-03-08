@@ -28,7 +28,7 @@ const Button: React.FC<Props> = ({
         buttonSize === 'small' && variant !== 'unstyled',
       'py-4 px-10 text-base font-bold':
         buttonSize === 'medium' && variant !== 'unstyled',
-      'bg-spotify-green hover:bg-spotify-light-green font-bold':
+      'bg-spotify-green hover:bg-spotify-light-green font-bold focus:outline-none focus:ring-2 focus:ring-spotify-light-green':
         variant === 'primary',
       'bg-transparent border border-white hover:bg-white hover:text-spotify-gray font-bold focus:outline-none focus:ring-2 focus:ring-gray-200 focus:ring-opacity-50':
         variant === 'outline',

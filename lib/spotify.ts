@@ -10,6 +10,7 @@ const ARTISTS_ENDPOINT = `${BASE_URL}/artists`;
 const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
 const FOLLOWED_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/following`;
 const PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
+const PLAYLISTS_ENDPOINT_ID = `${BASE_URL}/playlists`;
 const RECENTLY_PLAYED_ENDPOINT = `${ME_ENDPOINT}/player/recently-played`;
 const AUDIO_FEATURES_ENDPOINT = `${BASE_URL}/audio-features`;
 const TRACKS_ENDPOINT = `${BASE_URL}/tracks`;
@@ -66,6 +67,15 @@ export const getTopTracksOrArtists = async (
 
 export const getFollowedArtists = async (accessToken: string) => {
   return fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
+    headers: getHeaders(accessToken),
+  });
+};
+
+export const getPlaylistById = async (
+  accessToken: string,
+  playlistId: string,
+) => {
+  return fetch(`${PLAYLISTS_ENDPOINT_ID}/${playlistId}`, {
     headers: getHeaders(accessToken),
   });
 };
