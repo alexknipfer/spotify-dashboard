@@ -5,6 +5,11 @@ import { useSWRInfinite } from 'swr';
 
 type PaginatedResponse = SpotifyPaginatedResponse<SpotifyPlaylist>;
 
+export interface PaginationConfig {
+  url: string;
+  paginatedUrl?: string;
+}
+
 const PAGE_LIMIT = 20;
 
 const getKey = (pageIndex: number, previousPageData: PaginatedResponse) => {
@@ -23,25 +28,51 @@ const getKey = (pageIndex: number, previousPageData: PaginatedResponse) => {
   return `${APIRoute.PLAYLISTS}?limit=${limit}&offset=${offset}`;
 };
 
-const usePaginatedPlaylists = () => {
-  const { data, size, setSize, error } = useSWRInfinite<PaginatedResponse>(
-    getKey,
-  );
+const usePaginatedPlaylists = <PaginatedData>({
+  url,
+  paginatedUrl,
+}: PaginationConfig) => {
+  const getKey = (
+    pageIndex: number,
+    previousPageData: SpotifyPaginatedResponse<PaginatedData>,
+  ) => {
+    if (previousPageData && !previousPageData.next) {
+      return null;
+    }
 
-  const playlists = useMemo(
-    () => (data ? [].concat(...data.map((result) => result.items)) : []),
-    [data],
+    if (pageIndex === 0) {
+      return `${url}?limit=${PAGE_LIMIT}&offset=0`;
+    }
+
+    const queryParams = new URL(previousPageData.next).searchParams;
+    const limit = queryParams.get('limit');
+    const offset = queryParams.get('offset');
+
+    return `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
+  };
+
+  const { data: paginatedData, size, setSize, error } = useSWRInfinite<
+    SpotifyPaginatedResponse<PaginatedData>
+  >(getKey);
+
+  const data: PaginatedData[] = useMemo(
+    () =>
+      paginatedData
+        ? [].concat(...paginatedData.map((result) => result.items))
+        : [],
+    [paginatedData],
   );
 
   const isReachingEnd =
-    data && data[data.length - 1]?.items.length < PAGE_LIMIT;
-  const isLoadingInitialData = !data && !error;
+    paginatedData &&
+    paginatedData[paginatedData.length - 1]?.items.length < PAGE_LIMIT;
+  const isLoadingInitialData = !paginatedData && !error;
   const isLoadingMore =
-    size > 0 && data && typeof data[size - 1] === 'undefined';
-  const isEmpty = data?.[0]?.items.length === 0;
+    size > 0 && paginatedData && typeof paginatedData[size - 1] === 'undefined';
+  const isEmpty = paginatedData?.[0]?.items.length === 0;
 
   return {
-    playlists,
+    data,
     size,
     setSize,
     isReachingEnd,

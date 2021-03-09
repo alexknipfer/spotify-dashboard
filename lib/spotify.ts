@@ -80,6 +80,15 @@ export const getPlaylistById = async (
   });
 };
 
+export const getPlaylistByTracks = async (
+  accessToken: string,
+  playlistId: string,
+) => {
+  return fetch(`${PLAYLISTS_ENDPOINT_ID}/${playlistId}/tracks`, {
+    headers: getHeaders(accessToken),
+  });
+};
+
 export const getPlaylists = async (
   accessToken: string,
   limit?: string,
