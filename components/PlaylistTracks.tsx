@@ -41,6 +41,7 @@ const PlaylistTracks: React.FC<Props> = ({
       </div>
     );
   }
+
   return (
     <article className="flex items-center py-4">
       <div className="flex-shrink-0 h-thumbnail w-thumbnail">
