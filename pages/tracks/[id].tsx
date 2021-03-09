@@ -17,7 +17,7 @@ interface TrackDetailsResponse {
 const Track: NextPage = () => {
   const { query } = useRouter();
   const { data } = useSWR<TrackDetailsResponse>(
-    `${APIRoute.TRACK_DETAILS}/${query.id}`,
+    query.id ? `${APIRoute.TRACK_DETAILS}/${query.id}` : null,
   );
 
   return (

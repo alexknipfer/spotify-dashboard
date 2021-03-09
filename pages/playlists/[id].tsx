@@ -11,7 +11,7 @@ import useSWR from 'swr';
 const Playlist: NextPage = () => {
   const { query } = useRouter();
   const { data: playlist } = useSWR<SpotifyPlaylist>(
-    `${APIRoute.PLAYLISTS}/${query.id}`,
+    query.id ? `${APIRoute.PLAYLISTS}/${query.id}` : null,
   );
 
   return (
