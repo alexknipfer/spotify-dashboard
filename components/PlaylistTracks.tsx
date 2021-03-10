@@ -1,32 +1,13 @@
-import {
-  Artist,
-  SpotifyAlbum,
-  SpotifyPlaylist,
-  PlaylistTrack,
-} from '@/models/Spotify';
+import { PlaylistTrack } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
 import Image from 'next/image';
-import playlists from 'pages/api/playlists';
 
 interface Props {
   track?: PlaylistTrack;
-  name?: string;
-  album?: SpotifyAlbum;
-  duration?: number;
-  artists?: Artist[];
   isLoading?: boolean;
 }
 
-const PlaylistTracks: React.FC<Props> = ({
-  track,
-  name,
-  album,
-  duration,
-  artists = [],
-  isLoading,
-}) => {
-  const artistNames = artists.map((artist) => artist.name).join(', ');
-
+const PlaylistTracks: React.FC<Props> = ({ track, isLoading }) => {
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">
@@ -49,13 +30,13 @@ const PlaylistTracks: React.FC<Props> = ({
       </div>
       <div className="ml-5 truncate w-full">
         <div className="flex justify-between">
-          <div className="truncate mr-2">{name}</div>
+          <div className="truncate mr-2">{track.track.name}</div>
           <span className="text-gray-400 text-sm">
             {millisToMinutesAndSeconds(track.track.duration_ms)}
           </span>
         </div>
         <div className="text-sm text-gray-400 truncate">
-          {track.track.artists[0].name}&nbsp;·&nbsp;{track.track.name}
+          {track.track.artists[0].name}&nbsp;·&nbsp;{track.track.album.name}
         </div>
       </div>
     </article>
