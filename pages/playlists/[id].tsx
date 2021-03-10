@@ -20,12 +20,12 @@ const Playlist: NextPage = () => {
     isLoadingInitialData,
     isLoadingMore,
   } = usePaginatedData<PlaylistTrack>({
-    url: `${APIRoute.PLAYLISTS}/${query.id}/tracks`,
+    url: `${APIRoute.PLAYLISTS}/${query.id}/tracks` || null,
     defaultLoadCount: '100',
   });
 
   const { data: playlist } = useSWR<SpotifyPlaylist>(
-    `${APIRoute.PLAYLISTS}/${query.id}`,
+    query.id ? `${APIRoute.PLAYLISTS}/${query.id}` : null,
   );
 
   return (
