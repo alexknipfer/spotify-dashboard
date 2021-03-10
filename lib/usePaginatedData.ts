@@ -32,6 +32,7 @@ const usePaginatedData = <PaginatedData>({
       const queryParams = new URL(previousPageData.next).searchParams;
       const limit = queryParams.get('limit');
       const offset = queryParams.get('offset');
+
       return `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
     },
     [defaultLoadCount, paginatedUrl, url],
