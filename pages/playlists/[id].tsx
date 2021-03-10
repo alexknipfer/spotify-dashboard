@@ -2,11 +2,7 @@ import PlaylistTracks from '@/components/PlaylistTracks';
 import PlaylistDetails from '@/components/PlaylistDetails';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
-import {
-  SpotifyPlaylist,
-  PlaylistTrack,
-  SpotifyCursorPaginatedResponse,
-} from '@/models/Spotify';
+import { SpotifyPlaylist, PlaylistTrack } from '@/models/Spotify';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import SkeletonList from '@/components/SkeletonList';
@@ -27,12 +23,10 @@ const Playlist: NextPage = () => {
     url: `${APIRoute.PLAYLISTS}/${query.id}/tracks`,
     defaultLoadCount: '100',
   });
-  console.log(data);
 
   const { data: playlist } = useSWR<SpotifyPlaylist>(
     `${APIRoute.PLAYLISTS}/${query.id}`,
   );
-  console.log(playlist);
 
   return (
     <DashboardLayout>
@@ -44,10 +38,10 @@ const Playlist: NextPage = () => {
           skeletonComponent={<PlaylistTracks isLoading />}
         />
       )}
+
       {data.map((track, index) => (
         <PlaylistTracks key={index} track={track} />
       ))}
-
       {isLoadingMore && (
         <SkeletonList
           rows={5}
