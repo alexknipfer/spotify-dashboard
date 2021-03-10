@@ -17,6 +17,18 @@ const Playlist: NextPage = () => {
     isLoadingMore,
   } = usePaginatedPlaylists();
 
+  if (!playlists) {
+    return (
+      <div className="flex h-screen">
+        <div className="m-auto">
+          <h1 className="text-gray-400 text-5xl">
+            Uh oh, you don&apos;t have any playlists yet!
+          </h1>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <DashboardLayout>
       <Heading level="h1" className="mb-5">
