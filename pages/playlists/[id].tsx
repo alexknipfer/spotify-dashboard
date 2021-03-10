@@ -11,7 +11,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import SkeletonList from '@/components/SkeletonList';
 import useSWR from 'swr';
-import usePaginatedPlaylists from '@/lib/usePaginatedPlaylists';
+import usePaginatedData from '@/lib/usePaginatedData';
 import Button from '@/components/Button';
 
 const Playlist: NextPage = () => {
@@ -23,8 +23,9 @@ const Playlist: NextPage = () => {
     isReachingEnd,
     isLoadingInitialData,
     isLoadingMore,
-  } = usePaginatedPlaylists<PlaylistTrack>({
+  } = usePaginatedData<PlaylistTrack>({
     url: `${APIRoute.PLAYLISTS}/${query.id}/tracks`,
+    defaultLoadCount: '100',
   });
   console.log(data);
 

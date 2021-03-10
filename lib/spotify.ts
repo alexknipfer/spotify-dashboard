@@ -80,11 +80,19 @@ export const getPlaylistById = async (
   });
 };
 
-export const getPlaylistByTracks = async (
+export const getPlaylistTracks = async (
   accessToken: string,
   playlistId: string,
+  limit?: string,
+  offset?: string,
 ) => {
-  return fetch(`${PLAYLISTS_ENDPOINT_ID}/${playlistId}/tracks`, {
+  let url = `${PLAYLISTS_ENDPOINT_ID}/${playlistId}/tracks`;
+
+  if (limit && offset) {
+    url = `${PLAYLISTS_ENDPOINT_ID}/${playlistId}/tracks/?offset=${offset}&limit=${limit}`;
+  }
+
+  return fetch(url, {
     headers: getHeaders(accessToken),
   });
 };

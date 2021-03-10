@@ -4,7 +4,7 @@ import withAuthentication from '@/hoc/WithAuthentication';
 import Heading from '@/components/Heading';
 import PlayListPreviewCard from '@/components/PlaylistPreviewCard';
 import SkeletonList from '@/components/SkeletonList';
-import usePaginatedPlaylists from '@/lib/usePaginatedPlaylists';
+import usePaginatedData from '@/lib/usePaginatedData';
 import Button from '@/components/Button';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyPlaylist } from '@/models/Spotify';
@@ -17,7 +17,7 @@ const Playlist: NextPage = () => {
     isReachingEnd,
     isLoadingInitialData,
     isLoadingMore,
-  } = usePaginatedPlaylists<SpotifyPlaylist>({ url: APIRoute.PLAYLISTS });
+  } = usePaginatedData<SpotifyPlaylist>({ url: APIRoute.PLAYLISTS });
 
   return (
     <DashboardLayout>

@@ -8,6 +8,8 @@ type PaginatedResponse = SpotifyPaginatedResponse<SpotifyPlaylist>;
 export interface PaginationConfig {
   url: string;
   paginatedUrl?: string;
+  paginatedLimit?: string;
+  defaultLoadCount?: string;
 }
 
 const PAGE_LIMIT = 20;
@@ -28,9 +30,11 @@ const getKey = (pageIndex: number, previousPageData: PaginatedResponse) => {
   return `${APIRoute.PLAYLISTS}?limit=${limit}&offset=${offset}`;
 };
 
-const usePaginatedPlaylists = <PaginatedData>({
+const usePaginatedData = <PaginatedData>({
   url,
   paginatedUrl,
+  paginatedLimit,
+  defaultLoadCount,
 }: PaginationConfig) => {
   const getKey = (
     pageIndex: number,
@@ -40,15 +44,14 @@ const usePaginatedPlaylists = <PaginatedData>({
       return null;
     }
 
-    if (pageIndex === 0) {
-      return `${url}?limit=${PAGE_LIMIT}&offset=0`;
+    if (pageIndex === 0 && defaultLoadCount) {
+      return `${url}?limit=${defaultLoadCount}&offset=0`;
     }
-
     const queryParams = new URL(previousPageData.next).searchParams;
     const limit = queryParams.get('limit');
     const offset = queryParams.get('offset');
 
-    return `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
+    return `${paginatedUrl || url}?limit=${PAGE_LIMIT}&offset=${offset}`;
   };
 
   const { data: paginatedData, size, setSize, error } = useSWRInfinite<
@@ -82,4 +85,4 @@ const usePaginatedPlaylists = <PaginatedData>({
   };
 };
 
-export default usePaginatedPlaylists;
+export default usePaginatedData;
