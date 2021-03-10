@@ -1,4 +1,4 @@
-import PlaylistTracks from '@/components/PlaylistTracks';
+import TrackCard from '@/components/TrackCard';
 import PlaylistDetails from '@/components/PlaylistDetails';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
@@ -33,20 +33,25 @@ const Playlist: NextPage = () => {
       <PlaylistDetails isLoading={!playlist} playlist={playlist} />
       <div className="mt-10"></div>
       {isLoadingInitialData && (
-        <SkeletonList
-          rows={20}
-          skeletonComponent={<PlaylistTracks isLoading />}
-        />
+        <SkeletonList rows={20} skeletonComponent={<TrackCard isLoading />} />
       )}
 
       {data.map((track, index) => (
-        <PlaylistTracks key={index} track={track} />
+        <ul key={index}>
+          <li>
+            <TrackCard
+              id={track.track.id}
+              name={track.track.name}
+              album={track.track.album}
+              duration={track.track.duration_ms}
+              artists={track.track.artists}
+            />
+          </li>
+        </ul>
       ))}
+
       {isLoadingMore && (
-        <SkeletonList
-          rows={5}
-          skeletonComponent={<PlaylistTracks isLoading />}
-        />
+        <SkeletonList rows={5} skeletonComponent={<TrackCard isLoading />} />
       )}
       {!isReachingEnd && (
         <div className="text-center">

@@ -1,5 +1,5 @@
 import { SpotifyPaginatedResponse } from '@/models/Spotify';
-import { useMemo } from 'react';
+import { useMemo, useCallback } from 'react';
 import { useSWRInfinite } from 'swr';
 
 export interface PaginationConfig {
@@ -15,28 +15,27 @@ const usePaginatedData = <PaginatedData>({
   paginatedUrl,
   defaultLoadCount,
 }: PaginationConfig) => {
-  const getKey = (
-    pageIndex: number,
-    previousPageData: SpotifyPaginatedResponse<PaginatedData>,
-  ) => {
-    if (previousPageData && !previousPageData.next) {
-      return null;
-    }
-
-    if (pageIndex === 0 && defaultLoadCount) {
-      return `${url}?limit=${defaultLoadCount}&offset=0`;
-    }
-
-    if (pageIndex === 0) {
-      return `${url}?limit=${PAGE_LIMIT}&offset=0`;
-    }
-
-    const queryParams = new URL(previousPageData.next).searchParams;
-    const limit = queryParams.get('limit');
-    const offset = queryParams.get('offset');
-
-    return `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
-  };
+  const getKey = useCallback(
+    (
+      pageIndex: number,
+      previousPageData: SpotifyPaginatedResponse<PaginatedData>,
+    ) => {
+      if (previousPageData && !previousPageData.next) {
+        return null;
+      }
+      if (pageIndex === 0 && defaultLoadCount) {
+        return `${url}?limit=${defaultLoadCount}&offset=0`;
+      }
+      if (pageIndex === 0) {
+        return `${url}?limit=${PAGE_LIMIT}&offset=0`;
+      }
+      const queryParams = new URL(previousPageData.next).searchParams;
+      const limit = queryParams.get('limit');
+      const offset = queryParams.get('offset');
+      return `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
+    },
+    [defaultLoadCount, paginatedUrl, url],
+  );
 
   const { data: paginatedData, size, setSize, error } = useSWRInfinite<
     SpotifyPaginatedResponse<PaginatedData>
