@@ -17,18 +17,6 @@ const Playlist: NextPage = () => {
     isLoadingMore,
   } = usePaginatedPlaylists();
 
-  if (!playlists) {
-    return (
-      <div className="flex h-screen">
-        <div className="m-auto">
-          <h1 className="text-gray-400 text-5xl">
-            Uh oh, you don&apos;t have any playlists yet!
-          </h1>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <DashboardLayout>
       <Heading level="h1" className="mb-5">
@@ -51,15 +39,25 @@ const Playlist: NextPage = () => {
           />
         )}
       </div>
-      {!isReachingEnd && (
-        <div className="text-center">
-          <Button
-            variant="outline"
-            buttonSize="small"
-            onClick={() => setSize(size + 1)}
-          >
-            Load More
-          </Button>
+      {!playlists ? (
+        <div className="flex justify-center items-center">
+          <h1 className="text-gray-400 text-5xl">
+            Uh oh, you don&apos;t have any playlists yet!
+          </h1>
+        </div>
+      ) : (
+        <div>
+          {!isReachingEnd && (
+            <div className="text-center">
+              <Button
+                variant="outline"
+                buttonSize="small"
+                onClick={() => setSize(size + 1)}
+              >
+                Load More
+              </Button>
+            </div>
+          )}
         </div>
       )}
     </DashboardLayout>
