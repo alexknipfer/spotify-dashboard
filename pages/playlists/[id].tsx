@@ -20,7 +20,7 @@ const Playlist: NextPage = () => {
     isLoadingInitialData,
     isLoadingMore,
   } = usePaginatedData<PlaylistTrack>({
-    url: `${APIRoute.PLAYLISTS}/${query.id}/tracks` || null,
+    url: query.id ? `${APIRoute.PLAYLISTS}/${query.id}/tracks` : null,
     defaultLoadCount: '100',
   });
 
