@@ -39,25 +39,22 @@ const Playlist: NextPage = () => {
           />
         )}
       </div>
-      {!playlists ? (
+      {playlists.length === 0 && (
         <div className="flex justify-center items-center">
-          <h1 className="text-gray-400 text-5xl">
+          <Heading level="h1" className="text-gray-400 text-center">
             Uh oh, you don&apos;t have any playlists yet!
-          </h1>
+          </Heading>
         </div>
-      ) : (
-        <div>
-          {!isReachingEnd && (
-            <div className="text-center">
-              <Button
-                variant="outline"
-                buttonSize="small"
-                onClick={() => setSize(size + 1)}
-              >
-                Load More
-              </Button>
-            </div>
-          )}
+      )}
+      {!isReachingEnd && playlists.length > 0 && (
+        <div className="text-center">
+          <Button
+            variant="outline"
+            buttonSize="small"
+            onClick={() => setSize(size + 1)}
+          >
+            Load More
+          </Button>
         </div>
       )}
     </DashboardLayout>
