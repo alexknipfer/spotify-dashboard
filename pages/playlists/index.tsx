@@ -11,7 +11,7 @@ import { SpotifyPlaylist } from '@/models/Spotify';
 
 const Playlist: NextPage = () => {
   const {
-    data,
+    data: playlists,
     size,
     setSize,
     isReachingEnd,
@@ -31,7 +31,7 @@ const Playlist: NextPage = () => {
             skeletonComponent={<PlayListPreviewCard isLoading />}
           />
         )}
-        {data.map((playlist, index) => (
+        {playlists.map((playlist, index) => (
           <PlayListPreviewCard key={index} playlist={playlist} />
         ))}
         {isLoadingMore && (
@@ -41,7 +41,14 @@ const Playlist: NextPage = () => {
           />
         )}
       </div>
-      {!isReachingEnd && (
+      {playlists.length === 0 && (
+        <div className="flex justify-center items-center">
+          <Heading level="h1" className="text-gray-400 text-center">
+            Uh oh, you don&apos;t have any playlists yet!
+          </Heading>
+        </div>
+      )}
+      {!isReachingEnd && playlists.length > 0 && (
         <div className="text-center">
           <Button
             variant="outline"
