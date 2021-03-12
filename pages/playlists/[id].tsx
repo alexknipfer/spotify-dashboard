@@ -1,39 +1,69 @@
-import PlaylistTracks from '@/components/PlaylistTracks';
+import TrackCard from '@/components/TrackCard';
 import PlaylistDetails from '@/components/PlaylistDetails';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
-import { SpotifyPlaylist } from '@/models/Spotify';
+import { SpotifyPlaylist, PlaylistTrack } from '@/models/Spotify';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import SkeletonList from '@/components/SkeletonList';
 import useSWR from 'swr';
+import usePaginatedData from '@/lib/usePaginatedData';
+import Button from '@/components/Button';
 
 const Playlist: NextPage = () => {
   const { query } = useRouter();
+  const {
+    data,
+    size,
+    setSize,
+    isReachingEnd,
+    isLoadingInitialData,
+    isLoadingMore,
+  } = usePaginatedData<PlaylistTrack>({
+    url: query.id ? `${APIRoute.PLAYLISTS}/${query.id}/tracks` : null,
+    defaultLoadCount: '100',
+  });
+
   const { data: playlist } = useSWR<SpotifyPlaylist>(
-    `${APIRoute.PLAYLISTS}/${query.id}`,
+    query.id ? `${APIRoute.PLAYLISTS}/${query.id}` : null,
   );
 
   return (
     <DashboardLayout>
       <PlaylistDetails isLoading={!playlist} playlist={playlist} />
       <div className="mt-10"></div>
-      <ul>
-        {playlist ? (
-          playlist.tracks.items.map(({ track }) => (
-            <li key={track.id}>
-              <PlaylistTracks
-                name={track.name}
-                album={track.album}
-                artists={track.artists}
-                duration={track.duration_ms}
-              />
-            </li>
-          ))
-        ) : (
-          <SkeletonList skeletonComponent={<PlaylistTracks isLoading />} />
-        )}
-      </ul>
+      {isLoadingInitialData && (
+        <SkeletonList rows={20} skeletonComponent={<TrackCard isLoading />} />
+      )}
+
+      {data.map((track, index) => (
+        <ul key={index}>
+          <li>
+            <TrackCard
+              id={track.track.id}
+              name={track.track.name}
+              album={track.track.album}
+              duration={track.track.duration_ms}
+              artists={track.track.artists}
+            />
+          </li>
+        </ul>
+      ))}
+
+      {isLoadingMore && (
+        <SkeletonList rows={5} skeletonComponent={<TrackCard isLoading />} />
+      )}
+      {!isReachingEnd && (
+        <div className="text-center">
+          <Button
+            variant="outline"
+            buttonSize="small"
+            onClick={() => setSize(size + 1)}
+          >
+            Load More
+          </Button>
+        </div>
+      )}
     </DashboardLayout>
   );
 };

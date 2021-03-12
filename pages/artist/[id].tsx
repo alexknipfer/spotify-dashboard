@@ -9,7 +9,9 @@ import useSWR from 'swr';
 
 const Artist: NextPage = () => {
   const { query } = useRouter();
-  const { data } = useSWR<SpotifyArtist>(`${APIRoute.ARTIST}/${query.id}`);
+  const { data } = useSWR<SpotifyArtist>(
+    query.id ? `${APIRoute.ARTIST}/${query.id}` : null,
+  );
 
   return (
     <DashboardLayout>

@@ -9,8 +9,8 @@ const ME_ENDPOINT = `${BASE_URL}/me`;
 const ARTISTS_ENDPOINT = `${BASE_URL}/artists`;
 const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
 const FOLLOWED_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/following`;
-const PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
-const PLAYLISTS_ENDPOINT_ID = `${BASE_URL}/playlists`;
+const USER_PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
+const PLAYLISTS_ENDPOINT = `${BASE_URL}/playlists`;
 const RECENTLY_PLAYED_ENDPOINT = `${ME_ENDPOINT}/player/recently-played`;
 const AUDIO_FEATURES_ENDPOINT = `${BASE_URL}/audio-features`;
 const TRACKS_ENDPOINT = `${BASE_URL}/tracks`;
@@ -75,7 +75,24 @@ export const getPlaylistById = async (
   accessToken: string,
   playlistId: string,
 ) => {
-  return fetch(`${PLAYLISTS_ENDPOINT_ID}/${playlistId}`, {
+  return fetch(`${PLAYLISTS_ENDPOINT}/${playlistId}`, {
+    headers: getHeaders(accessToken),
+  });
+};
+
+export const getPlaylistTracks = async (
+  accessToken: string,
+  playlistId: string,
+  limit?: string,
+  offset?: string,
+) => {
+  let url = `${PLAYLISTS_ENDPOINT}/${playlistId}/tracks`;
+
+  if (limit && offset) {
+    url = `${PLAYLISTS_ENDPOINT}/${playlistId}/tracks/?offset=${offset}&limit=${limit}`;
+  }
+
+  return fetch(url, {
     headers: getHeaders(accessToken),
   });
 };
@@ -85,10 +102,10 @@ export const getPlaylists = async (
   limit?: string,
   offset?: string,
 ) => {
-  let url = PLAYLISTS_ENDPOINT;
+  let url = USER_PLAYLISTS_ENDPOINT;
 
   if (limit && offset) {
-    url = `${PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
+    url = `${USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
   }
 
   return fetch(url, {

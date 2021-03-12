@@ -1,14 +1,8 @@
 import { getPlaylists } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiResponse } from 'next';
+import { NextAPIRequestWithPagination } from '@/models/NextAPIRequestWithPagination';
 import { getSession } from 'next-auth/client';
-
-type NextAPIRequestWithPagination = NextApiRequest & {
-  query: {
-    limit?: string;
-    offset?: string;
-  };
-};
 
 export default async (
   req: NextAPIRequestWithPagination,

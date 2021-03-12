@@ -4,18 +4,20 @@ import withAuthentication from '@/hoc/WithAuthentication';
 import Heading from '@/components/Heading';
 import PlayListPreviewCard from '@/components/PlaylistPreviewCard';
 import SkeletonList from '@/components/SkeletonList';
-import usePaginatedPlaylists from '@/lib/usePaginatedPlaylists';
+import usePaginatedData from '@/lib/usePaginatedData';
 import Button from '@/components/Button';
+import { APIRoute } from '@/models/APIRoute.enum';
+import { SpotifyPlaylist } from '@/models/Spotify';
 
 const Playlist: NextPage = () => {
   const {
-    playlists,
+    data,
     size,
     setSize,
     isReachingEnd,
     isLoadingInitialData,
     isLoadingMore,
-  } = usePaginatedPlaylists();
+  } = usePaginatedData<SpotifyPlaylist>({ url: APIRoute.PLAYLISTS });
 
   return (
     <DashboardLayout>
@@ -29,7 +31,7 @@ const Playlist: NextPage = () => {
             skeletonComponent={<PlayListPreviewCard isLoading />}
           />
         )}
-        {playlists.map((playlist, index) => (
+        {data.map((playlist, index) => (
           <PlayListPreviewCard key={index} playlist={playlist} />
         ))}
         {isLoadingMore && (
