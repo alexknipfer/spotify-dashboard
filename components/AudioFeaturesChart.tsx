@@ -1,6 +1,6 @@
 import { SpotifyAudioFeatures } from '@/models/Spotify';
 import { Fragment, useEffect, useRef } from 'react';
-import Chart from 'chart.js';
+import Chart from 'chart.js/auto';
 
 const keys = [
   'acousticness',
@@ -27,7 +27,9 @@ const AudioFeaturesChart: React.FC<Props> = ({ audioFeatures }) => {
       type: 'bar',
       options: {
         maintainAspectRatio: false,
-        legend: { display: false },
+        plugins: {
+          legend: { display: false },
+        },
         scales: {
           xAxes: [
             {
