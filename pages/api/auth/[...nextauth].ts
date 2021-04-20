@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { InitOptions, User } from 'next-auth';
+import NextAuth, { NextAuthOptions, User } from 'next-auth';
 import Providers from 'next-auth/providers';
 import { appConfig } from '@/lib/appConfig';
 import { getAccessToken } from '@/lib/spotify';
@@ -40,7 +40,7 @@ const refreshToken = async (token: JWT) => {
   }
 };
 
-const options: InitOptions = {
+const options: NextAuthOptions = {
   providers: [
     Providers.Spotify({
       clientId: appConfig.spotify.clientId,
@@ -52,7 +52,8 @@ const options: InitOptions = {
     signIn: '/login',
   },
   callbacks: {
-    async jwt(token: JWT, user, account) {
+    // TODO: Figure out correct typings for token
+    async jwt(token: any, user, account) {
       if (account && user) {
         return {
           accessToken: account.accessToken,
@@ -68,7 +69,8 @@ const options: InitOptions = {
 
       return refreshToken(token);
     },
-    async session(session, token) {
+    // TODO: Figure out correct typings for session
+    async session(session: any, token) {
       if (token) {
         return {
           user: token.user,
