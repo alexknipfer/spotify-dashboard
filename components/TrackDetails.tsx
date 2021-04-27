@@ -30,7 +30,7 @@ const TrackDetails: React.FC<Props> = ({ track, isLoading }) => {
         src={track.album.images[0].url}
         priority
       />
-      <div className="text-center md:text-left md:ml-5">
+      <div className="text-center mt-5 md:mt-0 md:text-left md:ml-10">
         <Heading level="h1">{track.name}</Heading>
         <h2 className="text-gray-400 text-xl mt-2">
           {track.artists.map((artist) => artist.name).join(', ')}
