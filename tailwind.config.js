@@ -1,12 +1,11 @@
 const { fontFamily } = require('tailwindcss/defaultTheme');
 
 module.exports = {
-  purge: [
+  content: [
     './pages/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
     './layouts/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: false,
   variants: {
     margin: ['responsive', 'last'],
   },
