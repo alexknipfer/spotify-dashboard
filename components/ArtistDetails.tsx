@@ -1,8 +1,9 @@
-import { SpotifyArtist } from '@/models/Spotify';
 import Image from 'next/image';
-import Heading from '@/components/Heading';
 
 import Button from './Button';
+
+import { SpotifyArtist } from '@/models/Spotify';
+import Heading from '@/components/Heading';
 
 interface Props {
   artist: SpotifyArtist;

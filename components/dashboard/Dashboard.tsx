@@ -1,11 +1,12 @@
+import { Fragment } from 'react';
+import useSWR from 'swr';
+
 import {
   SpotifyProfile,
   SpotifyPaginatedResponse,
   SpotifyArtist,
   SpotifyTrack,
 } from '@/models/Spotify';
-import { Fragment } from 'react';
-import useSWR from 'swr';
 import ArtistCard from '@/components/ArtistCard';
 import TrackCard from '@/components/TrackCard';
 import { APIRoute } from '@/models/APIRoute.enum';

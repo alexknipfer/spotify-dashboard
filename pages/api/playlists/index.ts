@@ -1,8 +1,9 @@
+import { NextApiResponse } from 'next';
+import { getSession } from 'next-auth/client';
+
 import { getPlaylists } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
-import { NextApiResponse } from 'next';
 import { NextAPIRequestWithPagination } from '@/models/NextAPIRequestWithPagination';
-import { getSession } from 'next-auth/client';
 
 export default async (
   req: NextAPIRequestWithPagination,

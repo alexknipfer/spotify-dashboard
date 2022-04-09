@@ -1,6 +1,7 @@
+import Image from 'next/image';
+
 import { RoutePath } from '@/models/RoutePath.enum';
 import { SpotifyImage } from '@/models/Spotify';
-import Image from 'next/image';
 import Anchor from '@/components/Anchor';
 
 interface Props {

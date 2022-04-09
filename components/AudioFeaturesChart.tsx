@@ -1,7 +1,8 @@
-import { SpotifyAudioFeatures } from '@/models/Spotify';
 import { Fragment, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 import { Chart as ChartModel } from 'chart.js';
+
+import { SpotifyAudioFeatures } from '@/models/Spotify';
 
 const keys = [
   'acousticness',
