@@ -1,5 +1,3 @@
-import querystring from 'querystring';
-
 import { SpotifyTokenResponse } from '@/models/Spotify';
 import { appConfig } from '@/lib/appConfig';
 
@@ -34,7 +32,7 @@ export const getAccessToken = async (
       Authorization: `Basic ${authToken}`,
       'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: querystring.stringify({
+    body: new URLSearchParams({
       grant_type: 'refresh_token',
       refresh_token: refreshToken,
     }),
@@ -54,16 +52,13 @@ export const getTopTracksOrArtists = async (
   type: 'artists' | 'tracks',
   limit = 50,
   range = 'long_term',
-) => {
-  const queryParams = querystring.stringify({
-    limit,
-    time_range: range,
-  });
-
-  return fetch(`${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?${queryParams}`, {
-    headers: getHeaders(accessToken),
-  });
-};
+) =>
+  fetch(
+    `${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?limit=${limit}&time_range=${range}`,
+    {
+      headers: getHeaders(accessToken),
+    },
+  );
 
 export const getFollowedArtists = async (accessToken: string) => {
   return fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
