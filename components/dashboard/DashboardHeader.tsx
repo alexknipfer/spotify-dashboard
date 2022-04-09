@@ -1,13 +1,14 @@
-import { SpotifyProfile } from '@/models/Spotify';
 import { Fragment } from 'react';
 import classnames from 'classnames';
-import Statistic from '@/components/dashboard/Statistic';
-import { RoutePath } from '@/models/RoutePath.enum';
-import { signOut } from 'next-auth/client';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 
 import ProfileIcon from '../../public/static/icons/profile_icon.svg';
 import Button from '../Button';
+
+import { RoutePath } from '@/models/RoutePath.enum';
+import Statistic from '@/components/dashboard/Statistic';
+import { SpotifyProfile } from '@/models/Spotify';
 
 interface Props {
   isLoading: boolean;

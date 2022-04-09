@@ -1,5 +1,6 @@
-import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
+
+import { SpotifyPlaylist } from '@/models/Spotify';
 import Heading from '@/components/Heading';
 
 interface Props {

@@ -1,7 +1,9 @@
 import { NextPage } from 'next';
+import useSWR from 'swr';
+import { useState } from 'react';
+
 import DashboardLayout from '@/layouts/DashboardLayout';
 import Heading from '@/components/Heading';
-import useSWR from 'swr';
 import { APIRoute } from '@/models/APIRoute.enum';
 import {
   SpotifyPaginatedResponse,
@@ -11,12 +13,10 @@ import {
 import TrackCard from '@/components/TrackCard';
 import SkeletonList from '@/components/SkeletonList';
 import TimeRangeControls from '@/components/TimeRangeControls';
-import { useState } from 'react';
 
 const Tracks: NextPage = () => {
-  const [currentTimeRange, setTimeRange] = useState<SpotifyTimeRange>(
-    'long_term',
-  );
+  const [currentTimeRange, setTimeRange] =
+    useState<SpotifyTimeRange>('long_term');
   const { data: topTracks } = useSWR<SpotifyPaginatedResponse<SpotifyTrack>>(
     `${APIRoute.TOP_TRACKS}?range=${currentTimeRange}`,
   );

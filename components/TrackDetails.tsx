@@ -1,5 +1,6 @@
-import { SpotifyTrack } from '@/models/Spotify';
 import Image from 'next/image';
+
+import { SpotifyTrack } from '@/models/Spotify';
 import Heading from '@/components/Heading';
 import Button from '@/components/Button';
 

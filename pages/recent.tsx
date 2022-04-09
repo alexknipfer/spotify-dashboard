@@ -1,8 +1,9 @@
 import { NextPage } from 'next';
+import useSWR from 'swr';
+
 import DashboardLayout from '@/layouts/DashboardLayout';
 import withAuthentication from '@/hoc/WithAuthentication';
 import Heading from '@/components/Heading';
-import useSWR from 'swr';
 import { APIRoute } from '@/models/APIRoute.enum';
 import {
   SpotifyCursorPaginatedResponse,

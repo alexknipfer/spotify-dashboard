@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { SWRConfig } from 'swr';
 import { Provider } from 'next-auth/client';
+
 import { CustomAppProps } from '@/models/CustomPage';
 
 import '../styles/globals.css';

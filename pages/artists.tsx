@@ -1,6 +1,7 @@
 import { NextPage } from 'next';
 import { useState } from 'react';
 import useSWR from 'swr';
+
 import withAuthentication from '@/hoc/WithAuthentication';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import Heading from '@/components/Heading';
@@ -15,9 +16,8 @@ import ArtistPreviewCard from '@/components/ArtistPreviewCard';
 import SkeletonList from '@/components/SkeletonList';
 
 const Artists: NextPage = () => {
-  const [currentTimeRange, setTimeRange] = useState<SpotifyTimeRange>(
-    'long_term',
-  );
+  const [currentTimeRange, setTimeRange] =
+    useState<SpotifyTimeRange>('long_term');
   const { data: topArtists } = useSWR<SpotifyPaginatedResponse<SpotifyArtist>>(
     `${APIRoute.TOP_ARTISTS}?range=${currentTimeRange}`,
   );

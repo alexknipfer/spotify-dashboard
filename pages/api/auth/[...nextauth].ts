@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth, { NextAuthOptions, User } from 'next-auth';
 import Providers from 'next-auth/providers';
+
 import { appConfig } from '@/lib/appConfig';
 import { getAccessToken } from '@/lib/spotify';
 

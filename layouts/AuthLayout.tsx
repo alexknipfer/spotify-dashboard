@@ -1,4 +1,5 @@
 import { Fragment } from 'react';
+
 import Meta from '@/components/Meta';
 
 const AuthLayout: React.FC = ({ children }) => {

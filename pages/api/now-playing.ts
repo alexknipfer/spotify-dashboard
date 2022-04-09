@@ -1,8 +1,9 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/client';
+
 import { getNowPlayingTrack } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
 import { SpotifyImage, SpotifyNowPlayingResponse } from '@/models/Spotify';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
 
 export interface NowPlayingResponse {
   isPlaying: boolean;
@@ -29,7 +30,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
   }
 
-  const songDetails: SpotifyNowPlayingResponse = await nowPlayingResponse.json();
+  const songDetails: SpotifyNowPlayingResponse =
+    await nowPlayingResponse.json();
 
   const isPlaying = songDetails.is_playing;
   const songName = songDetails.item.name;

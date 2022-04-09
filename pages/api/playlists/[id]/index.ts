@@ -1,7 +1,8 @@
-import { getPlaylistById } from '@/lib/spotify';
-import { isBadStatusCode } from '@/lib/utils';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/client';
+
+import { getPlaylistById } from '@/lib/spotify';
+import { isBadStatusCode } from '@/lib/utils';
 
 type NextAPIRequestWithId = NextApiRequest & {
   query: {

@@ -1,6 +1,7 @@
+import Image from 'next/image';
+
 import { Artist, SpotifyAlbum } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
-import Image from 'next/image';
 import Anchor from '@/components/Anchor';
 import { RoutePath } from '@/models/RoutePath.enum';
 

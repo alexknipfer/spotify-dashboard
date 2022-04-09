@@ -1,6 +1,7 @@
+import Image from 'next/image';
+
 import { PlaylistTrack } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
-import Image from 'next/image';
 
 interface Props {
   track?: PlaylistTrack;
