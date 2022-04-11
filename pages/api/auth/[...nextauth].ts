@@ -17,7 +17,6 @@ interface CustomJWT extends JWT {
 const SPOTIFY_SCOPES = [
   'user-read-email',
   'user-top-read',
-  'user-follow-modify',
   'user-follow-read',
   'user-read-recently-played',
   'playlist-read-private',
