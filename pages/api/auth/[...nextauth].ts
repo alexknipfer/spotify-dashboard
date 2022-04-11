@@ -45,9 +45,9 @@ const refreshToken = async (token: CustomJWT) => {
 const options: NextAuthOptions = {
   providers: [
     SpotifyProvider({
-      authorization: `https://accounts.spotify.com/authorize?scope=${SPOTIFY_SCOPES.join(
-        ' ',
-      )}`,
+      authorization: {
+        params: { scope: SPOTIFY_SCOPES.join(' ') },
+      },
       clientId: appConfig.spotify.clientId,
       clientSecret: appConfig.spotify.clientSecret,
     }),
@@ -68,7 +68,7 @@ const options: NextAuthOptions = {
       if (account && user) {
         return {
           accessToken: account.access_token,
-          accessTokenExpires: Date.now() + account.expires_at * 1000,
+          accessTokenExpires: account.expires_at * 1000,
           refreshToken: account.refresh_token,
           user,
         };
