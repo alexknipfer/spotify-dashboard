@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, PropsWithChildren } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
@@ -36,7 +36,9 @@ const navItems = [
   },
 ];
 
-const DashboardLayout: React.FC = ({ children }) => {
+const DashboardLayout: React.FC<PropsWithChildren<unknown>> = ({
+  children,
+}) => {
   const router = useRouter();
 
   return (

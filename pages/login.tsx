@@ -1,4 +1,4 @@
-import { signIn, useSession } from 'next-auth/client';
+import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -12,16 +12,16 @@ import {
 } from '@/components/NoPageFlicker';
 
 const Login: CustomPage = () => {
-  const [session, loading] = useSession();
+  const { status } = useSession();
   const router = useRouter();
 
   useEffect(() => {
-    if (!session && !loading) {
+    if (status !== 'authenticated' && status !== 'loading') {
       document.documentElement.classList.add(NO_PAGE_FLICKER_CLASSNAME);
     } else {
       router.replace('/');
     }
-  }, [session, router, loading]);
+  }, [status, router]);
 
   return (
     <AuthLayout>

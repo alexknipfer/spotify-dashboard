@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
+import { getSession } from 'next-auth/react';
 
 import { getFollowedArtists, getPlaylists, getProfile } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';

@@ -10,18 +10,22 @@ function withAuthentication<Props>(
 ) {
   const RequiresAuthentication = (props: Props) => {
     const router = useRouter();
-    const [session, loading] = useSession();
+    const { status } = useSession();
 
     useEffect(() => {
-      if (!session && !loading) {
+      if (status !== 'authenticated' && status !== 'loading') {
         router.push('/login');
       }
-    }, [session, router, loading]);
+    }, [status, router]);
 
     return (
       <Fragment>
         <Meta />
-        {session ? <WrappedComponent {...props} /> : <NoPageFlicker />}
+        {status === 'authenticated' ? (
+          <WrappedComponent {...props} />
+        ) : (
+          <NoPageFlicker />
+        )}
       </Fragment>
     );
   };

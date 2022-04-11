@@ -1,8 +1,8 @@
-import { Fragment } from 'react';
+import { Fragment, PropsWithChildren } from 'react';
 
 import Meta from '@/components/Meta';
 
-const AuthLayout: React.FC = ({ children }) => {
+const AuthLayout: React.FC<PropsWithChildren<unknown>> = ({ children }) => {
   return (
     <Fragment>
       <Meta description="Welcome to Spotify Dashboard. Login with your spotify account to view your top tracks, top artists, and more!" />
