@@ -1,11 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import NextAuth, { NextAuthOptions, User } from 'next-auth';
-import Providers from 'next-auth/providers';
+import NextAuth, { Account, NextAuthOptions, User } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
+import SpotifyProvider from 'next-auth/providers/spotify';
 
 import { appConfig } from '@/lib/appConfig';
 import { getAccessToken } from '@/lib/spotify';
 
-interface JWT {
+interface CustomJWT extends JWT {
   accessToken: string;
   accessTokenExpires: number;
   refreshToken: string;
@@ -23,7 +24,7 @@ const SPOTIFY_SCOPES = [
   'user-read-currently-playing',
 ];
 
-const refreshToken = async (token: JWT) => {
+const refreshToken = async (token: CustomJWT) => {
   try {
     const refreshedTokens = await getAccessToken(token.refreshToken);
 
@@ -43,22 +44,31 @@ const refreshToken = async (token: JWT) => {
 
 const options: NextAuthOptions = {
   providers: [
-    Providers.Spotify({
+    SpotifyProvider({
+      authorization: `https://accounts.spotify.com/authorize?scope=${SPOTIFY_SCOPES.join(
+        ' ',
+      )}`,
       clientId: appConfig.spotify.clientId,
       clientSecret: appConfig.spotify.clientSecret,
-      scope: SPOTIFY_SCOPES.join(' '),
     }),
   ],
   pages: {
     signIn: '/login',
   },
   callbacks: {
-    // TODO: Figure out correct typings for token
-    async jwt(token: any, user, account) {
+    async jwt({
+      token,
+      account,
+      user,
+    }: {
+      token: CustomJWT;
+      account: Account;
+      user: User;
+    }) {
       if (account && user) {
         return {
-          accessToken: account.accessToken,
-          accessTokenExpires: Date.now() + account.expires_in * 1000,
+          accessToken: account.access_token,
+          accessTokenExpires: Date.now() + account.expires_at * 1000,
           refreshToken: account.refresh_token,
           user,
         };
@@ -70,12 +80,12 @@ const options: NextAuthOptions = {
 
       return refreshToken(token);
     },
-    // TODO: Figure out correct typings for session
-    async session(session: any, token) {
+    async session({ session, token }: any) {
       if (token) {
         return {
-          user: token.user,
+          user: session.user,
           accessToken: token.accessToken,
+          expires: session.expires,
           error: token.error,
         };
       }
