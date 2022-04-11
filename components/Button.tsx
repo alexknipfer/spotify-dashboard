@@ -11,7 +11,7 @@ interface CustomProps {
 
 type Props = CustomProps & React.HTMLProps<HTMLButtonElement>;
 
-const Button: React.FC<Props> = ({
+const Button = ({
   variant,
   type = 'button',
   children,
@@ -20,7 +20,7 @@ const Button: React.FC<Props> = ({
   buttonSize = 'medium',
   className,
   ...props
-}) => {
+}: Props) => {
   const classes = classnames(
     `transition duration-200 text-white rounded-full uppercase tracking-widest ${className}`,
     {

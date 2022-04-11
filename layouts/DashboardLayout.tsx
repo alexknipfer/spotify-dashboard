@@ -2,15 +2,16 @@ import { Fragment } from 'react';
 import Link from 'next/link';
 import classnames from 'classnames';
 import { useRouter } from 'next/router';
-import { RoutePath } from '@/models/RoutePath.enum';
-import Meta from '@/components/Meta';
-import NowPlaying from '@/components/NowPlaying';
 
 import HistoryIcon from '../public/static/icons/history.svg';
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
 import SpotifyLogo from '../public/static/icons/spotify_logo.svg';
 import TracksIcon from '../public/static/icons/tracks.svg';
 import MicrophoneIcon from '../public/static/icons/mic.svg';
+
+import NowPlaying from '@/components/NowPlaying';
+import Meta from '@/components/Meta';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 const navItems = [
   {
@@ -35,7 +36,11 @@ const navItems = [
   },
 ];
 
-const DashboardLayout: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+const DashboardLayout = ({ children }: Props) => {
   const router = useRouter();
 
   return (

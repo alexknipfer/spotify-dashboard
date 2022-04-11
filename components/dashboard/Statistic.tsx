@@ -4,7 +4,7 @@ interface Props {
   label: string;
   href?: string;
 }
-const Statistic: React.FC<Props> = ({ count, label, href }) => {
+const Statistic = ({ count, label, href }: Props) => {
   const content = (
     <div className="text-center mr-5 last:mr-0">
       <div className="text-spotify-green text-xl mb-1">{count}</div>

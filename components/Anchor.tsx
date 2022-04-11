@@ -1,12 +1,13 @@
 import Link from 'next/link';
 
 interface Props {
+  children: string;
   href: string;
   isExternal?: boolean;
   className?: string;
 }
 
-const Anchor: React.FC<Props> = ({ isExternal, href, children, className }) => {
+const Anchor = ({ isExternal, href, children, className }: Props) => {
   const classes = `text-white text-base hover:underline ${className}`;
 
   if (isExternal) {

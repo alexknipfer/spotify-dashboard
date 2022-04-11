@@ -1,5 +1,6 @@
-import { SpotifyPlaylist } from '@/models/Spotify';
 import Image from 'next/image';
+
+import { SpotifyPlaylist } from '@/models/Spotify';
 import Anchor from '@/components/Anchor';
 import { RoutePath } from '@/models/RoutePath.enum';
 
@@ -8,7 +9,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const PlaylistPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
+const PlaylistPreviewCard = ({ playlist, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">

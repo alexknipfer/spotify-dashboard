@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
-import DashboardLayout from '@/layouts/DashboardLayout';
 import useSWR from 'swr';
+
+import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
 import AudioFeaturesChart from '@/components/AudioFeaturesChart';
 import TrackDetails from '@/components/TrackDetails';

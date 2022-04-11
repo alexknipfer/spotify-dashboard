@@ -1,8 +1,9 @@
 import Image from 'next/image';
-import Anchor from '@/components/Anchor';
-import { SpotifyImage } from '@/models/Spotify';
 
 import ProfileIcon from '../public/static/icons/profile_icon.svg';
+
+import Anchor from '@/components/Anchor';
+import { SpotifyImage } from '@/models/Spotify';
 
 interface Props {
   name?: string;
@@ -11,12 +12,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ArtistPreviewCard: React.FC<Props> = ({
-  name,
-  images,
-  href,
-  isLoading,
-}) => {
+const ArtistPreviewCard = ({ name, images, href, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">

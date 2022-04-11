@@ -7,10 +7,7 @@ interface Props {
 
 const DEFAULT_ROWS = 15;
 
-const SkeletonList: React.FC<Props> = ({
-  rows = DEFAULT_ROWS,
-  skeletonComponent,
-}) => {
+const SkeletonList = ({ rows = DEFAULT_ROWS, skeletonComponent }: Props) => {
   return (
     <Fragment>
       {Array(rows)

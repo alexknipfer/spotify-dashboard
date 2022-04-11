@@ -1,4 +1,5 @@
 import classnames from 'classnames';
+
 import Button from '@/components/Button';
 import { SpotifyTimeRange } from '@/models/Spotify';
 
@@ -28,11 +29,11 @@ interface Props {
   className?: string;
 }
 
-const TimeRangeControls: React.FC<Props> = ({
+const TimeRangeControls = ({
   onChange,
   currentTimeFilter,
   className,
-}) => {
+}: Props) => {
   return (
     <div className={className}>
       {timeRanges.map(({ value, label }) => (

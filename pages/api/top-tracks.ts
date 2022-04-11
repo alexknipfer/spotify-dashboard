@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
+
 import { getTopTracksOrArtists } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
 
 type NextAPIRequestWithRange = NextApiRequest & {
   query: {

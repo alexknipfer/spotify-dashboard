@@ -1,4 +1,3 @@
-import { APIRoute } from '@/models/APIRoute.enum';
 import { NowPlayingResponse } from 'pages/api/now-playing';
 import useSWR from 'swr';
 import Image from 'next/image';
@@ -8,7 +7,9 @@ import { useState } from 'react';
 import Chevron from '../public/static/icons/chevron.svg';
 import SpotifyIcon from '../public/static/icons/spotify_icon.svg';
 
-const NowPlaying: React.FC = () => {
+import { APIRoute } from '@/models/APIRoute.enum';
+
+const NowPlaying = () => {
   const { data } = useSWR<NowPlayingResponse>(APIRoute.NOW_PLAYING);
   const [isVisible, setVisible] = useState(false);
 

@@ -1,20 +1,18 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
+
 import { getFollowedArtists, getPlaylists, getProfile } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  const [
-    profileResponse,
-    followingResponse,
-    playlistsResponse,
-  ] = await Promise.all([
-    getProfile(session.accessToken),
-    getFollowedArtists(session.accessToken),
-    getPlaylists(session.accessToken),
-  ]);
+  const [profileResponse, followingResponse, playlistsResponse] =
+    await Promise.all([
+      getProfile(session.accessToken),
+      getFollowedArtists(session.accessToken),
+      getPlaylists(session.accessToken),
+    ]);
 
   if (
     isBadStatusCode(profileResponse) ||

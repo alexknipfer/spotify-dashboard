@@ -1,4 +1,5 @@
 import { NextPage } from 'next';
+
 import DashboardLayout from '@/layouts/DashboardLayout';
 import withAuthentication from '@/hoc/WithAuthentication';
 import Heading from '@/components/Heading';

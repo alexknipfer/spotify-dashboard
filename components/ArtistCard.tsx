@@ -1,6 +1,7 @@
+import Image from 'next/image';
+
 import { RoutePath } from '@/models/RoutePath.enum';
 import { SpotifyImage } from '@/models/Spotify';
-import Image from 'next/image';
 import Anchor from '@/components/Anchor';
 
 interface Props {
@@ -10,7 +11,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ArtistCard: React.FC<Props> = ({ name, image, isLoading, id }) => {
+const ArtistCard = ({ name, image, isLoading, id }: Props) => {
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">

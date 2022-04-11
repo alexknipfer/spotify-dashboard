@@ -1,5 +1,6 @@
-import { SpotifyTrack } from '@/models/Spotify';
 import Image from 'next/image';
+
+import { SpotifyTrack } from '@/models/Spotify';
 import Heading from '@/components/Heading';
 import Button from '@/components/Button';
 
@@ -8,7 +9,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const TrackDetails: React.FC<Props> = ({ track, isLoading }) => {
+const TrackDetails = ({ track, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="flex flex-col md:flex-row items-center animate-pulse">

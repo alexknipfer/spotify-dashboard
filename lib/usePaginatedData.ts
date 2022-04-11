@@ -1,6 +1,7 @@
-import { SpotifyPaginatedResponse } from '@/models/Spotify';
 import { useMemo, useCallback } from 'react';
-import { useSWRInfinite } from 'swr';
+import useSWRInfinite from 'swr/infinite';
+
+import { SpotifyPaginatedResponse } from '@/models/Spotify';
 
 export interface PaginationConfig {
   url: string;
@@ -38,9 +39,12 @@ const usePaginatedData = <PaginatedData>({
     [defaultLoadCount, paginatedUrl, url],
   );
 
-  const { data: paginatedData, size, setSize, error } = useSWRInfinite<
-    SpotifyPaginatedResponse<PaginatedData>
-  >(getKey);
+  const {
+    data: paginatedData,
+    size,
+    setSize,
+    error,
+  } = useSWRInfinite<SpotifyPaginatedResponse<PaginatedData>>(getKey);
 
   const data: PaginatedData[] = useMemo(
     () =>

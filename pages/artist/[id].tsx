@@ -1,11 +1,12 @@
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
 import ArtistDetails from '@/components/ArtistDetails';
 import HeadlineStatistic from '@/components/HeadlineStatistic';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyArtist } from '@/models/Spotify';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
 
 const Artist: NextPage = () => {
   const { query } = useRouter();

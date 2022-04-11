@@ -4,7 +4,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const HeadlineStatistic: React.FC<Props> = ({ label, value, isLoading }) => {
+const HeadlineStatistic = ({ label, value, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="animate-pulse">

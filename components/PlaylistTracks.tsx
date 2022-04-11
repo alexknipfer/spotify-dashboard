@@ -1,13 +1,14 @@
+import Image from 'next/image';
+
 import { PlaylistTrack } from '@/models/Spotify';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
-import Image from 'next/image';
 
 interface Props {
   track?: PlaylistTrack;
   isLoading?: boolean;
 }
 
-const PlaylistTracks: React.FC<Props> = ({ track, isLoading }) => {
+const PlaylistTracks = ({ track, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">

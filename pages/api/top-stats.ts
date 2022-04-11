@@ -1,7 +1,8 @@
+import { NextApiRequest, NextApiResponse } from 'next';
+import { getSession } from 'next-auth/react';
+
 import { getTopTracksOrArtists } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
-import { NextApiRequest, NextApiResponse } from 'next';
-import { getSession } from 'next-auth/client';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });

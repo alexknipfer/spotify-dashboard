@@ -1,12 +1,13 @@
+import { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+
 import TrackCard from '@/components/TrackCard';
 import PlaylistDetails from '@/components/PlaylistDetails';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
 import { SpotifyPlaylist, PlaylistTrack } from '@/models/Spotify';
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import SkeletonList from '@/components/SkeletonList';
-import useSWR from 'swr';
 import usePaginatedData from '@/lib/usePaginatedData';
 import Button from '@/components/Button';
 
