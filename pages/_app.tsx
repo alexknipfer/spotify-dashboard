@@ -1,23 +1,18 @@
 import { NextPage } from 'next';
-import { SWRConfig } from 'swr';
-import { Provider } from 'next-auth/client';
+import { SessionProvider } from 'next-auth/react';
 
 import { CustomAppProps } from '@/models/CustomPage';
+import CustomSWRConfig from '@/components/CustomSWRConfig';
 
 import '../styles/globals.css';
 
 const App: NextPage<CustomAppProps> = ({ Component, pageProps }) => {
   return (
-    <Provider session={pageProps.session}>
-      <SWRConfig
-        value={{
-          fetcher: (resource, init) =>
-            fetch(resource, init).then((res) => res.json()),
-        }}
-      >
+    <SessionProvider session={pageProps.session} refetchInterval={5 * 60}>
+      <CustomSWRConfig>
         <Component {...pageProps} />
-      </SWRConfig>
-    </Provider>
+      </CustomSWRConfig>
+    </SessionProvider>
   );
 };
 
