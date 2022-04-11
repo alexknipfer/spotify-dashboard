@@ -1,6 +1,5 @@
 import { Fragment, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
-import { Chart as ChartModel } from 'chart.js';
 
 import { SpotifyAudioFeatures } from '@/models/Spotify';
 
@@ -17,9 +16,11 @@ interface Props {
   audioFeatures: SpotifyAudioFeatures;
 }
 
+type ChartDataPoints = Array<{ x: string; y: string | number }>;
+
 const AudioFeaturesChart = ({ audioFeatures }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const chartRef = useRef<ChartModel | null>(null);
+  const chartRef = useRef<Chart<'bar', ChartDataPoints> | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) {
@@ -34,23 +35,17 @@ const AudioFeaturesChart = ({ audioFeatures }: Props) => {
           legend: { display: false },
         },
         scales: {
-          xAxes: [
-            {
-              gridLines: {
-                color: 'rgba(255, 255, 255, 0.4)',
-              },
+          xAxes: {
+            grid: {
+              color: 'rgba(255, 255, 255, 0.4)',
             },
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                color: 'rgba(255, 255, 255, 0.4)',
-              },
-              ticks: {
-                beginAtZero: true,
-              },
+          },
+          yAxes: {
+            beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.4)',
             },
-          ],
+          },
         },
       },
       data: {
