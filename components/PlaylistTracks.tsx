@@ -8,7 +8,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const PlaylistTracks: React.FC<Props> = ({ track, isLoading }) => {
+const PlaylistTracks = ({ track, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">

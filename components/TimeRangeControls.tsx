@@ -29,11 +29,11 @@ interface Props {
   className?: string;
 }
 
-const TimeRangeControls: React.FC<Props> = ({
+const TimeRangeControls = ({
   onChange,
   currentTimeFilter,
   className,
-}) => {
+}: Props) => {
   return (
     <div className={className}>
       {timeRanges.map(({ value, label }) => (

@@ -11,7 +11,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ArtistCard: React.FC<Props> = ({ name, image, isLoading, id }) => {
+const ArtistCard = ({ name, image, isLoading, id }: Props) => {
   if (isLoading) {
     return (
       <div className="flex items-center py-4 animate-pulse">

@@ -17,12 +17,12 @@ interface Props {
   playlistCount: number;
 }
 
-const DashboardHeader: React.FC<Props> = ({
+const DashboardHeader = ({
   isLoading,
   profile,
   followingCount,
   playlistCount,
-}) => {
+}: Props) => {
   return (
     <header
       className={classnames('flex flex-col justify-center items-center', {

@@ -15,10 +15,6 @@ import SkeletonList from '@/components/SkeletonList';
 import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
 
-interface Props {
-  isLoading?: boolean;
-}
-
 interface TopStatsResponse {
   topTracks: SpotifyPaginatedResponse<SpotifyTrack>;
   topArtists: SpotifyPaginatedResponse<SpotifyArtist>;
@@ -30,7 +26,7 @@ interface ProfileResponse {
   playlistCount: number;
 }
 
-const Dashboard: React.FC<Props> = () => {
+const Dashboard = () => {
   const { data } = useSWR<ProfileResponse>(APIRoute.PROFILE);
   const { data: topStats } = useSWR<TopStatsResponse>(APIRoute.TOP_STATS);
 

@@ -10,7 +10,7 @@ interface Props {
   isLoading: boolean;
 }
 
-const ArtistDetails: React.FC<Props> = ({ artist, isLoading }) => {
+const ArtistDetails = ({ artist, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="flex flex-col md:flex-row items-center animate-pulse">

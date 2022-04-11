@@ -17,7 +17,7 @@ interface Props {
   audioFeatures: SpotifyAudioFeatures;
 }
 
-const AudioFeaturesChart: React.FC<Props> = ({ audioFeatures }) => {
+const AudioFeaturesChart = ({ audioFeatures }: Props) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<ChartModel | null>(null);
 

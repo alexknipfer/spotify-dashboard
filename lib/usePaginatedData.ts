@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { useSWRInfinite } from 'swr';
+import useSWRInfinite from 'swr/infinite';
 
 import { SpotifyPaginatedResponse } from '@/models/Spotify';
 

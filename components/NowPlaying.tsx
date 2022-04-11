@@ -9,7 +9,7 @@ import SpotifyIcon from '../public/static/icons/spotify_icon.svg';
 
 import { APIRoute } from '@/models/APIRoute.enum';
 
-const NowPlaying: React.FC = () => {
+const NowPlaying = () => {
   const { data } = useSWR<NowPlayingResponse>(APIRoute.NOW_PLAYING);
   const [isVisible, setVisible] = useState(false);
 

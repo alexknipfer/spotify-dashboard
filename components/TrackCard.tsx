@@ -14,14 +14,14 @@ interface Props {
   isLoading?: boolean;
 }
 
-const TrackCard: React.FC<Props> = ({
+const TrackCard = ({
   id,
   name,
   album,
   duration,
   artists = [],
   isLoading,
-}) => {
+}: Props) => {
   const artistNames = artists.map((artist) => artist.name).join(', ');
 
   if (isLoading) {

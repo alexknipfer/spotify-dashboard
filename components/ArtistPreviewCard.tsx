@@ -12,12 +12,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const ArtistPreviewCard: React.FC<Props> = ({
-  name,
-  images,
-  href,
-  isLoading,
-}) => {
+const ArtistPreviewCard = ({ name, images, href, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">

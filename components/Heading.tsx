@@ -1,16 +1,12 @@
 import classNames from 'classnames';
-import { PropsWithChildren } from 'react';
 
 interface Props {
+  children: string;
   level: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   className?: string;
 }
 
-const Heading: React.FC<PropsWithChildren<Props>> = ({
-  level,
-  children,
-  className,
-}) => {
+const Heading = ({ level, children, className }: Props) => {
   const Tag = level;
 
   return (

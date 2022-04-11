@@ -6,7 +6,7 @@ interface Props {
   description?: string;
 }
 
-const Meta: React.FC<Props> = (customMeta) => {
+const Meta = (customMeta: Props) => {
   const meta = {
     title: 'Spotify Dashboard - The place to find your Spotify statistics.',
     description:

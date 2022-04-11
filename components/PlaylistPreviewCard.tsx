@@ -9,7 +9,7 @@ interface Props {
   isLoading?: boolean;
 }
 
-const PlaylistPreviewCard: React.FC<Props> = ({ playlist, isLoading }) => {
+const PlaylistPreviewCard = ({ playlist, isLoading }: Props) => {
   if (isLoading) {
     return (
       <div className="animate-pulse flex flex-col items-center">
