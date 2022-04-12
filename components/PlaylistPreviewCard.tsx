@@ -31,10 +31,9 @@ const PlaylistPreviewCard = ({ playlist, isLoading }: Props) => {
       {playlist.images.length > 0 && (
         <Image src={playlist.images[0]?.url} width={208} height={208} />
       )}
-
       <Anchor
         href={`${RoutePath.PLAYLIST}/${playlist.id}`}
-        className="truncate"
+        className="block truncate"
       >
         {playlist.name}
       </Anchor>
