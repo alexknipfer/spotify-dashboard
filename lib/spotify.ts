@@ -41,11 +41,10 @@ export const getAccessToken = async (
   return response.json();
 };
 
-export const getProfile = async (accessToken: string) => {
-  return fetch(ME_ENDPOINT, {
+export const getProfile = async (accessToken: string) =>
+  fetch(ME_ENDPOINT, {
     headers: getHeaders(accessToken),
   });
-};
 
 const getTopStats =
   (type: 'artists' | 'tracks') =>
@@ -60,20 +59,18 @@ const getTopStats =
 export const getTopArtists = getTopStats('artists');
 export const getTopTracks = getTopStats('tracks');
 
-export const getFollowedArtists = async (accessToken: string) => {
-  return fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
+export const getFollowedArtists = async (accessToken: string) =>
+  fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
     headers: getHeaders(accessToken),
   });
-};
 
 export const getPlaylistById = async (
   accessToken: string,
   playlistId: string,
-) => {
-  return fetch(`${PLAYLISTS_ENDPOINT}/${playlistId}`, {
+) =>
+  fetch(`${PLAYLISTS_ENDPOINT}/${playlistId}`, {
     headers: getHeaders(accessToken),
   });
-};
 
 export const getPlaylistTracks = async (
   accessToken: string,
@@ -114,29 +111,25 @@ export const getRecentlyPlayed = async (accessToken: string) => {
   });
 };
 
-export const getArtistById = async (accessToken: string, artistId: string) => {
-  return fetch(`${ARTISTS_ENDPOINT}/${artistId}`, {
+export const getArtistById = async (accessToken: string, artistId: string) =>
+  fetch(`${ARTISTS_ENDPOINT}/${artistId}`, {
     headers: getHeaders(accessToken),
   });
-};
 
 export const getTrackAudioFeaturesById = async (
   accessToken: string,
   trackId: string,
-) => {
-  return fetch(`${AUDIO_FEATURES_ENDPOINT}/${trackId}`, {
+) =>
+  fetch(`${AUDIO_FEATURES_ENDPOINT}/${trackId}`, {
     headers: getHeaders(accessToken),
   });
-};
 
-export const getTrackById = async (accessToken: string, trackId: string) => {
-  return fetch(`${TRACKS_ENDPOINT}/${trackId}`, {
+export const getTrackById = async (accessToken: string, trackId: string) =>
+  fetch(`${TRACKS_ENDPOINT}/${trackId}`, {
     headers: getHeaders(accessToken),
   });
-};
 
-export const getNowPlayingTrack = async (accessToken: string) => {
-  return fetch(`${NOW_PLAYING_ENDPOINT}`, {
+export const getNowPlayingTrack = async (accessToken: string) =>
+  fetch(`${NOW_PLAYING_ENDPOINT}`, {
     headers: getHeaders(accessToken),
   });
-};
