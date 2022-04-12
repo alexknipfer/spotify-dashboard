@@ -1,15 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-import { getTopTracksOrArtists } from '@/lib/spotify';
+import { getTopArtists, getTopTracks } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const session = await getSession({ req });
 
   const [topArtistsResponse, topTracksResponse] = await Promise.all([
-    getTopTracksOrArtists(session.accessToken, 'artists', 10),
-    getTopTracksOrArtists(session.accessToken, 'tracks', 10),
+    getTopArtists(session.accessToken, 10),
+    getTopTracks(session.accessToken, 10),
   ]);
 
   if (

@@ -47,18 +47,18 @@ export const getProfile = async (accessToken: string) => {
   });
 };
 
-export const getTopTracksOrArtists = async (
-  accessToken: string,
-  type: 'artists' | 'tracks',
-  limit = 50,
-  range = 'long_term',
-) =>
-  fetch(
-    `${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?limit=${limit}&time_range=${range}`,
-    {
-      headers: getHeaders(accessToken),
-    },
-  );
+const getTopStats =
+  (type: 'artists' | 'tracks') =>
+  (accessToken: string, limit = 50, range = 'long_term') =>
+    fetch(
+      `${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?limit=${limit}&time_range=${range}`,
+      {
+        headers: getHeaders(accessToken),
+      },
+    );
+
+export const getTopArtists = getTopStats('artists');
+export const getTopTracks = getTopStats('tracks');
 
 export const getFollowedArtists = async (accessToken: string) => {
   return fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {

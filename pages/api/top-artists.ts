@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-import { getTopTracksOrArtists } from '@/lib/spotify';
+import { getTopArtists } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
 
 type NextAPIRequestWithRange = NextApiRequest & {
@@ -13,9 +13,8 @@ type NextAPIRequestWithRange = NextApiRequest & {
 export default async (req: NextAPIRequestWithRange, res: NextApiResponse) => {
   const session = await getSession({ req });
 
-  const topArtistsResponse = await getTopTracksOrArtists(
+  const topArtistsResponse = await getTopArtists(
     session.accessToken,
-    'artists',
     50,
     req.query.range,
   );
