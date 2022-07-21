@@ -1,7 +1,8 @@
 import { NextPage } from 'next';
 import useSWR from 'swr';
-import { useState } from 'react';
+import { useRouter } from 'next/router';
 
+import TimeRangeControls from '@/components/TimeRangeControls';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import Heading from '@/components/Heading';
 import { APIRoute } from '@/models/APIRoute.enum';
@@ -12,11 +13,16 @@ import {
 } from '@/models/Spotify';
 import TrackCard from '@/components/TrackCard';
 import SkeletonList from '@/components/SkeletonList';
-import TimeRangeControls from '@/components/TimeRangeControls';
+import { RoutePath } from '@/models/RoutePath.enum';
+import { isQueryParamValidSpotifyRange } from '@/lib/utils';
 
 const Tracks: NextPage = () => {
-  const [currentTimeRange, setTimeRange] =
-    useState<SpotifyTimeRange>('long_term');
+  const router = useRouter();
+
+  const currentTimeRange = isQueryParamValidSpotifyRange(router.query.range)
+    ? router.query.range
+    : SpotifyTimeRange.LONG_TERM;
+
   const { data: topTracks } = useSWR<SpotifyPaginatedResponse<SpotifyTrack>>(
     `${APIRoute.TOP_TRACKS}?range=${currentTimeRange}`,
   );
@@ -27,7 +33,9 @@ const Tracks: NextPage = () => {
         <Heading level="h1">Top Tracks</Heading>
         <TimeRangeControls
           currentTimeFilter={currentTimeRange}
-          onChange={setTimeRange}
+          onChange={(range) =>
+            router.push({ pathname: RoutePath.TRACKS, query: { range } })
+          }
           className="mt-5 md:mt-0"
         />
       </div>
