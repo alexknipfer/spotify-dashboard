@@ -11,15 +11,15 @@ interface TimeRange {
 const timeRanges: TimeRange[] = [
   {
     label: 'All Time',
-    value: 'long_term',
+    value: SpotifyTimeRange.LONG_TERM,
   },
   {
     label: 'Last 6 Months',
-    value: 'medium_term',
+    value: SpotifyTimeRange.MEDIUM_TERM,
   },
   {
     label: 'Last 4 Weeks',
-    value: 'short_term',
+    value: SpotifyTimeRange.SHORT_TERM,
   },
 ];
 

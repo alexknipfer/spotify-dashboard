@@ -1,3 +1,5 @@
+import { SpotifyTimeRange } from '@/models/Spotify';
+
 export function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
   const ret: any = {};
   keys.forEach((key) => {
@@ -16,3 +18,12 @@ export const millisToMinutesAndSeconds = (millis: number) => {
 
   return minutes + ':' + (Number(seconds) < 10 ? '0' : '') + seconds;
 };
+
+export const isQueryParamValidSpotifyRange = (
+  range: string | string[],
+): range is SpotifyTimeRange =>
+  Object.values(SpotifyTimeRange).includes(
+    Array.isArray(range)
+      ? (range[0] as SpotifyTimeRange)
+      : (range as SpotifyTimeRange),
+  );
