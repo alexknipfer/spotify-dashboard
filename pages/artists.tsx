@@ -35,7 +35,7 @@ const Artists: NextPage = () => {
         <TimeRangeControls
           currentTimeFilter={currentTimeRange}
           onChange={(range) =>
-            router.push({ pathname: RoutePath.TRACKS, query: { range } })
+            router.push({ pathname: RoutePath.ARTISTS, query: { range } })
           }
           className="mt-5 md:mt-0"
         />
