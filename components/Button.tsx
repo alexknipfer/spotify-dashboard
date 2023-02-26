@@ -52,8 +52,8 @@ const Button = ({
 
   if (hrefInternal) {
     return (
-      <Link href={hrefInternal}>
-        <a className={classes}>{children}</a>
+      <Link href={hrefInternal} className={classes}>
+        {children}
       </Link>
     );
   }
