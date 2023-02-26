@@ -2,22 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'Circular Std';
-  font-style: normal;
-  font-weight: 700;
-  font-display: optional;
-  src: url(/fonts/CircularStd-Bold.woff2) format('woff2');
-}
-
-@font-face {
-  font-family: 'Circular Std';
-  font-style: normal;
-  font-weight: 400;
-  font-display: optional;
-  src: url(/fonts/CircularStd-Book.woff2) format('woff2');
-}
-
 body {
   min-height: 100%;
 }

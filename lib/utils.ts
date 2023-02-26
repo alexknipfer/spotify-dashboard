@@ -1,3 +1,5 @@
+import localFont from 'next/font/local';
+
 import { SpotifyTimeRange } from '@/models/Spotify';
 
 export function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
@@ -27,3 +29,18 @@ export const isQueryParamValidSpotifyRange = (
       ? (range[0] as SpotifyTimeRange)
       : (range as SpotifyTimeRange),
   );
+
+export const circularStdFont = localFont({
+  src: [
+    {
+      path: './CircularStd-Book.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './CircularStd-Bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+});
