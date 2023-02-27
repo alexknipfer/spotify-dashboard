@@ -1,4 +1,4 @@
-import { SpotifyTokenResponse } from '@/models/Spotify';
+import { SpotifyProfile, SpotifyTokenResponse } from '@/models/Spotify';
 import { appConfig } from '@/lib/appConfig';
 
 const BASE_URL = `https://api.spotify.com/v1`;
@@ -41,28 +41,46 @@ export const getAccessToken = async (
   return response.json();
 };
 
-export const getProfile = async (accessToken: string) =>
-  fetch(ME_ENDPOINT, {
+export const getProfile = async (
+  accessToken: string,
+): Promise<SpotifyProfile> => {
+  const response = await fetch(ME_ENDPOINT, {
     headers: getHeaders(accessToken),
   });
 
+  return response.json();
+};
+
 const getTopStats =
   (type: 'artists' | 'tracks') =>
-  (accessToken: string, limit = 50, range = 'long_term') =>
-    fetch(
+  async <ResponseType>(
+    accessToken: string,
+    limit = 50,
+    range = 'long_term',
+  ): Promise<ResponseType> => {
+    const response = await fetch(
       `${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?limit=${limit}&time_range=${range}`,
       {
         headers: getHeaders(accessToken),
       },
     );
 
+    return response.json();
+  };
+
 export const getTopArtists = getTopStats('artists');
 export const getTopTracks = getTopStats('tracks');
-
-export const getFollowedArtists = async (accessToken: string) =>
-  fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
+export const getFollowedArtistsCount = async (
+  accessToken: string,
+): Promise<number> => {
+  const response = await fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
     headers: getHeaders(accessToken),
   });
+
+  const following = await response.json();
+
+  return following.artists.items.length;
+};
 
 export const getPlaylistById = async (
   accessToken: string,
@@ -89,20 +107,24 @@ export const getPlaylistTracks = async (
   });
 };
 
-export const getPlaylists = async (
+export const getPlaylistsTotal = async (
   accessToken: string,
   limit?: string,
   offset?: string,
-) => {
+): Promise<number> => {
   let url = USER_PLAYLISTS_ENDPOINT;
 
   if (limit && offset) {
     url = `${USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
   }
 
-  return fetch(url, {
+  const response = await fetch(url, {
     headers: getHeaders(accessToken),
   });
+
+  const playlists = await response.json();
+
+  return playlists.total;
 };
 
 export const getRecentlyPlayed = async (accessToken: string) => {
