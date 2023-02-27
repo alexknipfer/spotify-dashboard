@@ -2,7 +2,6 @@ import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect } from 'react';
 
-import { NoPageFlicker } from '@/components/NoPageFlicker';
 import Meta from '@/components/Meta';
 
 function withAuthentication<Props>(
@@ -24,7 +23,7 @@ function withAuthentication<Props>(
         {status === 'authenticated' ? (
           <WrappedComponent {...props} />
         ) : (
-          <NoPageFlicker />
+          <div>No page flicker</div>
         )}
       </Fragment>
     );
