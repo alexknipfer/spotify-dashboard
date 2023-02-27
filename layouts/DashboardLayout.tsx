@@ -12,7 +12,6 @@ import MicrophoneIcon from '../public/static/icons/mic.svg';
 import NowPlaying from '@/components/NowPlaying';
 import Meta from '@/components/Meta';
 import { RoutePath } from '@/models/RoutePath.enum';
-import { circularStdFont } from '@/lib/utils';
 
 const navItems = [
   {
@@ -78,9 +77,7 @@ const DashboardLayout = ({ children }: Props) => {
           </div>
         </div>
       </nav>
-      <main
-        className={`${circularStdFont.className} px-6 md:px-16 lg:px-28 pt-10 pb-20 max-w-screen-2xl mx-auto`}
-      >
+      <main className="px-6 md:px-16 lg:px-28 pt-10 pb-20 max-w-screen-2xl mx-auto">
         {children}
       </main>
     </Fragment>

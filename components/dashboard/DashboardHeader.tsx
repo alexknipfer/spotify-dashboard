@@ -1,78 +1,69 @@
 import { Fragment } from 'react';
 import classnames from 'classnames';
-import { signOut } from 'next-auth/react';
 import Image from 'next/image';
+import { getServerSession } from 'next-auth/next';
+import { authOptions } from 'pages/api/auth/[...nextauth]';
 
 import ProfileIcon from '../../public/static/icons/profile_icon.svg';
 import Button from '../Button';
 
 import { RoutePath } from '@/models/RoutePath.enum';
 import Statistic from '@/components/dashboard/Statistic';
-import { SpotifyProfile } from '@/models/Spotify';
+import {
+  getFollowedArtistsCount,
+  getPlaylistsTotal,
+  getProfile,
+} from '@/lib/spotify';
 
-interface Props {
-  isLoading: boolean;
-  profile: SpotifyProfile;
-  followingCount: number;
-  playlistCount: number;
-}
+export default async function DashboardHeader() {
+  const session = await getServerSession(authOptions);
 
-const DashboardHeader = ({
-  isLoading,
-  profile,
-  followingCount,
-  playlistCount,
-}: Props) => {
+  if (!session) {
+    throw new Error('Not authorized');
+  }
+
+  const [profile, followingCount, playlistCount] = await Promise.all([
+    getProfile(session.accessToken),
+    getFollowedArtistsCount(session.accessToken),
+    getPlaylistsTotal(session.accessToken),
+  ]);
+
   return (
     <header
       className={classnames('flex flex-col justify-center items-center', {
-        'animate-pulse': isLoading,
+        'animate-pulse': false,
       })}
     >
-      {isLoading ? (
-        <Fragment>
-          <div className="rounded-full bg-gray-600 h-40 w-40 mb-6" />
-          <div className=" bg-gray-600 w-7/12 md:w-60 h-7 md:h-11 rounded mb-6" />
-          <div className=" bg-gray-600 w-9/12 md:w-96 h-11 rounded mb-10" />
-          <div className=" bg-gray-600 w-3/12 md:w-20 h-11 rounded mb-6" />
-        </Fragment>
-      ) : (
-        <Fragment>
-          {profile.images.length ? (
-            <Image
-              src={profile.images[0].url}
-              width={160}
-              height={160}
-              className="rounded-full"
-            />
-          ) : (
-            <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7">
-              <ProfileIcon fill="#fff" width="100%" height="100%" />
-            </div>
-          )}
-          <h1 className="text-white font-bold text-3xl md:text-5xl my-6">
-            {profile.display_name}
-          </h1>
-          <div className="flex mb-10">
-            <Statistic label="Followers" count={profile.followers.total} />
-            <Statistic label="Following" count={followingCount} />
-            <Statistic
-              label="Playlists"
-              count={playlistCount}
-              href={RoutePath.PLAYLIST}
-            />
+      <Fragment>
+        {profile.images.length ? (
+          <Image
+            src={profile.images[0].url}
+            width={160}
+            height={160}
+            className="rounded-full"
+            alt="Spotify profile image"
+          />
+        ) : (
+          <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7">
+            <ProfileIcon fill="#fff" width="100%" height="100%" />
           </div>
-          <Button
-            variant="outline"
-            buttonSize="small"
-            onClick={() => signOut()}
-          >
-            Logout
-          </Button>
-        </Fragment>
-      )}
+        )}
+        <h1 className="text-white font-bold text-3xl md:text-5xl my-6">
+          {profile.display_name}
+        </h1>
+        <div className="flex mb-10">
+          <Statistic label="Followers" count={profile.followers.total} />
+          <Statistic label="Following" count={followingCount} />
+          <Statistic
+            label="Playlists"
+            count={playlistCount}
+            href={RoutePath.PLAYLIST}
+          />
+        </div>
+        <Button variant="outline" buttonSize="small" isLogout>
+          Logout
+        </Button>
+      </Fragment>
     </header>
   );
-};
-
-export default DashboardHeader;
+}

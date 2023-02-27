@@ -41,7 +41,7 @@ const refreshToken = async (token: CustomJWT) => {
   }
 };
 
-const options: NextAuthOptions = {
+export const authOptions: NextAuthOptions = {
   providers: [
     SpotifyProvider({
       authorization: {
@@ -95,4 +95,4 @@ const options: NextAuthOptions = {
 };
 
 export default (req: NextApiRequest, res: NextApiResponse) =>
-  NextAuth(req, res, options);
+  NextAuth(req, res, authOptions);

@@ -1,7 +1,7 @@
 import { NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
-import { getPlaylists } from '@/lib/spotify';
+import { getPlaylistsTotal } from '@/lib/spotify';
 import { isBadStatusCode } from '@/lib/utils';
 import { NextAPIRequestWithPagination } from '@/models/NextAPIRequestWithPagination';
 
@@ -13,7 +13,7 @@ export default async (
 
   const { limit, offset } = req.query;
 
-  const playlistResponse = await getPlaylists(
+  const playlistResponse = await getPlaylistsTotal(
     session.accessToken,
     limit,
     offset,

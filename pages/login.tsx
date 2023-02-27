@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 
 import Button from '@/components/Button';
 import Heading from '@/components/Heading';
-import AuthLayout from '@/layouts/AuthLayout';
 import { CustomPage } from '@/models/CustomPage';
 import {
   NoPageFlicker,
@@ -19,12 +18,12 @@ const Login: CustomPage = () => {
     if (status !== 'authenticated' && status !== 'loading') {
       document.documentElement.classList.add(NO_PAGE_FLICKER_CLASSNAME);
     } else {
-      router.replace('/');
+      router.replace('/login');
     }
   }, [status, router]);
 
   return (
-    <AuthLayout>
+    <>
       <NoPageFlicker />
       <Heading level="h1" className="mb-10">
         Spotify Profile
@@ -35,7 +34,7 @@ const Login: CustomPage = () => {
       >
         Log in to Spotify
       </Button>
-    </AuthLayout>
+    </>
   );
 };
 

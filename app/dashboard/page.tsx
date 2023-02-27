@@ -1,43 +1,39 @@
 import { Fragment } from 'react';
-import useSWR from 'swr';
+import { getServerSession } from 'next-auth';
+import { authOptions } from 'pages/api/auth/[...nextauth]';
+import { redirect } from 'next/navigation';
 
-import {
-  SpotifyProfile,
-  SpotifyPaginatedResponse,
-  SpotifyArtist,
-  SpotifyTrack,
-} from '@/models/Spotify';
+import { SpotifyPaginatedResponse, SpotifyTrack } from '@/models/Spotify';
 import ArtistCard from '@/components/ArtistCard';
 import TrackCard from '@/components/TrackCard';
-import { APIRoute } from '@/models/APIRoute.enum';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';
 import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
+import { getTopArtists, getTopTracks } from '@/lib/spotify';
 
-interface TopStatsResponse {
-  topTracks: SpotifyPaginatedResponse<SpotifyTrack>;
-  topArtists: SpotifyPaginatedResponse<SpotifyArtist>;
-}
+export default async function Dashboard() {
+  const session = await getServerSession(authOptions);
 
-interface ProfileResponse {
-  profile: SpotifyProfile;
-  followingCount: number;
-  playlistCount: number;
-}
+  if (!session) {
+    redirect('/login');
+  }
 
-const Dashboard = () => {
-  const { data } = useSWR<ProfileResponse>(APIRoute.PROFILE);
-  const { data: topStats } = useSWR<TopStatsResponse>(APIRoute.TOP_STATS);
+  const [topArtists, topTracks] = await Promise.all([
+    getTopArtists<SpotifyPaginatedResponse<SpotifyTrack>>(
+      session.accessToken,
+      10,
+    ),
+    getTopTracks<SpotifyPaginatedResponse<SpotifyTrack>>(
+      session.accessToken,
+      10,
+    ),
+  ]);
 
   return (
     <Fragment>
-      <DashboardHeader
-        isLoading={!data}
-        profile={data?.profile}
-        followingCount={data?.followingCount}
-        playlistCount={data?.playlistCount}
-      />
+      {/* @ts-expect-error Server Component */}
+      <DashboardHeader />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-20">
         <section>
           <div className="flex justify-between items-center mb-5">
@@ -53,8 +49,8 @@ const Dashboard = () => {
             </Button>
           </div>
           <ul>
-            {topStats ? (
-              topStats?.topArtists?.items?.map((artistDetails) => (
+            {topArtists ? (
+              topArtists.items.map((artistDetails: any) => (
                 <li key={artistDetails.id}>
                   <ArtistCard
                     id={artistDetails.id}
@@ -82,8 +78,8 @@ const Dashboard = () => {
             </Button>
           </div>
           <ul>
-            {topStats ? (
-              topStats?.topTracks?.items?.map((trackDetails) => (
+            {topTracks ? (
+              topTracks?.items?.map((trackDetails) => (
                 <li key={trackDetails.id}>
                   <TrackCard
                     id={trackDetails.id}
@@ -102,6 +98,4 @@ const Dashboard = () => {
       </div>
     </Fragment>
   );
-};
-
-export default Dashboard;
+}
