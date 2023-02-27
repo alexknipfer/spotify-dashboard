@@ -2,11 +2,12 @@ module.exports = {
   experimental: {
     appDir: true,
   },
-  async rewrites() {
+  async redirects() {
     return [
       {
         source: '/',
         destination: '/dashboard',
+        permanent: true,
       },
     ];
   },
