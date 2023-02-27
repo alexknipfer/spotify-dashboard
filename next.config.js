@@ -2,6 +2,14 @@ module.exports = {
   experimental: {
     appDir: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/dashboard',
+      },
+    ];
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
