@@ -31,12 +31,13 @@ const ArtistPreviewCard = ({ name, images, href, isLoading }: Props) => {
 
   return (
     <div className="text-center">
-      {images.length ? (
+      {images?.length ? (
         <Image
           src={images[0].url}
           width={208}
           height={208}
           className="rounded-full"
+          alt=""
         />
       ) : (
         <div className="flex justify-center items-center border border-white rounded-full p-7 w-52 h-52">

@@ -1,16 +1,22 @@
-import { Fragment } from 'react';
+import { Fragment, Suspense } from 'react';
 import { getServerSession } from 'next-auth';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 import { redirect } from 'next/navigation';
 
-import { SpotifyPaginatedResponse, SpotifyTrack } from '@/models/Spotify';
-import ArtistCard from '@/components/ArtistCard';
-import TrackCard from '@/components/TrackCard';
+import {
+  SpotifyArtist,
+  SpotifyPaginatedResponse,
+  SpotifyTrack,
+} from '@/models/Spotify';
+import { ArtistCardSkeleton } from '@/components/ArtistCard';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';
 import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
 import { getTopArtists, getTopTracks } from '@/lib/spotify';
+import ArtistsList from '@/components/dashboard/ArtistsList';
+import { TrackCardSkeleton } from '@/components/TrackCard';
+import TracksList from '@/components/dashboard/TracksList';
 
 export default async function Dashboard() {
   const session = await getServerSession(authOptions);
@@ -19,16 +25,14 @@ export default async function Dashboard() {
     redirect('/login');
   }
 
-  const [topArtists, topTracks] = await Promise.all([
-    getTopArtists<SpotifyPaginatedResponse<SpotifyTrack>>(
-      session.accessToken,
-      10,
-    ),
-    getTopTracks<SpotifyPaginatedResponse<SpotifyTrack>>(
-      session.accessToken,
-      10,
-    ),
-  ]);
+  const topTracksPromise = getTopTracks<SpotifyPaginatedResponse<SpotifyTrack>>(
+    session.accessToken,
+    10,
+  );
+  const artistsPromise = getTopArtists<SpotifyPaginatedResponse<SpotifyArtist>>(
+    session.accessToken,
+    10,
+  );
 
   return (
     <Fragment>
@@ -48,21 +52,14 @@ export default async function Dashboard() {
               See More
             </Button>
           </div>
-          <ul>
-            {topArtists ? (
-              topArtists.items.map((artistDetails: any) => (
-                <li key={artistDetails.id}>
-                  <ArtistCard
-                    id={artistDetails.id}
-                    name={artistDetails.name}
-                    image={artistDetails.images[0]}
-                  />
-                </li>
-              ))
-            ) : (
-              <SkeletonList skeletonComponent={<ArtistCard isLoading />} />
-            )}
-          </ul>
+          <Suspense
+            fallback={
+              <SkeletonList skeletonComponent={<ArtistCardSkeleton />} />
+            }
+          >
+            {/* @ts-expect-error Server Component */}
+            <ArtistsList promise={artistsPromise} />
+          </Suspense>
         </section>
         <section>
           <div className="flex justify-between items-center mb-5">
@@ -77,23 +74,14 @@ export default async function Dashboard() {
               See More
             </Button>
           </div>
-          <ul>
-            {topTracks ? (
-              topTracks?.items?.map((trackDetails) => (
-                <li key={trackDetails.id}>
-                  <TrackCard
-                    id={trackDetails.id}
-                    name={trackDetails.name}
-                    duration={trackDetails.duration_ms}
-                    artists={trackDetails.artists}
-                    album={trackDetails.album}
-                  />
-                </li>
-              ))
-            ) : (
-              <SkeletonList skeletonComponent={<TrackCard isLoading />} />
-            )}
-          </ul>
+          <Suspense
+            fallback={
+              <SkeletonList skeletonComponent={<TrackCardSkeleton />} />
+            }
+          >
+            {/* @ts-expect-error Server Component */}
+            <TracksList promise={topTracksPromise} />
+          </Suspense>
         </section>
       </div>
     </Fragment>

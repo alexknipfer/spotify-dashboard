@@ -1,5 +1,5 @@
 export enum RoutePath {
-  DASHBOARD = '/',
+  DASHBOARD = '/dashboard',
   RECENT = '/recent',
   ARTIST = '/artist',
   PLAYLIST = '/playlists',
