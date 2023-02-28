@@ -20,7 +20,7 @@ export const millisToMinutesAndSeconds = (millis: number) => {
 };
 
 export const isQueryParamValidSpotifyRange = (
-  range: string | null | undefined,
+  range: string | string[] | undefined,
 ): range is SpotifyTimeRange =>
   Object.values(SpotifyTimeRange).includes(
     Array.isArray(range)

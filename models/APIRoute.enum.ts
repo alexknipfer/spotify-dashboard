@@ -9,3 +9,7 @@ export enum APIRoute {
   TRACK_DETAILS = '/api/track-details',
   NOW_PLAYING = '/api/now-playing',
 }
+
+export enum NewAPIRoute {
+  TRACKS = '/api/dashboard/tracks',
+}

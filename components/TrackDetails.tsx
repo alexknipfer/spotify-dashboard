@@ -5,12 +5,12 @@ import Heading from '@/components/Heading';
 import Button from '@/components/Button';
 
 interface Props {
-  track: SpotifyTrack;
+  track: SpotifyTrack | undefined;
   isLoading: boolean;
 }
 
 const TrackDetails = ({ track, isLoading }: Props) => {
-  if (isLoading) {
+  if (isLoading || !track) {
     return (
       <div className="flex flex-col md:flex-row items-center animate-pulse">
         <div className="w-52 h-52 bg-gray-400 mb-5 md:mr-5" />
@@ -30,6 +30,7 @@ const TrackDetails = ({ track, isLoading }: Props) => {
         height={208}
         src={track.album.images[0].url}
         priority
+        alt={`Album image for ${track.album.name}`}
       />
       <div className="text-center mt-5 md:mt-0 md:text-left md:ml-10">
         <Heading level="h1">{track.name}</Heading>

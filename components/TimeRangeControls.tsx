@@ -1,8 +1,11 @@
 'use client';
+
 import classnames from 'classnames';
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import Button from '@/components/Button';
 import { SpotifyTimeRange } from '@/models/Spotify';
+import { RoutePath } from '@/models/RoutePath.enum';
 
 interface TimeRange {
   label: string;
@@ -25,16 +28,16 @@ const timeRanges: TimeRange[] = [
 ];
 
 interface Props {
-  currentTimeFilter: SpotifyTimeRange;
-  onChange: (timeRange: SpotifyTimeRange) => void;
+  route: RoutePath;
   className?: string;
 }
 
-const TimeRangeControls = ({
-  onChange,
-  currentTimeFilter,
-  className,
-}: Props) => {
+const TimeRangeControls = ({ route, className }: Props) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const currentTimeFilter =
+    searchParams?.get('range') || SpotifyTimeRange.LONG_TERM;
+
   return (
     <div className={className}>
       {timeRanges.map(({ value, label }) => (
@@ -42,7 +45,7 @@ const TimeRangeControls = ({
           variant="unstyled"
           key={value}
           className="ml-2 md:ml-5"
-          onClick={() => onChange(value)}
+          onClick={() => router.push(`${route}?range=${value}`)}
           aria-pressed={value === currentTimeFilter}
         >
           <span

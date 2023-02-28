@@ -1,28 +1,31 @@
-import { NextPage } from 'next';
-import { useRouter } from 'next/router';
-import useSWR from 'swr';
+'use client';
 
-import DashboardLayout from '@/layouts/DashboardLayout';
+import useSWR from 'swr';
+import { Fragment } from 'react';
+
 import { APIRoute } from '@/models/APIRoute.enum';
-import AudioFeaturesChart from '@/components/AudioFeaturesChart';
-import TrackDetails from '@/components/TrackDetails';
 import { SpotifyAudioFeatures, SpotifyTrack } from '@/models/Spotify';
+import TrackDetails from '@/components/TrackDetails';
 import HeadlineStatistic from '@/components/HeadlineStatistic';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
+import AudioFeaturesChart from '@/components/AudioFeaturesChart';
+
+interface Props {
+  params: { id: string };
+}
 
 interface TrackDetailsResponse {
   audioFeatures: SpotifyAudioFeatures;
   track: SpotifyTrack;
 }
 
-const Track: NextPage = () => {
-  const { query } = useRouter();
+export default function Track({ params }: Props) {
   const { data } = useSWR<TrackDetailsResponse>(
-    query.id ? `${APIRoute.TRACK_DETAILS}/${query.id}` : null,
+    `${APIRoute.TRACK_DETAILS}/${params.id}`,
   );
 
   return (
-    <DashboardLayout>
+    <Fragment>
       <TrackDetails isLoading={!data} track={data?.track} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-10">
         <HeadlineStatistic
@@ -37,20 +40,18 @@ const Track: NextPage = () => {
         />
         <HeadlineStatistic
           label="Tempo (BPM)"
-          value={`${Math.round(data?.audioFeatures.tempo)}`}
+          value={`${Math.round(data?.audioFeatures.tempo || 0)}`}
           isLoading={!data}
         />
         <HeadlineStatistic
           label="Duration"
-          value={millisToMinutesAndSeconds(data?.track.duration_ms)}
+          value={millisToMinutesAndSeconds(data?.track.duration_ms || 0)}
           isLoading={!data}
         />
       </div>
       {data?.audioFeatures && (
         <AudioFeaturesChart audioFeatures={data.audioFeatures} />
       )}
-    </DashboardLayout>
+    </Fragment>
   );
-};
-
-export default Track;
+}
