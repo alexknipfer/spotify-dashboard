@@ -1,3 +1,4 @@
+'use client';
 import classnames from 'classnames';
 
 import Button from '@/components/Button';

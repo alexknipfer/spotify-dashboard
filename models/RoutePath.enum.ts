@@ -4,5 +4,5 @@ export enum RoutePath {
   ARTIST = '/artist',
   PLAYLIST = '/playlists',
   ARTISTS = '/artists',
-  TRACKS = '/tracks',
+  TRACKS = '/dashboard/tracks',
 }

@@ -1,39 +1,60 @@
 'use client';
+
 import { Fragment } from 'react';
+import useSWR from 'swr';
 
-// import Heading from '@/components/Heading';
-// import TimeRangeControls from '@/components/TimeRangeControls';
+import { SpotifyPaginatedResponse, SpotifyTrack } from '@/models/Spotify';
+import TrackCard, { TrackCardSkeleton } from '@/components/TrackCard';
+import SkeletonList from '@/components/SkeletonList';
 
-export default function Tracks() {
+interface Props {
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default function Tracks({ searchParams }: Props) {
+  const { data, isLoading, error } = useSWR<
+    SpotifyPaginatedResponse<SpotifyTrack>
+  >(`/api/dashboard/tracks`);
+  console.error({ searchParams });
+  // const currentTimeRange = isQueryParamValidSpotifyRange(searchParams.range)
+  //   ? searchParams.range
+  //   : SpotifyTimeRange.LONG_TERM;
+
+  // const session = await getServerSession(authOptions);
+
+  // if (!session) {
+  //   redirect('/login');
+  // }
+
+  // const topTracks = await getTopTracks<SpotifyPaginatedResponse<SpotifyTrack>>(
+  //   session.accessToken,
+  //   50,
+  //   currentTimeRange,
+  // );
+
+  if (isLoading) {
+    return <SkeletonList skeletonComponent={<TrackCardSkeleton />} />;
+  }
+
+  if (error) {
+    return <div>Error</div>;
+  }
+
   return (
     <Fragment>
-      {/* <div className="flex justify-between items-center flex-col mb-10 md:flex-row">
-        <Heading level="h1">Top Tracks</Heading>
-        <TimeRangeControls
-          currentTimeFilter={currentTimeRange}
-          onChange={(range) =>
-            router.push({ pathname: RoutePath.TRACKS, query: { range } })
-          }
-          className="mt-5 md:mt-0"
-        />
-      </div>
       <ul>
-        {topTracks ? (
-          topTracks.items.map((track) => (
-            <li key={track.id}>
-              <TrackCard
-                id={track.id}
-                name={track.name}
-                album={track.album}
-                duration={track.duration_ms}
-                artists={track.artists}
-              />
-            </li>
-          ))
-        ) : (
-          <SkeletonList skeletonComponent={<TrackCard isLoading />} />
-        )}
-      </ul> */}
+        {data?.items.map((track) => (
+          <li key={track.id}>
+            <TrackCard
+              id={track.id}
+              name={track.name}
+              album={track.album}
+              duration={track.duration_ms}
+              artists={track.artists}
+            />
+          </li>
+        ))}
+      </ul>
     </Fragment>
   );
 }
