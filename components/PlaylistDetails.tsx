@@ -29,6 +29,7 @@ const PlaylistDetails = ({ playlist, isLoading }: Props) => {
         src={playlist.images[0].url}
         className="rounded-none"
         priority
+        alt={`Image for playlist ${playlist.name}`}
       />
       <div className="text-center md:text-left md:ml-5">
         <Heading level="h1">{playlist.name}</Heading>

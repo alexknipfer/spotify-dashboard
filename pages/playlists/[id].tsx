@@ -2,7 +2,7 @@ import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
-import TrackCard from '@/components/TrackCard';
+import TrackCard, { TrackCardSkeleton } from '@/components/TrackCard';
 import PlaylistDetails from '@/components/PlaylistDetails';
 import DashboardLayout from '@/layouts/DashboardLayout';
 import { APIRoute } from '@/models/APIRoute.enum';
@@ -34,7 +34,7 @@ const Playlist: NextPage = () => {
       <PlaylistDetails isLoading={!playlist} playlist={playlist} />
       <div className="mt-10"></div>
       {isLoadingInitialData && (
-        <SkeletonList rows={20} skeletonComponent={<TrackCard isLoading />} />
+        <SkeletonList rows={20} skeletonComponent={<TrackCardSkeleton />} />
       )}
 
       {data.map((track, index) => (
@@ -52,7 +52,7 @@ const Playlist: NextPage = () => {
       ))}
 
       {isLoadingMore && (
-        <SkeletonList rows={5} skeletonComponent={<TrackCard isLoading />} />
+        <SkeletonList rows={5} skeletonComponent={<TrackCardSkeleton />} />
       )}
       {!isReachingEnd && (
         <div className="text-center">

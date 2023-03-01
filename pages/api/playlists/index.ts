@@ -2,7 +2,7 @@ import { NextApiResponse } from 'next';
 import { getSession } from 'next-auth/react';
 
 import { getPlaylistsTotal } from '@/lib/spotify';
-import { isBadStatusCode } from '@/lib/utils';
+// import { isBadStatusCode } from '@/lib/utils';
 import { NextAPIRequestWithPagination } from '@/models/NextAPIRequestWithPagination';
 
 export default async (
@@ -19,13 +19,13 @@ export default async (
     offset,
   );
 
-  if (isBadStatusCode(playlistResponse)) {
-    return res.status(400).json({
-      error: 'Failed to fetch playlist.',
-    });
-  }
+  // if (isBadStatusCode(playlistResponse)) {
+  //   return res.status(400).json({
+  //     error: 'Failed to fetch playlist.',
+  //   });
+  // }
 
-  const playlist = await playlistResponse.json();
+  // const playlist = await playlistResponse.json();
 
-  return res.status(200).json(playlist);
+  return res.status(200).json(playlistResponse);
 };

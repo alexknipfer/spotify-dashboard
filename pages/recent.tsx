@@ -10,7 +10,7 @@ import {
   SpotifyRecentlyPlayed,
 } from '@/models/Spotify';
 import SkeletonList from '@/components/SkeletonList';
-import TrackCard from '@/components/TrackCard';
+import TrackCard, { TrackCardSkeleton } from '@/components/TrackCard';
 
 const Recent: NextPage = () => {
   const { data: recentlyPlayed } = useSWR<
@@ -36,7 +36,7 @@ const Recent: NextPage = () => {
             </li>
           ))
         ) : (
-          <SkeletonList skeletonComponent={<TrackCard isLoading />} />
+          <SkeletonList skeletonComponent={<TrackCardSkeleton />} />
         )}
       </ul>
     </DashboardLayout>

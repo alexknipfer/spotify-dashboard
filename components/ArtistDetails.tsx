@@ -31,6 +31,7 @@ const ArtistDetails = ({ artist, isLoading }: Props) => {
         src={artist.images[0].url}
         className="rounded-full"
         priority
+        alt={`Artist image for ${artist.name}`}
       />
       <div className="mt-5 text-center md:text-left md:ml-5">
         <Heading level="h1">{artist.name}</Heading>

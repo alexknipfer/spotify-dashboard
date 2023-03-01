@@ -35,6 +35,7 @@ const NowPlaying = () => {
           src={data.albumImage.url}
           width={data.albumImage.width}
           height={data.albumImage.height}
+          alt={`Album image for ${data.album}`}
         />
         <div className="text-white text-sm md:text-base w-full truncate mt-5">
           <a

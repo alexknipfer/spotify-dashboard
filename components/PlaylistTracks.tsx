@@ -27,7 +27,12 @@ const PlaylistTracks = ({ track, isLoading }: Props) => {
   return (
     <article className="flex items-center py-4">
       <div className="flex-shrink-0 h-thumbnail w-thumbnail">
-        <Image src={track.track.album.images[0].url} width={50} height={50} />
+        <Image
+          src={track.track.album.images[0].url}
+          width={50}
+          height={50}
+          alt={`Image for track ${track.track.name}`}
+        />
       </div>
       <div className="ml-5 truncate w-full">
         <div className="flex justify-between">

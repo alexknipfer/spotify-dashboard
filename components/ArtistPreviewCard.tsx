@@ -44,9 +44,11 @@ const ArtistPreviewCard = ({ name, images, href, isLoading }: Props) => {
           <ProfileIcon fill="#fff" width="100%" height="100%" />
         </div>
       )}
-      <Anchor isExternal href={href} className="block mt-2">
-        {name}
-      </Anchor>
+      {href && (
+        <Anchor isExternal href={href} className="block mt-2">
+          {name || ''}
+        </Anchor>
+      )}
     </div>
   );
 };

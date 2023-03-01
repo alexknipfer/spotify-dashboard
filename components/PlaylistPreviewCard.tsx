@@ -29,7 +29,12 @@ const PlaylistPreviewCard = ({ playlist, isLoading }: Props) => {
   return (
     <div className="text-center">
       {playlist.images.length > 0 && (
-        <Image src={playlist.images[0]?.url} width={208} height={208} />
+        <Image
+          src={playlist.images[0]?.url}
+          width={208}
+          height={208}
+          alt={`Image for playlist ${playlist.name}`}
+        />
       )}
       <Anchor
         href={`${RoutePath.PLAYLIST}/${playlist.id}`}
