@@ -27,8 +27,8 @@ export default function TrackCard({
       <div className="flex-shrink-0 h-thumbnail w-thumbnail">
         <Image
           src={album.images[0].url}
-          width={50}
-          height={50}
+          width={album.images[0].width}
+          height={album.images[0].height}
           alt={`Spotify album art for ${album.name}`}
         />
       </div>

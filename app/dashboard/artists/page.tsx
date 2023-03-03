@@ -34,7 +34,6 @@ export default function Artists({ searchParams }: Props) {
 
   return (
     <Fragment>
-      <div>test</div>
       <div className="flex justify-between items-center flex-col mb-10 md:flex-row">
         <Heading level="h1">Top Artists</Heading>
         <TimeRangeControls route={RoutePath.ARTISTS} className="mt-5 md:mt-0" />
