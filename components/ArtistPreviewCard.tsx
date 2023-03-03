@@ -6,29 +6,12 @@ import Anchor from '@/components/Anchor';
 import { SpotifyImage } from '@/models/Spotify';
 
 interface Props {
-  name?: string;
-  images?: SpotifyImage[];
-  href?: string;
-  isLoading?: boolean;
+  name: string;
+  images: SpotifyImage[];
+  href: string;
 }
 
-const ArtistPreviewCard = ({ name, images, href, isLoading }: Props) => {
-  if (isLoading) {
-    return (
-      <div className="animate-pulse flex flex-col items-center">
-        <div className="w-full rounded-full bg-gray-600 circle" />
-        <div className="h-4 w-8/12 bg-gray-600 mt-2" />
-        <style jsx>{`
-          .circle::before {
-            content: '';
-            display: block;
-            padding-bottom: 100%;
-          }
-        `}</style>
-      </div>
-    );
-  }
-
+export function ArtistPreviewCard({ name, images, href }: Props) {
   return (
     <div className="text-center">
       {images?.length ? (
@@ -51,6 +34,20 @@ const ArtistPreviewCard = ({ name, images, href, isLoading }: Props) => {
       )}
     </div>
   );
-};
+}
 
-export default ArtistPreviewCard;
+export function ArtistPreviewCardSkeleton() {
+  return (
+    <div className="animate-pulse flex flex-col items-center">
+      <div className="w-full rounded-full bg-gray-600 circle" />
+      <div className="h-4 w-8/12 bg-gray-600 mt-2" />
+      <style jsx>{`
+        .circle::before {
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+        }
+      `}</style>
+    </div>
+  );
+}

@@ -12,4 +12,5 @@ export enum APIRoute {
 
 export enum NewAPIRoute {
   TRACKS = '/api/dashboard/tracks',
+  ARTISTS = '/api/dashboard/artists',
 }
