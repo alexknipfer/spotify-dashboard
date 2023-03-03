@@ -18,6 +18,7 @@ specifiers:
   eslint-plugin-react: ^7.32.2
   eslint-plugin-react-hooks: ^4.6.0
   husky: ^8.0.3
+  ky: ^0.33.2
   lint-staged: ^13.1.2
   next: 13.2.3
   next-auth: ^4.19.2
@@ -33,6 +34,7 @@ dependencies:
   '@svgr/webpack': 6.5.1
   chart.js: 4.2.1
   classnames: 2.3.2
+  ky: 0.33.2
   next: 13.2.3_biqbaboplfbrettd7655fr4n2y
   next-auth: 4.19.2_nvzgbose6yf6w7ijjprgspqefi
   react: 18.2.0
@@ -3657,6 +3659,11 @@ packages:
       array-includes: 3.1.6
       object.assign: 4.1.4
     dev: true
+
+  /ky/0.33.2:
+    resolution: {integrity: sha512-f6oS2rKUcPu5FzdqCDbFpmzis/JlqFZw8uIHm/jf8Kc3vtnW+VDhuashOAKyBZv8bFiZFZUMNxTC0JtahEvujA==}
+    engines: {node: '>=14.16'}
+    dev: false
 
   /language-subtag-registry/0.3.22:
     resolution: {integrity: sha512-tN0MCzyWnoz/4nHS6uxdlFWoUZT7ABptwKPQ52Ea7URk6vll88bWBVhodtnlfEuCcKWNGoc+uGbw1cwa9IKh/w==}
