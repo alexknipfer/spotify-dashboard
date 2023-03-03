@@ -1,6 +1,8 @@
 import { spotifyService } from '@/lib/spotifyService';
 import TrackCard from '@/components/TrackCard';
 
+export const revalidate = 60;
+
 export default async function Recent() {
   const recentlyPlayed = await spotifyService.getRecentlyPlayed();
 
