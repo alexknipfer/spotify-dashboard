@@ -1,38 +1,18 @@
 import { Fragment, Suspense } from 'react';
-import { getServerSession } from 'next-auth';
-import { authOptions } from 'pages/api/auth/[...nextauth]';
-import { redirect } from 'next/navigation';
 
-import {
-  SpotifyArtist,
-  SpotifyPaginatedResponse,
-  SpotifyTrack,
-} from '@/models/Spotify';
 import { ArtistCardSkeleton } from '@/components/ArtistCard';
 import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';
 import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
-import { getTopArtists, getTopTracks } from '@/lib/spotify';
 import ArtistsList from '@/components/dashboard/ArtistsList';
 import { TrackCardSkeleton } from '@/components/TrackCard';
 import TracksList from '@/components/dashboard/TracksList';
+import { spotifyService } from '@/lib/spotifyService';
 
 export default async function Dashboard() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    redirect('/login');
-  }
-
-  const topTracksPromise = getTopTracks<SpotifyPaginatedResponse<SpotifyTrack>>(
-    session.accessToken,
-    10,
-  );
-  const artistsPromise = getTopArtists<SpotifyPaginatedResponse<SpotifyArtist>>(
-    session.accessToken,
-    10,
-  );
+  const topTracksPromise = spotifyService.getTopTracks(10);
+  const artistsPromise = spotifyService.getTopArtists(10);
 
   return (
     <Fragment>
