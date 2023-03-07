@@ -1,33 +1,25 @@
-'use client';
-
 import { Fragment } from 'react';
-import useSWR from 'swr';
 
-import {
-  SpotifyPaginatedResponse,
-  SpotifyTimeRange,
-  SpotifyTrack,
-} from '@/models/Spotify';
-import TrackCard, { TrackCardSkeleton } from '@/components/TrackCard';
-import SkeletonList from '@/components/SkeletonList';
+import { SpotifyTimeRange } from '@/models/Spotify';
+import TrackCard from '@/components/TrackCard';
 import { isQueryParamValidSpotifyRange } from '@/lib/utils';
-import { NewAPIRoute } from '@/models/APIRoute.enum';
 import Heading from '@/components/Heading';
 import TimeRangeControls from '@/components/TimeRangeControls';
 import { RoutePath } from '@/models/RoutePath.enum';
+import { spotifyService } from '@/lib/spotifyService';
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-export default function Tracks({ searchParams }: Props) {
+export const revalidate = 60;
+
+export default async function Tracks({ searchParams }: Props) {
   const currentTimeRange = isQueryParamValidSpotifyRange(searchParams.range)
     ? searchParams.range
     : SpotifyTimeRange.LONG_TERM;
 
-  const { data } = useSWR<SpotifyPaginatedResponse<SpotifyTrack>>(
-    `${NewAPIRoute.TRACKS}?range=${currentTimeRange}`,
-  );
+  const data = await spotifyService.getTopTracks(50, currentTimeRange);
 
   return (
     <Fragment>
@@ -36,21 +28,17 @@ export default function Tracks({ searchParams }: Props) {
         <TimeRangeControls route={RoutePath.TRACKS} className="mt-5 md:mt-0" />
       </div>
       <ul>
-        {data ? (
-          data.items.map((track) => (
-            <li key={track.id}>
-              <TrackCard
-                id={track.id}
-                name={track.name}
-                album={track.album}
-                duration={track.duration_ms}
-                artists={track.artists}
-              />
-            </li>
-          ))
-        ) : (
-          <SkeletonList skeletonComponent={<TrackCardSkeleton />} />
-        )}
+        {data.items.map((track) => (
+          <li key={track.id}>
+            <TrackCard
+              id={track.id}
+              name={track.name}
+              album={track.album}
+              duration={track.duration_ms}
+              artists={track.artists}
+            />
+          </li>
+        ))}
       </ul>
     </Fragment>
   );
