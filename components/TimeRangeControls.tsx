@@ -1,5 +1,6 @@
 'use client';
 
+import { startTransition } from 'react';
 import classnames from 'classnames';
 import { useRouter, useSearchParams } from 'next/navigation';
 
@@ -32,11 +33,20 @@ interface Props {
   className?: string;
 }
 
-const TimeRangeControls = ({ route, className }: Props) => {
-  const router = useRouter();
+export default function TimeRangeControls({ route, className }: Props) {
+  const { replace } = useRouter();
   const searchParams = useSearchParams();
   const currentTimeFilter =
     searchParams?.get('range') || SpotifyTimeRange.LONG_TERM;
+
+  const handleTimeRangeChange = (newTimeRange: SpotifyTimeRange) => {
+    const params = new URLSearchParams(window.location.search);
+    params.set('range', newTimeRange);
+
+    startTransition(() => {
+      replace(`${route}?${params.toString()}`);
+    });
+  };
 
   return (
     <div className={className}>
@@ -45,7 +55,7 @@ const TimeRangeControls = ({ route, className }: Props) => {
           variant="unstyled"
           key={value}
           className="ml-2 md:ml-5"
-          onClick={() => router.push(`${route}?range=${value}`)}
+          onClick={() => handleTimeRangeChange(value)}
           aria-pressed={value === currentTimeFilter}
         >
           <span
@@ -64,6 +74,4 @@ const TimeRangeControls = ({ route, className }: Props) => {
       ))}
     </div>
   );
-};
-
-export default TimeRangeControls;
+}
