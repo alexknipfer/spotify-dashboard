@@ -12,6 +12,20 @@ export class Fetch {
     return this.handleResponse(response);
   }
 
+  public async post<Result>(
+    url: string,
+    headers: Headers,
+    body: BodyInit,
+  ): Promise<Result> {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers,
+      body,
+    });
+
+    return this.handleResponse(response);
+  }
+
   private async handleResponse(response: Response) {
     if (!response.ok) {
       throw new Error(`HTTP Response Code: ${response.status}`);

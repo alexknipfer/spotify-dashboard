@@ -1,5 +1,3 @@
-import ky from 'ky';
-
 import { appConfig } from '@/lib/appConfig';
 import {
   PlaylistTrack,
@@ -34,12 +32,8 @@ class SpotifyService extends Fetch {
     `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
   ).toString('base64');
 
-  private spotifyApi = ky.create({});
-
   public getProfile() {
-    return this.spotifyApi
-      .get(SpotifyService.ME_ENDPOINT)
-      .json<SpotifyProfile>();
+    return this.get<SpotifyProfile>(SpotifyService.ME_ENDPOINT);
   }
 
   public getTopArtists(limit = 50, range = SpotifyTimeRange.LONG_TERM) {
@@ -51,17 +45,17 @@ class SpotifyService extends Fetch {
   }
 
   public async getFollowedArtistsCount() {
-    const response = await this.spotifyApi
-      .get(`${SpotifyService.FOLLOWED_ARTISTS_ENDPOINT}?type=artist`)
-      .json<{ artists: SpotifyPaginatedResponse<SpotifyArtist> }>();
+    const response = await this.get<{
+      artists: SpotifyPaginatedResponse<SpotifyArtist>;
+    }>(`${SpotifyService.FOLLOWED_ARTISTS_ENDPOINT}?type=artist`);
 
     return response.artists.items.length;
   }
 
   public getPlaylistById(playlistId: string) {
-    return this.spotifyApi
-      .get(`${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}`)
-      .json<SpotifyPlaylist>();
+    return this.get<SpotifyPlaylist>(
+      `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}`,
+    );
   }
 
   public getPlaylistTracks(
@@ -75,9 +69,7 @@ class SpotifyService extends Fetch {
       url = `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}/tracks/?offset=${offset}&limit=${limit}`;
     }
 
-    return this.spotifyApi
-      .get(url)
-      .json<SpotifyPaginatedResponse<PlaylistTrack>>();
+    return this.get<SpotifyPaginatedResponse<PlaylistTrack>>(url);
   }
 
   public async getPlaylistsTotal(limit?: string, offset?: string) {
@@ -87,9 +79,9 @@ class SpotifyService extends Fetch {
       url = `${SpotifyService.USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
     }
 
-    const playlists = await this.spotifyApi
-      .get(url)
-      .json<SpotifyPaginatedResponse<SpotifyPlaylist>>();
+    const playlists = await this.get<SpotifyPaginatedResponse<SpotifyPlaylist>>(
+      url,
+    );
 
     return playlists.total;
   }
@@ -101,46 +93,42 @@ class SpotifyService extends Fetch {
   }
 
   public getArtistById(artistId: string) {
-    return this.spotifyApi
-      .get(`${SpotifyService.ARTISTS_ENDPOINT}/${artistId}`)
-      .json<SpotifyArtist>();
+    return this.get<SpotifyArtist>(
+      `${SpotifyService.ARTISTS_ENDPOINT}/${artistId}`,
+    );
   }
 
   public getTrackAudioFeaturesById(trackId: string) {
-    return this.spotifyApi
-      .get(`${SpotifyService.AUDIO_FEATURES_ENDPOINT}/${trackId}`)
-      .json<SpotifyAudioFeatures>();
+    return this.get<SpotifyAudioFeatures>(
+      `${SpotifyService.AUDIO_FEATURES_ENDPOINT}/${trackId}`,
+    );
   }
 
   public getTrackById(trackId: string) {
-    return this.spotifyApi
-      .get(`${SpotifyService.TRACKS_ENDPOINT}/${trackId}`)
-      .json<SpotifyTrack>();
+    return this.get<SpotifyTrack>(
+      `${SpotifyService.TRACKS_ENDPOINT}/${trackId}`,
+    );
   }
 
   public getNowPlayingTrack() {
-    return this.spotifyApi
-      .get(SpotifyService.NOW_PLAYING_ENDPOINT)
-      .json<SpotifyNowPlayingResponse>();
+    return this.get<SpotifyNowPlayingResponse>(
+      SpotifyService.NOW_PLAYING_ENDPOINT,
+    );
   }
 
-  public getAccessToken = async (
-    refreshToken: string,
-  ): Promise<SpotifyTokenResponse> => {
-    const response = await fetch(SpotifyService.TOKEN_ENDPOINT, {
-      method: 'POST',
-      headers: {
+  public async getAccessToken(refreshToken: string) {
+    return this.post<SpotifyTokenResponse>(
+      SpotifyService.TOKEN_ENDPOINT,
+      new Headers({
         Authorization: `Basic ${SpotifyService.AUTH_TOKEN}`,
         'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
+      }),
+      new URLSearchParams({
         grant_type: 'refresh_token',
         refresh_token: refreshToken,
       }),
-    });
-
-    return response.json();
-  };
+    );
+  }
 
   private async getTopStats<ResponseType>(
     type: 'artists' | 'tracks',

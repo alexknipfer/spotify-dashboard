@@ -4,7 +4,7 @@ import { JWT } from 'next-auth/jwt';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
 import { appConfig } from '@/lib/appConfig';
-import { getAccessToken } from '@/lib/spotify';
+import { spotifyService } from '@/lib/spotifyService';
 
 interface CustomJWT extends JWT {
   accessToken: string;
@@ -25,7 +25,10 @@ const SPOTIFY_SCOPES = [
 
 const refreshToken = async (token: CustomJWT) => {
   try {
-    const refreshedTokens = await getAccessToken(token.refreshToken);
+    // const refreshedTokens = await getAccessToken(token.refreshToken);
+    const refreshedTokens = await spotifyService.getAccessToken(
+      token.refreshToken,
+    );
 
     return {
       ...token,
