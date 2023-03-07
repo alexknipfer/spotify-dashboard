@@ -1,6 +1,4 @@
 import ky from 'ky';
-import { getServerSession } from 'next-auth';
-import { authOptions } from 'pages/api/auth/[...nextauth]';
 
 import { appConfig } from '@/lib/appConfig';
 import {
@@ -36,16 +34,7 @@ class SpotifyService extends Fetch {
     `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
   ).toString('base64');
 
-  private spotifyApi = ky.create({
-    hooks: {
-      beforeRequest: [
-        async (request) => {
-          const session = await getServerSession(authOptions);
-          request.headers.set('Authorization', `Bearer ${session.accessToken}`);
-        },
-      ],
-    },
-  });
+  private spotifyApi = ky.create({});
 
   public getProfile() {
     return this.spotifyApi

@@ -1,16 +1,15 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 
-export abstract class Fetch {
+export class Fetch {
   public async get<Result>(url: string, revalidate = 60): Promise<Result> {
-    try {
-      const headers = await this.getHeaders();
-      const response = await fetch(url, { headers, next: { revalidate } });
+    const headers = await this.getHeaders();
+    const response = await fetch(url, {
+      headers,
+      next: { revalidate },
+    });
 
-      return this.handleResponse(response);
-    } catch (error) {
-      throw new Error(error.message);
-    }
+    return this.handleResponse(response);
   }
 
   private async handleResponse(response: Response) {
