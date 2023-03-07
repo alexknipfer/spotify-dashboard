@@ -28,7 +28,7 @@ export class Fetch {
 
   private async handleResponse(response: Response) {
     if (!response.ok) {
-      throw new Error(`HTTP Response Code: ${response.status}`);
+      throw new Error(`HTTP Response: ${response.statusText}`);
     }
 
     const json = await response.json();
