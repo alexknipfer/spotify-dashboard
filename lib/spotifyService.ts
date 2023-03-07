@@ -17,8 +17,9 @@ import {
   SpotifyTokenResponse,
   SpotifyTrack,
 } from '@/models/Spotify';
+import { Fetch } from '@/lib/fetch';
 
-class SpotifyService {
+class SpotifyService extends Fetch {
   private static readonly BASE_URL = 'https://api.spotify.com/v1';
   private static readonly ME_ENDPOINT = `${SpotifyService.BASE_URL}/me`;
   private static readonly TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
@@ -105,9 +106,9 @@ class SpotifyService {
   }
 
   public getRecentlyPlayed() {
-    return this.spotifyApi
-      .get(SpotifyService.RECENTLY_PLAYED_ENDPOINT)
-      .json<SpotifyCursorPaginatedResponse<SpotifyRecentlyPlayed>>();
+    return this.get<SpotifyCursorPaginatedResponse<SpotifyRecentlyPlayed>>(
+      SpotifyService.RECENTLY_PLAYED_ENDPOINT,
+    );
   }
 
   public getArtistById(artistId: string) {
@@ -152,16 +153,20 @@ class SpotifyService {
     return response.json();
   };
 
-  private getTopStats<ResponseType>(
+  private async getTopStats<ResponseType>(
     type: 'artists' | 'tracks',
     limit: number,
     range: SpotifyTimeRange,
   ) {
-    return this.spotifyApi
-      .get(
-        `${SpotifyService.TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?limit=${limit}&time_range=${range}`,
-      )
-      .json<SpotifyPaginatedResponse<ResponseType>>();
+    const params = new URLSearchParams();
+    params.set('limit', limit.toString());
+    params.set('time_range', range);
+
+    return this.get<SpotifyPaginatedResponse<ResponseType>>(
+      `${
+        SpotifyService.TOP_TRACKS_OR_ARTISTS_ENDPOINT
+      }/${type}?${params.toString()}`,
+    );
   }
 }
 
