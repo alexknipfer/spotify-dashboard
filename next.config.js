@@ -30,6 +30,7 @@ module.exports = {
       'newjams-images.scdn.co',
       'seeded-session-images.scdn.co',
       'seed-mix-image.spotifycdn.com',
+      'wrapped-images.spotifycdn.com',
     ],
   },
 };
