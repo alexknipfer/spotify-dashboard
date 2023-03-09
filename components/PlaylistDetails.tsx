@@ -5,22 +5,9 @@ import Heading from '@/components/Heading';
 
 interface Props {
   playlist: SpotifyPlaylist;
-  isLoading: boolean;
 }
 
-const PlaylistDetails = ({ playlist, isLoading }: Props) => {
-  if (isLoading) {
-    return (
-      <div className="flex flex-col md:flex-row items-center animate-pulse">
-        <div className="rounded-full w-52 h-52 bg-gray-400 mb-5 md:mr-5" />
-        <div>
-          <div className="w-56 bg-gray-400 h-7 mb-5" />
-          <div className="w-64 bg-gray-400 h-3" />
-        </div>
-      </div>
-    );
-  }
-
+export default function PlaylistDetails({ playlist }: Props) {
   return (
     <article className="flex flex-col md:flex-row items-center">
       <Image
@@ -46,6 +33,16 @@ const PlaylistDetails = ({ playlist, isLoading }: Props) => {
       </div>
     </article>
   );
-};
+}
 
-export default PlaylistDetails;
+export function PlaylistDetailsSkeleton() {
+  return (
+    <div className="flex flex-col md:flex-row items-center animate-pulse">
+      <div className="rounded-full w-52 h-52 bg-gray-400 mb-5 md:mr-5" />
+      <div>
+        <div className="w-56 bg-gray-400 h-7 mb-5" />
+        <div className="w-64 bg-gray-400 h-3" />
+      </div>
+    </div>
+  );
+}

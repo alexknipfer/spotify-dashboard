@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 
 import { SpotifyPlaylist } from '@/models/Spotify';
@@ -5,27 +7,10 @@ import Anchor from '@/components/Anchor';
 import { RoutePath } from '@/models/RoutePath.enum';
 
 interface Props {
-  playlist?: SpotifyPlaylist;
-  isLoading?: boolean;
+  playlist: SpotifyPlaylist;
 }
 
-const PlaylistPreviewCard = ({ playlist, isLoading }: Props) => {
-  if (isLoading) {
-    return (
-      <div className="animate-pulse flex flex-col items-center">
-        <div className="w-full bg-gray-600 square" />
-        <div className="h-4 w-8/12 bg-gray-600 mt-2" />
-        <style jsx>{`
-          .square::before {
-            content: '';
-            display: block;
-            padding-bottom: 100%;
-          }
-        `}</style>
-      </div>
-    );
-  }
-
+export default function PlaylistPreviewCard({ playlist }: Props) {
   return (
     <div className="text-center">
       {playlist.images.length > 0 && (
@@ -47,6 +32,20 @@ const PlaylistPreviewCard = ({ playlist, isLoading }: Props) => {
       </div>
     </div>
   );
-};
+}
 
-export default PlaylistPreviewCard;
+export function PlaylistPreviewCardSkeleton() {
+  return (
+    <div className="animate-pulse flex flex-col items-center">
+      <div className="w-full bg-gray-600 square" />
+      <div className="h-4 w-8/12 bg-gray-600 mt-2" />
+      <style jsx>{`
+        .square::before {
+          content: '';
+          display: block;
+          padding-bottom: 100%;
+        }
+      `}</style>
+    </div>
+  );
+}
