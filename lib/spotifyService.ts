@@ -72,7 +72,7 @@ class SpotifyService extends Fetch {
     return this.get<SpotifyPaginatedResponse<PlaylistTrack>>(url);
   }
 
-  public async getPlaylistsTotal(limit?: string, offset?: string) {
+  public async getPlaylists(limit?: string, offset?: string) {
     let url = SpotifyService.USER_PLAYLISTS_ENDPOINT;
 
     if (limit && offset) {
@@ -83,7 +83,7 @@ class SpotifyService extends Fetch {
       url,
     );
 
-    return playlists.total;
+    return playlists;
   }
 
   public getRecentlyPlayed() {

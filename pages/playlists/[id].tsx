@@ -31,7 +31,7 @@ const Playlist: NextPage = () => {
 
   return (
     <DashboardLayout>
-      <PlaylistDetails isLoading={!playlist} playlist={playlist} />
+      <PlaylistDetails playlist={playlist} />
       <div className="mt-10"></div>
       {isLoadingInitialData && (
         <SkeletonList rows={20} skeletonComponent={<TrackCardSkeleton />} />
