@@ -1,5 +1,7 @@
 import { Fragment } from 'react';
 
+import Tracks from '../components/Tracks';
+
 import PlaylistDetails from '@/components/PlaylistDetails';
 import { spotifyService } from '@/lib/spotifyService';
 
@@ -15,6 +17,7 @@ export default async function Playlist({ params }: Props) {
   return (
     <Fragment>
       <PlaylistDetails playlist={playlist} />
+      <Tracks playlistId={params.id} />
     </Fragment>
   );
 }
