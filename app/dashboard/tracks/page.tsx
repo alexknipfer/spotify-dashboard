@@ -6,7 +6,7 @@ import { isQueryParamValidSpotifyRange } from '@/lib/utils';
 import Heading from '@/components/Heading';
 import TimeRangeControls from '@/components/TimeRangeControls';
 import { RoutePath } from '@/models/RoutePath.enum';
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };

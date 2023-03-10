@@ -8,7 +8,7 @@ import { RoutePath } from '@/models/RoutePath.enum';
 import ArtistsList from '@/components/dashboard/ArtistsList';
 import { TrackCardSkeleton } from '@/components/TrackCard';
 import TracksList from '@/components/dashboard/TracksList';
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 
 export default async function Dashboard() {
   const topTracksPromise = spotifyService.getTopTracks(10);

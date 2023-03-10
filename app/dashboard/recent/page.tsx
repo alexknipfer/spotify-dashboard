@@ -1,4 +1,4 @@
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 import TrackCard from '@/components/TrackCard';
 
 export const revalidate = 60;

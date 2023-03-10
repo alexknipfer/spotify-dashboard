@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import { SpotifyTimeRange } from '@/models/Spotify';
 import { isQueryParamValidSpotifyRange } from '@/lib/utils';
 import { ArtistPreviewCard } from '@/components/ArtistPreviewCard';
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };

@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import Tracks from '../components/Tracks';
 
 import PlaylistDetails from '@/components/PlaylistDetails';
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 
 interface Props {
   params: { id: string };

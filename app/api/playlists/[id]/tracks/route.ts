@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 
 interface Params {
   id: string;

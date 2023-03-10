@@ -4,7 +4,7 @@ import { JWT } from 'next-auth/jwt';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
 import { appConfig } from '@/lib/appConfig';
-import { spotifyService } from '@/lib/spotifyService';
+import { spotifyService } from '@/lib/spotify';
 
 interface CustomJWT extends JWT {
   accessToken: string;

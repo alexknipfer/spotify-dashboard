@@ -9,11 +9,7 @@ import Button from '../Button';
 
 import { RoutePath } from '@/models/RoutePath.enum';
 import Statistic from '@/components/dashboard/Statistic';
-import {
-  getFollowedArtistsCount,
-  getPlaylistsTotal,
-  getProfile,
-} from '@/lib/spotify';
+import { spotifyService } from '@/lib/spotify';
 
 export default async function DashboardHeader() {
   const session = await getServerSession(authOptions);
@@ -22,10 +18,10 @@ export default async function DashboardHeader() {
     throw new Error('Not authorized');
   }
 
-  const [profile, followingCount, playlistCount] = await Promise.all([
-    getProfile(session.accessToken),
-    getFollowedArtistsCount(session.accessToken),
-    getPlaylistsTotal(session.accessToken),
+  const [profile, followingCount, playlists] = await Promise.all([
+    spotifyService.getProfile(),
+    spotifyService.getFollowedArtistsCount(),
+    spotifyService.getPlaylists(),
   ]);
 
   return (
@@ -56,7 +52,7 @@ export default async function DashboardHeader() {
           <Statistic label="Following" count={followingCount} />
           <Statistic
             label="Playlists"
-            count={playlistCount}
+            count={playlists.total}
             href={RoutePath.PLAYLIST}
           />
         </div>
