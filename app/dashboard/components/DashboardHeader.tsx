@@ -1,23 +1,16 @@
 import { Fragment } from 'react';
 import classnames from 'classnames';
 import Image from 'next/image';
-import { getServerSession } from 'next-auth/next';
-import { authOptions } from 'pages/api/auth/[...nextauth]';
 
-import ProfileIcon from '../../public/static/icons/profile_icon.svg';
-import Button from '../Button';
+import ProfileIcon from '../../../public/static/icons/profile_icon.svg';
 
+import Statistic from './Statistic';
+
+import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
-import Statistic from '@/components/dashboard/Statistic';
 import { spotifyService } from '@/lib/spotify';
 
 export default async function DashboardHeader() {
-  const session = await getServerSession(authOptions);
-
-  if (!session) {
-    throw new Error('Not authorized');
-  }
-
   const [profile, followingCount, playlists] = await Promise.all([
     spotifyService.getProfile(),
     spotifyService.getFollowedArtistsCount(),
@@ -38,6 +31,7 @@ export default async function DashboardHeader() {
             height={160}
             className="rounded-full"
             alt="Spotify profile image"
+            priority
           />
         ) : (
           <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7">

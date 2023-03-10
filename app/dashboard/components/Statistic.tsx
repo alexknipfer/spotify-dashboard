@@ -4,13 +4,15 @@ interface Props {
   label: string;
   href?: string;
 }
-const Statistic = ({ count, label, href }: Props) => {
+
+export default function Statistic({ count, label, href }: Props) {
   const content = (
     <div className="text-center mr-5 last:mr-0">
       <div className="text-spotify-green text-xl mb-1">{count}</div>
       <div className="uppercase text-xs text-gray-400">{label}</div>
     </div>
   );
+
   if (href) {
     return (
       <Link href={href} passHref>
@@ -20,5 +22,4 @@ const Statistic = ({ count, label, href }: Props) => {
   }
 
   return content;
-};
-export default Statistic;
+}

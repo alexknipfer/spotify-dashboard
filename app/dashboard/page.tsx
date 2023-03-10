@@ -1,13 +1,14 @@
 import { Fragment, Suspense } from 'react';
 
+import DashboardHeader from './components/DashboardHeader';
+import ArtistsList from './components/ArtistsList';
+import TracksList from './components/TracksList';
+
 import { ArtistCardSkeleton } from '@/components/ArtistCard';
-import DashboardHeader from '@/components/dashboard/DashboardHeader';
 import SkeletonList from '@/components/SkeletonList';
 import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
-import ArtistsList from '@/components/dashboard/ArtistsList';
 import { TrackCardSkeleton } from '@/components/TrackCard';
-import TracksList from '@/components/dashboard/TracksList';
 import { spotifyService } from '@/lib/spotify';
 
 export default async function Dashboard() {
