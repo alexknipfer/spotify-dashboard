@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { spotifyService } from '../../../../lib/spotify';
+import { spotifyService } from '../../../../../lib/spotify';
 
 import AudioFeaturesChart from './components/AudioFeaturesChart';
 import TrackDetails from './components/TrackDetails';
