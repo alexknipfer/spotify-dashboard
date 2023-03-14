@@ -9,9 +9,12 @@ interface Props {
   name: string;
   images: SpotifyImage[];
   href: string;
+  index: number;
 }
 
-export function ArtistPreviewCard({ name, images, href }: Props) {
+const MAX_IMAGES_IN_VIEW = 20;
+
+export function ArtistPreviewCard({ name, images, href, index }: Props) {
   return (
     <div className="flex flex-col items-center">
       {images?.length ? (
@@ -20,6 +23,7 @@ export function ArtistPreviewCard({ name, images, href }: Props) {
             src={images[0].url}
             className="rounded-full object-cover"
             alt={`Image of ${name}`}
+            priority={index < MAX_IMAGES_IN_VIEW}
             fill
             sizes="(max-width: 768px) 100vw,
               (max-width: 1200px) 50vw,

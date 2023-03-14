@@ -29,12 +29,13 @@ export default async function Artists({ searchParams }: Props) {
         <TimeRangeControls route={RoutePath.ARTISTS} className="mt-5 md:mt-0" />
       </div>
       <div className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {topArtists.items.map((artist) => (
+        {topArtists.items.map((artist, index) => (
           <ArtistPreviewCard
             key={artist.id}
             name={artist.name}
             href={artist.external_urls.spotify}
             images={artist.images}
+            index={index}
           />
         ))}
       </div>
