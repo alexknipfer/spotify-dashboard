@@ -3,9 +3,6 @@ import { Fragment } from 'react';
 import { SpotifyTimeRange } from '@/models/Spotify';
 import TrackCard from '@/components/TrackCard';
 import { isQueryParamValidSpotifyRange } from '@/lib/utils';
-import Heading from '@/components/Heading';
-import TimeRangeControls from '@/components/TimeRangeControls';
-import { RoutePath } from '@/models/RoutePath.enum';
 import { spotifyService } from '@/lib/spotify';
 
 interface Props {
@@ -23,10 +20,6 @@ export default async function Tracks({ searchParams }: Props) {
 
   return (
     <Fragment>
-      <div className="flex justify-between items-center flex-col mb-10 md:flex-row">
-        <Heading level="h1">Top Tracks</Heading>
-        <TimeRangeControls route={RoutePath.TRACKS} className="mt-5 md:mt-0" />
-      </div>
       <ul>
         {data.items.map((track) => (
           <li key={track.id}>
