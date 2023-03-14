@@ -3,8 +3,8 @@ import { Fragment, Suspense } from 'react';
 import DashboardHeader from './components/DashboardHeader';
 import ArtistsList from './components/ArtistsList';
 import TracksList from './components/TracksList';
+import { ArtistCardSkeleton } from './components/ArtistCard';
 
-import { ArtistCardSkeleton } from 'app/dashboard/components/ArtistCard';
 import SkeletonList from '@/components/SkeletonList';
 import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
