@@ -5,24 +5,10 @@ import Heading from '@/components/Heading';
 import Button from '@/components/Button';
 
 interface Props {
-  track: SpotifyTrack | undefined;
-  isLoading: boolean;
+  track: SpotifyTrack;
 }
 
-const TrackDetails = ({ track, isLoading }: Props) => {
-  if (isLoading || !track) {
-    return (
-      <div className="flex flex-col md:flex-row items-center animate-pulse">
-        <div className="w-52 h-52 bg-gray-400 mb-5 md:mr-5" />
-        <div className="flex flex-col items-center md:items-start">
-          <div className="w-56 bg-gray-400 h-7 mb-2" />
-          <div className="w-40 bg-gray-400 h-5 mb-2" />
-          <div className="w-40 bg-gray-400 h-4" />
-        </div>
-      </div>
-    );
-  }
-
+export default function TrackDetails({ track }: Props) {
   return (
     <article className="flex flex-col md:flex-row items-center">
       <Image
@@ -51,6 +37,17 @@ const TrackDetails = ({ track, isLoading }: Props) => {
       </div>
     </article>
   );
-};
+}
 
-export default TrackDetails;
+export function TrackDetailsSkeleton() {
+  return (
+    <div className="flex flex-col md:flex-row items-center animate-pulse">
+      <div className="w-52 h-52 bg-gray-400 mb-5 md:mr-5" />
+      <div className="flex flex-col items-center md:items-start">
+        <div className="w-56 bg-gray-400 h-7 mb-2" />
+        <div className="w-40 bg-gray-400 h-5 mb-2" />
+        <div className="w-40 bg-gray-400 h-4" />
+      </div>
+    </div>
+  );
+}

@@ -2,10 +2,11 @@
 
 import { Fragment } from 'react';
 
-import Heading from '@/components/Heading';
-import PlayListPreviewCard, {
+import PlaylistPreviewCard, {
   PlaylistPreviewCardSkeleton,
-} from '@/components/PlaylistPreviewCard';
+} from './components/PlaylistPreviewCard';
+
+import Heading from '@/components/Heading';
 import SkeletonList from '@/components/SkeletonList';
 import usePaginatedData from '@/lib/usePaginatedData';
 import Button from '@/components/Button';
@@ -35,7 +36,7 @@ export default function Playlists() {
           />
         )}
         {playlists.map((playlist, index) => (
-          <PlayListPreviewCard key={index} playlist={playlist} />
+          <PlaylistPreviewCard key={index} playlist={playlist} />
         ))}
         {isLoadingMore && (
           <SkeletonList

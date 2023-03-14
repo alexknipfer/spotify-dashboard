@@ -19,6 +19,7 @@ export default function PlaylistPreviewCard({ playlist }: Props) {
           width={208}
           height={208}
           alt={`Image for playlist ${playlist.name}`}
+          className="inline-block mb-2"
         />
       )}
       <Anchor
@@ -37,15 +38,15 @@ export default function PlaylistPreviewCard({ playlist }: Props) {
 export function PlaylistPreviewCardSkeleton() {
   return (
     <div className="animate-pulse flex flex-col items-center">
-      <div className="w-full bg-gray-600 square" />
+      <div className="w-[208px] h-[208px] bg-gray-600 mb-2" />
       <div className="h-4 w-8/12 bg-gray-600 mt-2" />
-      <style jsx>{`
+      {/* <style jsx>{`
         .square::before {
           content: '';
           display: block;
           padding-bottom: 100%;
         }
-      `}</style>
+      `}</style> */}
     </div>
   );
 }

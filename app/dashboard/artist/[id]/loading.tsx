@@ -1,6 +1,7 @@
 import { Fragment } from 'react';
 
-import { ArtistDetailsSkeleton } from '@/components/ArtistDetails';
+import { ArtistDetailsSkeleton } from './components/ArtistDetails';
+
 import { HeadlineStatisticSkeleton } from '@/components/HeadlineStatistic';
 
 export default function Loading() {

@@ -1,13 +1,16 @@
 import { Fragment } from 'react';
 
+import { ArtistPreviewCard } from './components/ArtistPreviewCard';
+
 import { SpotifyTimeRange } from '@/models/Spotify';
 import { isQueryParamValidSpotifyRange } from '@/lib/utils';
-import { ArtistPreviewCard } from '@/components/ArtistPreviewCard';
 import { spotifyService } from '@/lib/spotify';
 
 interface Props {
   searchParams: { [key: string]: string | string[] | undefined };
 }
+
+export const revalidate = 60;
 
 export default async function Artists({ searchParams }: Props) {
   const currentTimeRange = isQueryParamValidSpotifyRange(searchParams.range)

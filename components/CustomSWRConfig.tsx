@@ -8,11 +8,13 @@ interface Props {
   swrConfig?: Partial<PublicConfiguration<any, any, Fetcher<any>>> & Provider;
 }
 
-const CustomSWRConfig = ({ children, swrConfig }: Props) => (
-  <SWRConfig value={{ fetcher: customFetcher, ...swrConfig }}>
-    {children}
-  </SWRConfig>
-);
+export default function CustomSWRConfig({ children, swrConfig }: Props) {
+  return (
+    <SWRConfig value={{ fetcher: customFetcher, ...swrConfig }}>
+      {children}
+    </SWRConfig>
+  );
+}
 
 const customFetcher = async (url: string) => {
   const res = await fetch(url);
@@ -24,5 +26,3 @@ const customFetcher = async (url: string) => {
 
   return res.json();
 };
-
-export default CustomSWRConfig;

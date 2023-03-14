@@ -20,7 +20,7 @@ interface Props {
 
 type ChartDataPoints = Array<{ x: string; y: string | number }>;
 
-const AudioFeaturesChart = ({ audioFeatures }: Props) => {
+export default function AudioFeaturesChart({ audioFeatures }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const chartRef = useRef<Chart<'bar', ChartDataPoints> | null>(null);
 
@@ -95,6 +95,4 @@ const AudioFeaturesChart = ({ audioFeatures }: Props) => {
       </div>
     </Fragment>
   );
-};
-
-export default AudioFeaturesChart;
+}

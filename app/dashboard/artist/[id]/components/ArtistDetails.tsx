@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 
-import Button from './Button';
+import Button from '../../../../../components/Button';
 
 import { SpotifyArtist } from '@/models/Spotify';
 import Heading from '@/components/Heading';

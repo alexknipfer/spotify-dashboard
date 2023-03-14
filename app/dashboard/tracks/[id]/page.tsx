@@ -1,65 +1,42 @@
-'use client';
-
-import useSWR from 'swr';
 import { Fragment } from 'react';
 
-import { APIRoute } from '@/models/APIRoute.enum';
-import { SpotifyAudioFeatures, SpotifyTrack } from '@/models/Spotify';
-import TrackDetails from '@/components/TrackDetails';
-import HeadlineStatistic, {
-  HeadlineStatisticSkeleton,
-} from '@/components/HeadlineStatistic';
+import { spotifyService } from '../../../../lib/spotify';
+
+import AudioFeaturesChart from './components/AudioFeaturesChart';
+import TrackDetails from './components/TrackDetails';
+
+import HeadlineStatistic from '@/components/HeadlineStatistic';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
-import AudioFeaturesChart from '@/components/AudioFeaturesChart';
-import SkeletonList from '@/components/SkeletonList';
 
 interface Props {
   params: { id: string };
 }
 
-interface TrackDetailsResponse {
-  audioFeatures: SpotifyAudioFeatures;
-  track: SpotifyTrack;
-}
-
-export default function Track({ params }: Props) {
-  const { data } = useSWR<TrackDetailsResponse>(
-    `${APIRoute.TRACK_DETAILS}/${params.id}`,
-  );
+export default async function Track({ params }: Props) {
+  const [track, audioFeatures] = await Promise.all([
+    spotifyService.getTrackById(params.id),
+    spotifyService.getTrackAudioFeaturesById(params.id),
+  ]);
 
   return (
     <Fragment>
-      <TrackDetails isLoading={!data} track={data?.track} />
+      <TrackDetails track={track} />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 my-10">
-        {!data ? (
-          <SkeletonList
-            rows={4}
-            skeletonComponent={<HeadlineStatisticSkeleton />}
-          />
-        ) : (
-          <Fragment>
-            <HeadlineStatistic
-              label="Popularity"
-              value={`${data?.track.popularity}%`}
-            />
-            <HeadlineStatistic
-              label="Loudness"
-              value={`${data?.audioFeatures.loudness}`}
-            />
-            <HeadlineStatistic
-              label="Tempo (BPM)"
-              value={`${Math.round(data?.audioFeatures.tempo || 0)}`}
-            />
-            <HeadlineStatistic
-              label="Duration"
-              value={millisToMinutesAndSeconds(data?.track.duration_ms || 0)}
-            />
-          </Fragment>
-        )}
+        <HeadlineStatistic label="Popularity" value={`${track.popularity}%`} />
+        <HeadlineStatistic
+          label="Loudness"
+          value={`${audioFeatures.loudness}`}
+        />
+        <HeadlineStatistic
+          label="Tempo (BPM)"
+          value={`${Math.round(audioFeatures.tempo || 0)}`}
+        />
+        <HeadlineStatistic
+          label="Duration"
+          value={millisToMinutesAndSeconds(track.duration_ms || 0)}
+        />
       </div>
-      {data?.audioFeatures && (
-        <AudioFeaturesChart audioFeatures={data.audioFeatures} />
-      )}
+      <AudioFeaturesChart audioFeatures={audioFeatures} />
     </Fragment>
   );
 }
