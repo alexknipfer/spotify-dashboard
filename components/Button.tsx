@@ -1,14 +1,10 @@
-'use client';
-
 import classnames from 'classnames';
-import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
 interface CustomProps {
   variant: 'primary' | 'outline' | 'unstyled';
   buttonSize?: 'small' | 'medium' | 'large';
   type?: 'button' | 'submit';
-  isLogout?: boolean;
   hrefExternal?: string;
   hrefInternal?: string;
 }
@@ -23,7 +19,6 @@ const Button = ({
   hrefInternal,
   buttonSize = 'medium',
   className,
-  isLogout,
   ...props
 }: Props) => {
   const classes = classnames(
@@ -57,25 +52,14 @@ const Button = ({
 
   if (hrefInternal) {
     return (
-      <Link href={hrefInternal} className={classes}>
-        {children}
+      <Link href={hrefInternal}>
+        <a className={classes}>{children}</a>
       </Link>
     );
   }
 
   return (
-    <button
-      type={type}
-      {...props}
-      className={classes}
-      onClick={(event) => {
-        if (isLogout) {
-          signOut();
-        } else if (props.onClick) {
-          props.onClick(event);
-        }
-      }}
-    >
+    <button type={type} {...props} className={classes}>
       {children}
     </button>
   );

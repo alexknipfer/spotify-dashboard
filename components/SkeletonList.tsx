@@ -7,10 +7,7 @@ interface Props {
 
 const DEFAULT_ROWS = 15;
 
-export default function SkeletonList({
-  rows = DEFAULT_ROWS,
-  skeletonComponent,
-}: Props) {
+const SkeletonList = ({ rows = DEFAULT_ROWS, skeletonComponent }: Props) => {
   return (
     <Fragment>
       {Array(rows)
@@ -20,4 +17,6 @@ export default function SkeletonList({
         ))}
     </Fragment>
   );
-}
+};
+
+export default SkeletonList;

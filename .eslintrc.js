@@ -51,12 +51,6 @@ module.exports = {
     'prefer-const': 'warn',
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'prettier/prettier': 'warn',
-    'react/no-unknown-property': [
-      2,
-      {
-        ignore: ['jsx'],
-      },
-    ],
   },
   settings: {
     react: {

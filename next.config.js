@@ -1,16 +1,4 @@
 module.exports = {
-  experimental: {
-    appDir: true,
-  },
-  async redirects() {
-    return [
-      {
-        source: '/',
-        destination: '/dashboard',
-        permanent: true,
-      },
-    ];
-  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.svg$/,
@@ -30,7 +18,6 @@ module.exports = {
       'newjams-images.scdn.co',
       'seeded-session-images.scdn.co',
       'seed-mix-image.spotifycdn.com',
-      'wrapped-images.spotifycdn.com',
     ],
   },
 };
