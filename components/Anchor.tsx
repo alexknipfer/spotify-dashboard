@@ -17,8 +17,8 @@ const Anchor = ({ isExternal, href, children, className }: Props) => {
   }
 
   return (
-    <Link href={href} className={classes}>
-      {children}
+    <Link href={href}>
+      <a className={classes}>{children}</a>
     </Link>
   );
 };

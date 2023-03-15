@@ -1,12 +1,7 @@
-'use client';
-
-import { startTransition } from 'react';
 import classnames from 'classnames';
-import { useRouter, useSearchParams } from 'next/navigation';
 
 import Button from '@/components/Button';
 import { SpotifyTimeRange } from '@/models/Spotify';
-import { RoutePath } from '@/models/RoutePath.enum';
 
 interface TimeRange {
   label: string;
@@ -29,25 +24,16 @@ const timeRanges: TimeRange[] = [
 ];
 
 interface Props {
-  route: RoutePath;
+  currentTimeFilter: SpotifyTimeRange;
+  onChange: (timeRange: SpotifyTimeRange) => void;
   className?: string;
 }
 
-export default function TimeRangeControls({ route, className }: Props) {
-  const { replace } = useRouter();
-  const searchParams = useSearchParams();
-  const currentTimeFilter =
-    searchParams?.get('range') || SpotifyTimeRange.LONG_TERM;
-
-  const handleTimeRangeChange = (newTimeRange: SpotifyTimeRange) => {
-    const params = new URLSearchParams(window.location.search);
-    params.set('range', newTimeRange);
-
-    startTransition(() => {
-      replace(`${route}?${params.toString()}`);
-    });
-  };
-
+const TimeRangeControls = ({
+  onChange,
+  currentTimeFilter,
+  className,
+}: Props) => {
   return (
     <div className={className}>
       {timeRanges.map(({ value, label }) => (
@@ -55,7 +41,7 @@ export default function TimeRangeControls({ route, className }: Props) {
           variant="unstyled"
           key={value}
           className="ml-2 md:ml-5"
-          onClick={() => handleTimeRangeChange(value)}
+          onClick={() => onChange(value)}
           aria-pressed={value === currentTimeFilter}
         >
           <span
@@ -74,4 +60,6 @@ export default function TimeRangeControls({ route, className }: Props) {
       ))}
     </div>
   );
-}
+};
+
+export default TimeRangeControls;
