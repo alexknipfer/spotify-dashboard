@@ -14,7 +14,7 @@ export default async function Tracks({ searchParams }: Props) {
     ? searchParams.range
     : SpotifyTimeRange.LONG_TERM;
 
-  const data = await spotifyService.getTopTracks(50, currentTimeRange);
+  const data = await spotifyService.getTopTracks(20, currentTimeRange);
 
   return (
     <Fragment>

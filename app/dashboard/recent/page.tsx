@@ -1,13 +1,17 @@
 import { spotifyService } from '@/lib/spotify';
 import TrackCard from '@/components/TrackCard';
+import { SpotifyTimeRange } from '@/models/Spotify';
 
 export default async function Recent() {
-  const recentlyPlayed = await spotifyService.getRecentlyPlayed();
+  const data = await spotifyService.getTopTracks(
+    20,
+    SpotifyTimeRange.LONG_TERM,
+  );
 
   return (
     <ul>
-      {recentlyPlayed.items.map(({ track }, index) => (
-        <li key={`${track.id}-${index}`}>
+      {data.items.map((track) => (
+        <li key={track.id}>
           <TrackCard
             id={track.id}
             name={track.name}
