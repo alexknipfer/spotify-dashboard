@@ -67,6 +67,8 @@ export const authOptions: NextAuthOptions = {
       account: Account;
       user: User;
     }) {
+      console.log('TOKEN USER: ', JSON.stringify(token.user));
+
       if (account && user) {
         return {
           accessToken: account.access_token,
