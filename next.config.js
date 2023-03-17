@@ -20,6 +20,7 @@ module.exports = {
     return config;
   },
   images: {
+    unoptimized: true,
     domains: [
       'i.scdn.co',
       'mosaic.scdn.co',
