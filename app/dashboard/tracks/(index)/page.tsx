@@ -14,8 +14,6 @@ export default async function Tracks({ searchParams }: Props) {
 
   const data = await spotifyService.getTopTracks(20, currentTimeRange);
 
-  console.log('TRACKS!!!!');
-
   return (
     <ul>
       {data.items.map((track) => (
