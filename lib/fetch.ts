@@ -10,6 +10,7 @@ export abstract class Fetch {
     const response = await fetch(url, {
       headers,
       next: nextFetchConfig,
+      cache: 'no-store',
     });
 
     return this.handleResponse(response);
