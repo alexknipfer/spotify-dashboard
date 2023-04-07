@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import ProfileIcon from '../../../../../public/static/icons/profile_icon.svg';
+import ProfileIcon from '../../../../public/static/icons/profile_icon.svg';
 
 import Anchor from '@/components/Anchor';
 import { SpotifyImage } from '@/models/Spotify';
