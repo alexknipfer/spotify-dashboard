@@ -20,7 +20,7 @@ export default function ArtistCard({ name, image, id }: Props) {
         className="rounded-full"
         alt={`Spotify artist image of ${name}`}
       />
-      <Anchor href={`${RoutePath.ARTIST}/${id}`} className="ml-5">
+      <Anchor href={`${RoutePath.ARTISTS}/${id}`} className="ml-5">
         {name}
       </Anchor>
     </article>
