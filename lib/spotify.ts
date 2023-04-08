@@ -1,135 +1,155 @@
-import { SpotifyTokenResponse } from '@/models/Spotify';
 import { appConfig } from '@/lib/appConfig';
+import {
+  PlaylistTrack,
+  SpotifyArtist,
+  SpotifyAudioFeatures,
+  SpotifyCursorPaginatedResponse,
+  SpotifyNowPlayingResponse,
+  SpotifyPaginatedResponse,
+  SpotifyPlaylist,
+  SpotifyProfile,
+  SpotifyRecentlyPlayed,
+  SpotifyTimeRange,
+  SpotifyTokenResponse,
+  SpotifyTrack,
+} from '@/models/Spotify';
+import { Fetch } from '@/lib/fetch';
 
-const BASE_URL = `https://api.spotify.com/v1`;
-const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
-const ME_ENDPOINT = `${BASE_URL}/me`;
-const ARTISTS_ENDPOINT = `${BASE_URL}/artists`;
-const TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/top`;
-const FOLLOWED_ARTISTS_ENDPOINT = `${ME_ENDPOINT}/following`;
-const USER_PLAYLISTS_ENDPOINT = `${ME_ENDPOINT}/playlists`;
-const PLAYLISTS_ENDPOINT = `${BASE_URL}/playlists`;
-const RECENTLY_PLAYED_ENDPOINT = `${ME_ENDPOINT}/player/recently-played`;
-const AUDIO_FEATURES_ENDPOINT = `${BASE_URL}/audio-features`;
-const TRACKS_ENDPOINT = `${BASE_URL}/tracks`;
-const NOW_PLAYING_ENDPOINT = `${ME_ENDPOINT}/player/currently-playing`;
+class SpotifyService {
+  private fetch: Fetch;
+  private static readonly BASE_URL = 'https://api.spotify.com/v1';
+  private static readonly ME_ENDPOINT = `${SpotifyService.BASE_URL}/me`;
+  private static readonly TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
+  private static readonly ARTISTS_ENDPOINT = `${SpotifyService.BASE_URL}/artists`;
+  private static readonly TOP_TRACKS_OR_ARTISTS_ENDPOINT = `${SpotifyService.ME_ENDPOINT}/top`;
+  private static readonly FOLLOWED_ARTISTS_ENDPOINT = `${SpotifyService.ME_ENDPOINT}/following`;
+  private static readonly USER_PLAYLISTS_ENDPOINT = `${SpotifyService.ME_ENDPOINT}/playlists`;
+  private static readonly PLAYLISTS_ENDPOINT = `${SpotifyService.BASE_URL}/playlists`;
+  private static readonly RECENTLY_PLAYED_ENDPOINT = `${SpotifyService.ME_ENDPOINT}/player/recently-played`;
+  private static readonly AUDIO_FEATURES_ENDPOINT = `${SpotifyService.BASE_URL}/audio-features`;
+  private static readonly TRACKS_ENDPOINT = `${SpotifyService.BASE_URL}/tracks`;
+  private static readonly NOW_PLAYING_ENDPOINT = `${SpotifyService.ME_ENDPOINT}/player/currently-playing`;
+  private static readonly AUTH_TOKEN = Buffer.from(
+    `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
+  ).toString('base64');
 
-const authToken = Buffer.from(
-  `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
-).toString('base64');
+  constructor() {
+    this.fetch = new Fetch();
+  }
 
-const getHeaders = (accessToken: string) =>
-  new Headers({
-    Authorization: `Bearer ${accessToken}`,
-  });
+  public getProfile() {
+    return this.fetch.get<SpotifyProfile>(SpotifyService.ME_ENDPOINT);
+  }
 
-export const getAccessToken = async (
-  refreshToken: string,
-): Promise<SpotifyTokenResponse> => {
-  const response = await fetch(TOKEN_ENDPOINT, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${authToken}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      grant_type: 'refresh_token',
-      refresh_token: refreshToken,
-    }),
-  });
+  public getTopArtists(limit = 50, range = SpotifyTimeRange.LONG_TERM) {
+    return this.getTopStats<SpotifyArtist>('artists', limit, range);
+  }
 
-  return response.json();
-};
+  public getTopTracks(limit = 50, range = SpotifyTimeRange.LONG_TERM) {
+    return this.getTopStats<SpotifyTrack>('tracks', limit, range);
+  }
 
-export const getProfile = async (accessToken: string) =>
-  fetch(ME_ENDPOINT, {
-    headers: getHeaders(accessToken),
-  });
+  public async getFollowedArtistsCount() {
+    const response = await this.fetch.get<{
+      artists: SpotifyPaginatedResponse<SpotifyArtist>;
+    }>(`${SpotifyService.FOLLOWED_ARTISTS_ENDPOINT}?type=artist`);
 
-const getTopStats =
-  (type: 'artists' | 'tracks') =>
-  (accessToken: string, limit = 50, range = 'long_term') =>
-    fetch(
-      `${TOP_TRACKS_OR_ARTISTS_ENDPOINT}/${type}?limit=${limit}&time_range=${range}`,
-      {
-        headers: getHeaders(accessToken),
-      },
+    return response.artists.items.length;
+  }
+
+  public getPlaylistById(playlistId: string) {
+    return this.fetch.get<SpotifyPlaylist>(
+      `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}`,
     );
-
-export const getTopArtists = getTopStats('artists');
-export const getTopTracks = getTopStats('tracks');
-
-export const getFollowedArtists = async (accessToken: string) =>
-  fetch(`${FOLLOWED_ARTISTS_ENDPOINT}?type=artist`, {
-    headers: getHeaders(accessToken),
-  });
-
-export const getPlaylistById = async (
-  accessToken: string,
-  playlistId: string,
-) =>
-  fetch(`${PLAYLISTS_ENDPOINT}/${playlistId}`, {
-    headers: getHeaders(accessToken),
-  });
-
-export const getPlaylistTracks = async (
-  accessToken: string,
-  playlistId: string,
-  limit?: string,
-  offset?: string,
-) => {
-  let url = `${PLAYLISTS_ENDPOINT}/${playlistId}/tracks`;
-
-  if (limit && offset) {
-    url = `${PLAYLISTS_ENDPOINT}/${playlistId}/tracks/?offset=${offset}&limit=${limit}`;
   }
 
-  return fetch(url, {
-    headers: getHeaders(accessToken),
-  });
-};
+  public getPlaylistTracks(
+    playlistId: string,
+    limit?: string | null,
+    offset?: string | null,
+  ) {
+    let url = `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}/tracks`;
 
-export const getPlaylists = async (
-  accessToken: string,
-  limit?: string,
-  offset?: string,
-) => {
-  let url = USER_PLAYLISTS_ENDPOINT;
+    if (limit && offset) {
+      url = `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}/tracks/?offset=${offset}&limit=${limit}`;
+    }
 
-  if (limit && offset) {
-    url = `${USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
+    return this.fetch.get<SpotifyPaginatedResponse<PlaylistTrack>>(url);
   }
 
-  return fetch(url, {
-    headers: getHeaders(accessToken),
-  });
-};
+  public async getPlaylists(limit?: string | null, offset?: string | null) {
+    let url = SpotifyService.USER_PLAYLISTS_ENDPOINT;
 
-export const getRecentlyPlayed = async (accessToken: string) => {
-  return fetch(RECENTLY_PLAYED_ENDPOINT, {
-    headers: getHeaders(accessToken),
-  });
-};
+    if (limit && offset) {
+      url = `${SpotifyService.USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
+    }
 
-export const getArtistById = async (accessToken: string, artistId: string) =>
-  fetch(`${ARTISTS_ENDPOINT}/${artistId}`, {
-    headers: getHeaders(accessToken),
-  });
+    const playlists = await this.fetch.get<
+      SpotifyPaginatedResponse<SpotifyPlaylist>
+    >(url);
 
-export const getTrackAudioFeaturesById = async (
-  accessToken: string,
-  trackId: string,
-) =>
-  fetch(`${AUDIO_FEATURES_ENDPOINT}/${trackId}`, {
-    headers: getHeaders(accessToken),
-  });
+    return playlists;
+  }
 
-export const getTrackById = async (accessToken: string, trackId: string) =>
-  fetch(`${TRACKS_ENDPOINT}/${trackId}`, {
-    headers: getHeaders(accessToken),
-  });
+  public getRecentlyPlayed() {
+    return this.fetch.get<
+      SpotifyCursorPaginatedResponse<SpotifyRecentlyPlayed>
+    >(SpotifyService.RECENTLY_PLAYED_ENDPOINT);
+  }
 
-export const getNowPlayingTrack = async (accessToken: string) =>
-  fetch(`${NOW_PLAYING_ENDPOINT}`, {
-    headers: getHeaders(accessToken),
-  });
+  public getArtistById(artistId: string) {
+    return this.fetch.get<SpotifyArtist>(
+      `${SpotifyService.ARTISTS_ENDPOINT}/${artistId}`,
+    );
+  }
+
+  public getTrackAudioFeaturesById(trackId: string) {
+    return this.fetch.get<SpotifyAudioFeatures>(
+      `${SpotifyService.AUDIO_FEATURES_ENDPOINT}/${trackId}`,
+    );
+  }
+
+  public getTrackById(trackId: string) {
+    return this.fetch.get<SpotifyTrack>(
+      `${SpotifyService.TRACKS_ENDPOINT}/${trackId}`,
+    );
+  }
+
+  public getNowPlayingTrack() {
+    return this.fetch.get<SpotifyNowPlayingResponse>(
+      SpotifyService.NOW_PLAYING_ENDPOINT,
+    );
+  }
+
+  public async getAccessToken(refreshToken: string) {
+    return this.fetch.post<SpotifyTokenResponse>(
+      SpotifyService.TOKEN_ENDPOINT,
+      new Headers({
+        Authorization: `Basic ${SpotifyService.AUTH_TOKEN}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      }),
+      new URLSearchParams({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+      }),
+    );
+  }
+
+  private async getTopStats<ResponseType>(
+    type: 'artists' | 'tracks',
+    limit: number,
+    range: SpotifyTimeRange,
+  ) {
+    const params = new URLSearchParams();
+    params.set('limit', limit.toString());
+    params.set('time_range', range);
+
+    return this.fetch.get<SpotifyPaginatedResponse<ResponseType>>(
+      `${
+        SpotifyService.TOP_TRACKS_OR_ARTISTS_ENDPOINT
+      }/${type}?${params.toString()}`,
+    );
+  }
+}
+
+export const spotifyService = new SpotifyService();

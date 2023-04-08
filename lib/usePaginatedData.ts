@@ -21,20 +21,21 @@ const usePaginatedData = <PaginatedData>({
       pageIndex: number,
       previousPageData: SpotifyPaginatedResponse<PaginatedData>,
     ) => {
-      if (previousPageData && !previousPageData.next) {
-        return null;
-      }
-      if (pageIndex === 0 && defaultLoadCount) {
-        return `${url}?limit=${defaultLoadCount}&offset=0`;
-      }
-      if (pageIndex === 0) {
-        return `${url}?limit=${PAGE_LIMIT}&offset=0`;
-      }
-      const queryParams = new URL(previousPageData.next).searchParams;
-      const limit = queryParams.get('limit');
-      const offset = queryParams.get('offset');
+      let nextUrl: string | null = '';
 
-      return `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
+      if (previousPageData && !previousPageData.next) {
+        nextUrl = null;
+      } else if (pageIndex === 0) {
+        nextUrl = `${url}?limit=${defaultLoadCount || PAGE_LIMIT}&offset=0`;
+      } else {
+        const queryParams = new URL(previousPageData.next || url).searchParams;
+        const limit = queryParams.get('limit');
+        const offset = queryParams.get('offset');
+
+        nextUrl = `${paginatedUrl || url}?limit=${limit}&offset=${offset}`;
+      }
+
+      return nextUrl;
     },
     [defaultLoadCount, paginatedUrl, url],
   );
@@ -48,15 +49,12 @@ const usePaginatedData = <PaginatedData>({
 
   const data: PaginatedData[] = useMemo(
     () =>
-      paginatedData
-        ? [].concat(...paginatedData.map((result) => result.items))
-        : [],
+      paginatedData ? paginatedData.flatMap((result) => result.items) : [],
     [paginatedData],
   );
 
   const isReachingEnd =
-    paginatedData &&
-    paginatedData[paginatedData.length - 1]?.items.length < PAGE_LIMIT;
+    paginatedData && paginatedData[paginatedData.length - 1].next === null;
   const isLoadingInitialData = !paginatedData && !error;
   const isLoadingMore =
     size > 0 && paginatedData && typeof paginatedData[size - 1] === 'undefined';
