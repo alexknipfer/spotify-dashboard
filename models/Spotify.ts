@@ -19,7 +19,7 @@ export interface SpotifyPaginatedResponse<ItemType> {
   offset: number;
   previous: null;
   href: string;
-  next: null;
+  next: string | null;
 }
 
 export interface SpotifyCursorPaginatedResponse<ItemType> {

@@ -60,8 +60,8 @@ class SpotifyService extends Fetch {
 
   public getPlaylistTracks(
     playlistId: string,
-    limit?: string,
-    offset?: string,
+    limit?: string | null,
+    offset?: string | null,
   ) {
     let url = `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}/tracks`;
 
@@ -72,7 +72,7 @@ class SpotifyService extends Fetch {
     return this.get<SpotifyPaginatedResponse<PlaylistTrack>>(url);
   }
 
-  public async getPlaylists(limit?: string, offset?: string) {
+  public async getPlaylists(limit?: string | null, offset?: string | null) {
     let url = SpotifyService.USER_PLAYLISTS_ENDPOINT;
 
     if (limit && offset) {

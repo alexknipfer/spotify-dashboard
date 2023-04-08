@@ -6,14 +6,6 @@ import SpotifyProvider from 'next-auth/providers/spotify';
 import { appConfig } from '@/lib/appConfig';
 import { spotifyService } from '@/lib/spotify';
 
-interface CustomJWT extends JWT {
-  accessToken: string;
-  accessTokenExpires: number;
-  refreshToken: string;
-  user: User;
-  error?: string;
-}
-
 const SPOTIFY_SCOPES = [
   'user-read-email',
   'user-top-read',
@@ -23,9 +15,8 @@ const SPOTIFY_SCOPES = [
   'user-read-currently-playing',
 ];
 
-const refreshToken = async (token: CustomJWT) => {
+const refreshToken = async (token: JWT) => {
   try {
-    // const refreshedTokens = await getAccessToken(token.refreshToken);
     const refreshedTokens = await spotifyService.getAccessToken(
       token.refreshToken,
     );
@@ -63,14 +54,14 @@ export const authOptions: NextAuthOptions = {
       account,
       user,
     }: {
-      token: CustomJWT;
-      account: Account;
+      token: any;
+      account: Account | null;
       user: User;
     }) {
       if (account && user) {
         return {
           accessToken: account.access_token,
-          accessTokenExpires: account.expires_at * 1000,
+          accessTokenExpires: account.expires_at || 0 * 1000,
           refreshToken: account.refresh_token,
           user,
         };
