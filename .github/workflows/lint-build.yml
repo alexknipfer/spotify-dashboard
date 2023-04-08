@@ -1,5 +1,10 @@
 name: CI
 on: [push]
+env:
+  SPOTIFY_CLIENT_ID: ${{secrets.SPOTIFY_CLIENT_ID}}
+  SPOTIFY_CLIENT_SECRET: ${{secrets.SPOTIFY_CLIENT_SECRET}}
+  NEXTAUTH_SECRET: ${{secrets.NEXTAUTH_SECRET}}
+  NEXTAUTH_URL: ${{secrets.NEXTAUTH_URL}}
 jobs:
   build:
     name: Build, lint, and test on Node ${{ matrix.node }} and ${{ matrix.os }}
