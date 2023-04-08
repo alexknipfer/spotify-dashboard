@@ -15,7 +15,8 @@ import {
 } from '@/models/Spotify';
 import { Fetch } from '@/lib/fetch';
 
-class SpotifyService extends Fetch {
+class SpotifyService {
+  private fetch: Fetch;
   private static readonly BASE_URL = 'https://api.spotify.com/v1';
   private static readonly ME_ENDPOINT = `${SpotifyService.BASE_URL}/me`;
   private static readonly TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
@@ -32,8 +33,12 @@ class SpotifyService extends Fetch {
     `${appConfig.spotify.clientId}:${appConfig.spotify.clientSecret}`,
   ).toString('base64');
 
+  constructor() {
+    this.fetch = new Fetch();
+  }
+
   public getProfile() {
-    return this.get<SpotifyProfile>(SpotifyService.ME_ENDPOINT);
+    return this.fetch.get<SpotifyProfile>(SpotifyService.ME_ENDPOINT);
   }
 
   public getTopArtists(limit = 50, range = SpotifyTimeRange.LONG_TERM) {
@@ -45,7 +50,7 @@ class SpotifyService extends Fetch {
   }
 
   public async getFollowedArtistsCount() {
-    const response = await this.get<{
+    const response = await this.fetch.get<{
       artists: SpotifyPaginatedResponse<SpotifyArtist>;
     }>(`${SpotifyService.FOLLOWED_ARTISTS_ENDPOINT}?type=artist`);
 
@@ -53,7 +58,7 @@ class SpotifyService extends Fetch {
   }
 
   public getPlaylistById(playlistId: string) {
-    return this.get<SpotifyPlaylist>(
+    return this.fetch.get<SpotifyPlaylist>(
       `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}`,
     );
   }
@@ -69,7 +74,7 @@ class SpotifyService extends Fetch {
       url = `${SpotifyService.PLAYLISTS_ENDPOINT}/${playlistId}/tracks/?offset=${offset}&limit=${limit}`;
     }
 
-    return this.get<SpotifyPaginatedResponse<PlaylistTrack>>(url);
+    return this.fetch.get<SpotifyPaginatedResponse<PlaylistTrack>>(url);
   }
 
   public async getPlaylists(limit?: string | null, offset?: string | null) {
@@ -79,45 +84,45 @@ class SpotifyService extends Fetch {
       url = `${SpotifyService.USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
     }
 
-    const playlists = await this.get<SpotifyPaginatedResponse<SpotifyPlaylist>>(
-      url,
-    );
+    const playlists = await this.fetch.get<
+      SpotifyPaginatedResponse<SpotifyPlaylist>
+    >(url);
 
     return playlists;
   }
 
   public getRecentlyPlayed() {
-    return this.get<SpotifyCursorPaginatedResponse<SpotifyRecentlyPlayed>>(
-      SpotifyService.RECENTLY_PLAYED_ENDPOINT,
-    );
+    return this.fetch.get<
+      SpotifyCursorPaginatedResponse<SpotifyRecentlyPlayed>
+    >(SpotifyService.RECENTLY_PLAYED_ENDPOINT);
   }
 
   public getArtistById(artistId: string) {
-    return this.get<SpotifyArtist>(
+    return this.fetch.get<SpotifyArtist>(
       `${SpotifyService.ARTISTS_ENDPOINT}/${artistId}`,
     );
   }
 
   public getTrackAudioFeaturesById(trackId: string) {
-    return this.get<SpotifyAudioFeatures>(
+    return this.fetch.get<SpotifyAudioFeatures>(
       `${SpotifyService.AUDIO_FEATURES_ENDPOINT}/${trackId}`,
     );
   }
 
   public getTrackById(trackId: string) {
-    return this.get<SpotifyTrack>(
+    return this.fetch.get<SpotifyTrack>(
       `${SpotifyService.TRACKS_ENDPOINT}/${trackId}`,
     );
   }
 
   public getNowPlayingTrack() {
-    return this.get<SpotifyNowPlayingResponse>(
+    return this.fetch.get<SpotifyNowPlayingResponse>(
       SpotifyService.NOW_PLAYING_ENDPOINT,
     );
   }
 
   public async getAccessToken(refreshToken: string) {
-    return this.post<SpotifyTokenResponse>(
+    return this.fetch.post<SpotifyTokenResponse>(
       SpotifyService.TOKEN_ENDPOINT,
       new Headers({
         Authorization: `Basic ${SpotifyService.AUTH_TOKEN}`,
@@ -139,7 +144,7 @@ class SpotifyService extends Fetch {
     params.set('limit', limit.toString());
     params.set('time_range', range);
 
-    return this.get<SpotifyPaginatedResponse<ResponseType>>(
+    return this.fetch.get<SpotifyPaginatedResponse<ResponseType>>(
       `${
         SpotifyService.TOP_TRACKS_OR_ARTISTS_ENDPOINT
       }/${type}?${params.toString()}`,
