@@ -34,7 +34,7 @@ export default function TrackCard({
       </div>
       <div className="ml-5 truncate w-full">
         <div className="flex justify-between">
-          <Anchor href={`${RoutePath.TRACKS}/${id}`} className="truncate mr-2">
+          <Anchor href={`${RoutePath.TRACK}/${id}`} className="truncate mr-2">
             {name}
           </Anchor>
           <span className="text-gray-400 text-sm">

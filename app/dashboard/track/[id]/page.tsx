@@ -1,12 +1,11 @@
 import { Fragment } from 'react';
 
-import { spotifyService } from '../../../../../lib/spotify';
-
 import AudioFeaturesChart from './components/AudioFeaturesChart';
 import TrackDetails from './components/TrackDetails';
 
 import HeadlineStatistic from '@/components/HeadlineStatistic';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
+import { spotifyService } from '@/lib/spotify';
 
 interface Props {
   params: { id: string };
