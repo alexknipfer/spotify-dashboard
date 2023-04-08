@@ -1,7 +1,19 @@
 import { getServerSession } from 'next-auth';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 
-export abstract class Fetch {
+interface FetchConfig {
+  nextConfig?: NextFetchRequestConfig;
+  cache?: RequestCache;
+}
+
+export class Fetch {
+  constructor(private config: FetchConfig = {}) {
+    this.config = {
+      nextConfig: config.nextConfig,
+      cache: config.cache || 'no-store',
+    };
+  }
+
   public async get<Result>(
     url: string,
     nextFetchConfig?: NextFetchRequestConfig,
@@ -48,7 +60,7 @@ export abstract class Fetch {
     const session = await getServerSession(authOptions);
 
     return new Headers({
-      Authorization: `Bearer ${session.accessToken}`,
+      Authorization: `Bearer ${session?.accessToken}`,
     });
   }
 }
