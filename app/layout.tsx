@@ -2,6 +2,7 @@ import './global.css';
 import localFont from 'next/font/local';
 
 import { Providers } from './providers';
+import { Metadata } from 'next';
 
 interface Props {
   children: React.ReactNode;
@@ -22,12 +23,11 @@ const circularStdFont = localFont({
   ],
 });
 
-export const metadata = {
-  title: {
-    default: 'Spotify Dashboard - The place to find your Spotify statistics.',
-  },
+export const metadata: Metadata = {
+  title: 'Spotify Dashboard - The place to find your Spotify statistics.',
   description:
     'Find your most recent spotify music, top artists, top songs, and more!',
+  themeColor: 'black',
   openGraph: {
     title: 'Spotify Dashboard - The place to find your Spotify statistics.',
     description:
