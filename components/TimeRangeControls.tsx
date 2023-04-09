@@ -3,6 +3,7 @@
 import { startTransition } from 'react';
 import classnames from 'classnames';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { LayoutGroup, motion } from 'framer-motion';
 
 import Button from '@/components/Button';
 import { SpotifyTimeRange } from '@/models/Spotify';
@@ -49,29 +50,40 @@ export default function TimeRangeControls({ route, className }: Props) {
   };
 
   return (
-    <div className={className}>
-      {timeRanges.map(({ value, label }) => (
-        <Button
-          variant="unstyled"
-          key={value}
-          className="ml-2 md:ml-5"
-          onClick={() => handleTimeRangeChange(value)}
-          aria-pressed={value === currentTimeFilter}
-        >
-          <span
-            className={classnames(
-              ' hover:text-white transition duration-200 text-xs md:text-sm pb-1',
-              {
-                'border-b-2 border-white text-white':
-                  value === currentTimeFilter,
-                'text-gray-400': value !== currentTimeFilter,
-              },
-            )}
+    <LayoutGroup>
+      <div className={className}>
+        {timeRanges.map(({ value, label }) => (
+          <Button
+            variant="unstyled"
+            key={value}
+            className="ml-2 md:ml-5"
+            onClick={() => handleTimeRangeChange(value)}
+            aria-pressed={value === currentTimeFilter}
           >
-            {label}
-          </span>
-        </Button>
-      ))}
-    </div>
+            <span
+              className={classnames(
+                'relative hover:text-white transition duration-200 text-xs md:text-sm pb-1',
+                {
+                  'text-gray-400': value !== currentTimeFilter,
+                },
+              )}
+            >
+              <span>{label}</span>
+              {value === currentTimeFilter ? (
+                <motion.div
+                  className="absolute inset-0 border-b-2 border-white text-white"
+                  layoutId="timerange"
+                  transition={{
+                    type: 'spring',
+                    stiffness: 350,
+                    damping: 30,
+                  }}
+                />
+              ) : null}
+            </span>
+          </Button>
+        ))}
+      </div>
+    </LayoutGroup>
   );
 }
