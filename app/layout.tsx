@@ -1,8 +1,8 @@
 import './global.css';
 import localFont from 'next/font/local';
+import { Metadata } from 'next';
 
 import { Providers } from './providers';
-import { Metadata } from 'next';
 
 interface Props {
   children: React.ReactNode;
