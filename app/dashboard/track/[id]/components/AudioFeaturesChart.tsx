@@ -38,12 +38,18 @@ export default function AudioFeaturesChart({ audioFeatures }: Props) {
         },
         scales: {
           xAxes: {
+            ticks: {
+              display: false,
+            },
             grid: {
               color: 'rgba(255, 255, 255, 0.4)',
             },
           },
           yAxes: {
             beginAtZero: true,
+            ticks: {
+              display: false,
+            },
             grid: {
               color: 'rgba(255, 255, 255, 0.4)',
             },
