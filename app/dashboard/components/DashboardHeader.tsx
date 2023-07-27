@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import classnames from 'classnames';
 import Image from 'next/image';
 
 import ProfileIcon from '../../../public/static/icons/profile_icon.svg';
@@ -24,11 +23,7 @@ export default async function DashboardHeader() {
     : null;
 
   return (
-    <header
-      className={classnames('flex flex-col justify-center items-center', {
-        'animate-pulse': false,
-      })}
-    >
+    <header className="flex flex-col justify-center items-center">
       <Fragment>
         {largestProfileImage ? (
           <Image
