@@ -17,7 +17,6 @@ export default async function Dashboard() {
 
   return (
     <Fragment>
-      {/* @ts-expect-error Server Component */}
       <DashboardHeader />
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-20">
         <section>
@@ -38,7 +37,6 @@ export default async function Dashboard() {
               <SkeletonList skeletonComponent={<ArtistCardSkeleton />} />
             }
           >
-            {/* @ts-expect-error Server Component */}
             <ArtistsList promise={artistsPromise} />
           </Suspense>
         </section>
@@ -60,7 +58,6 @@ export default async function Dashboard() {
               <SkeletonList skeletonComponent={<TrackCardSkeleton />} />
             }
           >
-            {/* @ts-expect-error Server Component */}
             <TracksList promise={topTracksPromise} />
           </Suspense>
         </section>
