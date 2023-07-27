@@ -11,6 +11,8 @@ import { RoutePath } from '@/models/RoutePath.enum';
 import { TrackCardSkeleton } from '@/components/TrackCard';
 import { spotifyService } from '@/lib/spotify';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Dashboard() {
   const topTracksPromise = spotifyService.getTopTracks(10);
   const artistsPromise = spotifyService.getTopArtists(10);
