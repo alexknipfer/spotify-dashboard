@@ -17,6 +17,12 @@ export default async function DashboardHeader() {
     spotifyService.getPlaylists(),
   ]);
 
+  const largestProfileImage = profile.images.length
+    ? profile.images.reduce((prev, curr) =>
+        prev.height > curr.height ? prev : curr,
+      )
+    : null;
+
   return (
     <header
       className={classnames('flex flex-col justify-center items-center', {
@@ -24,9 +30,9 @@ export default async function DashboardHeader() {
       })}
     >
       <Fragment>
-        {profile.images.length ? (
+        {largestProfileImage ? (
           <Image
-            src={profile.images[0].url}
+            src={largestProfileImage.url}
             width={160}
             height={160}
             className="rounded-full"
