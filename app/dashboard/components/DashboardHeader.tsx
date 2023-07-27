@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import classnames from 'classnames';
 import Image from 'next/image';
 
 import ProfileIcon from '../../../public/static/icons/profile_icon.svg';
@@ -17,16 +16,18 @@ export default async function DashboardHeader() {
     spotifyService.getPlaylists(),
   ]);
 
+  const largestProfileImage = profile.images.length
+    ? profile.images.reduce((prev, curr) =>
+        prev.height > curr.height ? prev : curr,
+      )
+    : null;
+
   return (
-    <header
-      className={classnames('flex flex-col justify-center items-center', {
-        'animate-pulse': false,
-      })}
-    >
+    <header className="flex flex-col justify-center items-center">
       <Fragment>
-        {profile.images.length ? (
+        {largestProfileImage ? (
           <Image
-            src={profile.images[0].url}
+            src={largestProfileImage.url}
             width={160}
             height={160}
             className="rounded-full"

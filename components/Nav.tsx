@@ -16,19 +16,19 @@ import { RoutePath } from '@/models/RoutePath.enum';
 const navItems = {
   [RoutePath.DASHBOARD]: {
     name: 'Profile',
-    icon: <ProfileIcon className="fill-current" />,
+    icon: <ProfileIcon width={24} height={24} className="fill-current" />,
   },
   [RoutePath.TRACKS]: {
     name: 'Top Tracks',
-    icon: <TracksIcon className="fill-current" />,
+    icon: <TracksIcon width={24} height={24} className="fill-current" />,
   },
   [RoutePath.ARTISTS]: {
     name: 'Top Artists',
-    icon: <MicrophoneIcon className="fill-current" />,
+    icon: <MicrophoneIcon width={24} height={24} className="fill-current" />,
   },
   [RoutePath.RECENT]: {
     name: 'Recent',
-    icon: <HistoryIcon className="fill-current" />,
+    icon: <HistoryIcon width={24} height={24} className="fill-current" />,
   },
 };
 

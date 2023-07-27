@@ -1,4 +1,4 @@
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 import { authOptions } from 'pages/api/auth/[...nextauth]';
 
 interface FetchConfig {
@@ -9,20 +9,18 @@ interface FetchConfig {
 export class Fetch {
   constructor(private config: FetchConfig = {}) {
     this.config = {
-      nextConfig: config.nextConfig,
+      nextConfig: config.nextConfig || {
+        revalidate: 0,
+      },
       cache: config.cache || 'no-store',
     };
   }
 
-  public async get<Result>(
-    url: string,
-    nextFetchConfig?: NextFetchRequestConfig,
-  ): Promise<Result> {
+  public async get<Result>(url: string): Promise<Result> {
     const headers = await this.getHeaders();
     const response = await fetch(url, {
       headers,
-      next: nextFetchConfig,
-      cache: 'no-store',
+      cache: this.config.cache,
     });
 
     return this.handleResponse(response);

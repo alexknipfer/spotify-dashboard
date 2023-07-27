@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation';
-import { getServerSession } from 'next-auth';
+import { getServerSession } from 'next-auth/next';
 
 import { RoutePath } from '../../models/RoutePath.enum';
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
