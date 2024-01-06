@@ -1,6 +1,6 @@
 import './global.css';
 import localFont from 'next/font/local';
-import { Metadata } from 'next';
+import { Metadata, Viewport } from 'next';
 
 import { Providers } from './providers';
 
@@ -24,15 +24,14 @@ const circularStdFont = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://spotify-dashboard-alexknipfer.vercel.app'),
   title: 'Spotify Dashboard - The place to find your Spotify statistics.',
   description:
     'Find your most recent spotify music, top artists, top songs, and more!',
-  themeColor: 'black',
   openGraph: {
     title: 'Spotify Dashboard - The place to find your Spotify statistics.',
     description:
       'Find your most recent spotify music, top artists, top songs, and more!',
-    url: 'https://spotify-dashboard-alexknipfer.vercel.app',
     siteName: 'Spotify Dashboard',
     images: [
       {
@@ -51,6 +50,10 @@ export const metadata: Metadata = {
   icons: {
     shortcut: '/static/favicons/favicon.ico',
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: 'black',
 };
 
 export default function RootLayout({ children }: Props) {

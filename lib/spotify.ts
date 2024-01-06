@@ -84,9 +84,8 @@ class SpotifyService {
       url = `${SpotifyService.USER_PLAYLISTS_ENDPOINT}?offset=${offset}&limit=${limit}`;
     }
 
-    const playlists = await this.fetch.get<
-      SpotifyPaginatedResponse<SpotifyPlaylist>
-    >(url);
+    const playlists =
+      await this.fetch.get<SpotifyPaginatedResponse<SpotifyPlaylist>>(url);
 
     return playlists;
   }
