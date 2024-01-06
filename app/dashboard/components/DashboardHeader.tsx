@@ -1,7 +1,4 @@
 import { Fragment } from 'react';
-import Image from 'next/image';
-
-import ProfileIcon from '../../../public/static/icons/profile_icon.svg';
 
 import Statistic from './Statistic';
 
@@ -16,29 +13,9 @@ export default async function DashboardHeader() {
     spotifyService.getPlaylists(),
   ]);
 
-  const largestProfileImage = profile.images.length
-    ? profile.images.reduce((prev, curr) =>
-        prev.height > curr.height ? prev : curr,
-      )
-    : null;
-
   return (
     <header className="flex flex-col justify-center items-center">
       <Fragment>
-        {largestProfileImage ? (
-          <Image
-            src={largestProfileImage.url}
-            width={160}
-            height={160}
-            className="rounded-full"
-            alt="Spotify profile image"
-            priority
-          />
-        ) : (
-          <div className="flex justify-center items-center h-40 w-40 border border-white rounded-full p-7">
-            <ProfileIcon fill="#fff" width="100%" height="100%" />
-          </div>
-        )}
         <h1 className="text-white font-bold text-3xl md:text-5xl my-6">
           {profile.display_name}
         </h1>
