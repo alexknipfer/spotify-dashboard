@@ -9,7 +9,7 @@ import { RoutePath } from '@/models/RoutePath.enum';
 
 export default async function TopMenu() {
   return (
-    <div className="flex items-center justify-between h-16 sticky top-0 px-16">
+    <div className="flex items-center justify-between h-16 sticky top-0 px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
       <div className="flex items-center">
         <Link
           href={RoutePath.DASHBOARD}
