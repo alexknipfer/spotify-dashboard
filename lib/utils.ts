@@ -34,3 +34,6 @@ export const isQueryParamValidSpotifyRange = (
       ? (range[0] as SpotifyTimeRange)
       : (range as SpotifyTimeRange),
   );
+
+export const titlecase = (value: string) =>
+  value.toLowerCase().replace(/\b\w/g, (s) => s.toUpperCase());
