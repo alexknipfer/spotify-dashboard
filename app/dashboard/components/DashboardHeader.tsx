@@ -2,7 +2,6 @@ import { Fragment } from 'react';
 
 import Statistic from './Statistic';
 
-import Button from '@/components/Button';
 import { RoutePath } from '@/models/RoutePath.enum';
 import { spotifyService } from '@/lib/spotify';
 
@@ -28,9 +27,6 @@ export default async function DashboardHeader() {
             href={RoutePath.PLAYLIST}
           />
         </div>
-        <Button variant="outline" buttonSize="small" isLogout>
-          Logout
-        </Button>
       </Fragment>
     </header>
   );
