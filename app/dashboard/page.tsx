@@ -1,6 +1,5 @@
 import { Fragment, Suspense } from 'react';
 
-import DashboardHeader from './components/DashboardHeader';
 import ArtistsList from './components/ArtistsList';
 import TracksList from './components/TracksList';
 import { ArtistCardSkeleton } from './components/ArtistCard';
@@ -19,8 +18,7 @@ export default async function Dashboard() {
 
   return (
     <Fragment>
-      <DashboardHeader />
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-20">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <section>
           <div className="flex justify-between items-center mb-5">
             <h2 className="text-lg md:text-xl font-bold">

@@ -8,10 +8,14 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
 import { spotifyService } from '@/lib/spotify';
 
 export default async function NavProfileMenu() {
-  const profile = await spotifyService.getProfile();
+  const [profile, followingCount] = await Promise.all([
+    spotifyService.getProfile(),
+    spotifyService.getFollowedArtistsCount(),
+  ]);
 
   const smallestProfileImage = profile.images.length
     ? profile.images.reduce((prev, curr) =>
@@ -43,6 +47,12 @@ export default async function NavProfileMenu() {
             <p className="text-xs leading-none text-zinc-500">
               {profile.email}
             </p>
+          </div>
+          <div className="flex mt-2 space-x-2">
+            <Badge variant="secondary">
+              {profile.followers.total} Followers
+            </Badge>
+            <Badge variant="secondary">{followingCount} Following</Badge>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
