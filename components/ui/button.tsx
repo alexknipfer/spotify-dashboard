@@ -22,6 +22,8 @@ const buttonVariants = cva(
           'bg-zinc-100 text-zinc-900 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:text-zinc-50 dark:hover:bg-zinc-800/80',
         ghost: 'hover:text-zinc-900 dark:hover:text-zinc-50',
         link: 'underline-offset-4 hover:underline text-zinc-50',
+        spotify:
+          'bg-spotify-green hover:bg-spotify-light-green font-bold focus:outline-none focus:ring-2 focus:ring-spotify-light-green text-white rounded-full uppercase',
         logout: 'justify-start py-1.5',
       },
       size: {
@@ -30,6 +32,7 @@ const buttonVariants = cva(
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
         logout: 'px-0 py-0',
+        spotify: 'py-3 px-6 text-xs font-bold',
       },
     },
     defaultVariants: {
@@ -43,11 +46,28 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  hrefExternal?: string;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
+  (
+    { className, variant, size, asChild = false, hrefExternal, ...props },
+    ref,
+  ) => {
     const Comp = asChild ? Slot : 'button';
+
+    if (hrefExternal) {
+      return (
+        <a
+          href={hrefExternal}
+          className={cn(buttonVariants({ variant, size, className }))}
+          target="_blank"
+          rel="noreferrer"
+        >
+          {props.children}
+        </a>
+      );
+    }
 
     return (
       <Comp
