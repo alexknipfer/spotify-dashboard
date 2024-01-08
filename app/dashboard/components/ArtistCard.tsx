@@ -1,25 +1,21 @@
+'use client';
+
 import Image from 'next/image';
+import { useState } from 'react';
 
 import ArtistDrawerContent from './ArtistDrawerContent';
 
 import { SpotifyArtist } from '@/models/Spotify';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
+import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { titlecase } from '@/lib/utils';
 
 interface Props {
   artist: SpotifyArtist;
 }
 
 export default function ArtistCard({ artist }: Props) {
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+
   const image = artist.images[0];
 
   return (
@@ -31,29 +27,20 @@ export default function ArtistCard({ artist }: Props) {
         className="rounded-full"
         alt={`Spotify artist image of ${artist.name}`}
       />
-      <Drawer>
+      <Drawer
+        onOpenChange={(open) => {
+          setDrawerOpen(open);
+        }}
+      >
         <DrawerTrigger asChild>
           <Button variant="link">{artist.name}</Button>
         </DrawerTrigger>
         <DrawerContent>
-          <div className="w-full px-6">
-            <DrawerHeader>
-              <DrawerTitle>{artist.name}</DrawerTitle>
-              <DrawerDescription className="flex space-x-2 flex-wrap mt-2">
-                {artist.genres.map((genre) => (
-                  <Badge variant="secondary" key={genre}>
-                    {titlecase(genre)}
-                  </Badge>
-                ))}
-              </DrawerDescription>
-            </DrawerHeader>
-            <ArtistDrawerContent artist={artist} />
+          <div className="px-10 py-8">
+            <ArtistDrawerContent artist={artist} isDrawerOpen={isDrawerOpen} />
           </div>
         </DrawerContent>
       </Drawer>
-      {/* <Anchor href={`${RoutePath.ARTIST}/${id}`} className="ml-5">
-        {name}
-      </Anchor> */}
     </article>
   );
 }
