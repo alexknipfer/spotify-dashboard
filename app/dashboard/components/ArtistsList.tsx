@@ -13,11 +13,7 @@ export default async function ArtistsList({ promise }: Props) {
     <ul>
       {artists.items.map((artistDetails) => (
         <li key={artistDetails.id}>
-          <ArtistCard
-            id={artistDetails.id}
-            name={artistDetails.name}
-            image={artistDetails.images[0]}
-          />
+          <ArtistCard artist={artistDetails} />
         </li>
       ))}
     </ul>

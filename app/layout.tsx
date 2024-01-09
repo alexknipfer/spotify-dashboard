@@ -1,26 +1,18 @@
 import './global.css';
-import localFont from 'next/font/local';
+import { Inter as FontSans } from 'next/font/google';
 import { Metadata, Viewport } from 'next';
 
 import { Providers } from './providers';
+
+import { cn } from '@/lib/utils';
 
 interface Props {
   children: React.ReactNode;
 }
 
-const circularStdFont = localFont({
-  src: [
-    {
-      path: '../public/fonts/CircularStd-Book.woff2',
-      weight: '400',
-      style: 'normal',
-    },
-    {
-      path: '../public/fonts/CircularStd-Bold.woff2',
-      weight: '700',
-      style: 'normal',
-    },
-  ],
+const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
 });
 
 export const metadata: Metadata = {
@@ -58,9 +50,12 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" className={circularStdFont.className}>
+    <html
+      lang="en"
+      className={cn('min-h-screen font-sans antialiased', fontSans.variable)}
+    >
       <Providers>
-        <body className="bg-spotify-gray text-white">{children}</body>
+        <body className="bg-zinc-950 text-white">{children}</body>
       </Providers>
     </html>
   );
