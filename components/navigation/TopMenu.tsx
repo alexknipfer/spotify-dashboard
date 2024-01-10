@@ -1,15 +1,16 @@
 import Link from 'next/link';
 
-import SpotifyLogo from '../public/static/icons/spotify_logo.svg';
+import SpotifyLogo from '../../public/static/icons/spotify_logo.svg';
+import NavProfileMenu from '../NavProfileMenu';
 
 import Nav from './Nav';
-import NavProfileMenu from './NavProfileMenu';
+import MobileNavSheet from './MobileNavSheet';
 
 import { RoutePath } from '@/models/RoutePath.enum';
 
 export default async function TopMenu() {
   return (
-    <div className="flex items-center justify-between h-16 sticky top-0 px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
+    <header className="flex items-center justify-between h-16 sticky top-0 z-50 border-b border-zinc-800 backdrop-blur supports-[backdrop-filter]:bg-background/70 px-6 md:px-16 lg:px-28 max-w-screen-2xl mx-auto">
       <div className="flex items-center">
         <Link
           href={RoutePath.DASHBOARD}
@@ -18,9 +19,10 @@ export default async function TopMenu() {
         >
           <SpotifyLogo />
         </Link>
+        <MobileNavSheet />
         <Nav />
       </div>
       <NavProfileMenu />
-    </div>
+    </header>
   );
 }

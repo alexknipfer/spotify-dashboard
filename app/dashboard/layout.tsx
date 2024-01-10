@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import TopMenu from '@/components/TopMenu';
+import TopMenu from '@/components/navigation/TopMenu';
 
 interface Props {
   children: React.ReactNode;
