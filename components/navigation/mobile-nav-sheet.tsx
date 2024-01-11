@@ -7,7 +7,7 @@ import { useState } from 'react';
 import SpotifyLogo from '../../public/static/icons/spotify_logo.svg';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '../ui/sheet';
 
-import { navItems } from '@/lib/constants';
+import { navItems } from 'config/nav';
 import { RoutePath } from '@/types/route-path.enum';
 
 export default function MobileNavSheet() {

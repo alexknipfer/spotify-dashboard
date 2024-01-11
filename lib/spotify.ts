@@ -1,4 +1,4 @@
-import { appConfig } from '@/lib/app-config';
+import { appConfig } from '@/config/app-config';
 import {
   PlaylistTrack,
   SpotifyArtist,

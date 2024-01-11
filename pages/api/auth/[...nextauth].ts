@@ -3,7 +3,7 @@ import NextAuth, { Account, NextAuthOptions, User } from 'next-auth';
 import { JWT } from 'next-auth/jwt';
 import SpotifyProvider from 'next-auth/providers/spotify';
 
-import { appConfig } from '@/lib/app-config';
+import { appConfig } from '@/config/app-config';
 import { spotifyService } from '@/lib/spotify';
 
 const SPOTIFY_SCOPES = [
