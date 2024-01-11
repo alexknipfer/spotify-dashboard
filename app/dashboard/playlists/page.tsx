@@ -6,12 +6,12 @@ import PlaylistPreviewCard, {
   PlaylistPreviewCardSkeleton,
 } from './components/PlaylistPreviewCard';
 
-import Heading from '@/components/Heading';
-import SkeletonList from '@/components/SkeletonList';
-import usePaginatedData from '@/lib/usePaginatedData';
-import Button from '@/components/Button';
-import { APIRoute } from '@/models/APIRoute.enum';
-import { SpotifyPlaylist } from '@/models/Spotify';
+import Heading from '@/components/heading';
+import SkeletonList from '@/components/skeleton-list';
+import usePaginatedData from '@/hooks/use-paginated-data';
+import Button from '@/components/button';
+import { APIRoute } from '@/types/api-route.enum';
+import { SpotifyPlaylist } from '@/types/spotify.interface';
 
 export default function Playlists() {
   const {

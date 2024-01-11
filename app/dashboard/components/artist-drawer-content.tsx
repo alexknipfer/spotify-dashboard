@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import { Fragment } from 'react';
 
-import Heading from '@/components/Heading';
-import { SpotifyArtist } from '@/models/Spotify';
+import Heading from '@/components/heading';
+import { SpotifyArtist } from '@/types/spotify.interface';
 import HeadlineStatistic, {
   HeadlineStatisticSkeleton,
-} from '@/components/HeadlineStatistic';
-import { useArtist } from '@/lib/useArtist';
+} from '@/components/headline-statistic';
+import { useArtist } from '@/hooks/use-artist';
 import { Badge } from '@/components/ui/badge';
 import { titlecase } from '@/lib/utils';
 import { Button } from '@/components/ui/button';

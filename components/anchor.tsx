@@ -7,7 +7,12 @@ interface Props {
   className?: string;
 }
 
-const Anchor = ({ isExternal, href, children, className }: Props) => {
+export default function Anchor({
+  isExternal,
+  href,
+  children,
+  className,
+}: Props) {
   const classes = `text-white text-base hover:underline ${className}`;
 
   if (isExternal) {
@@ -21,6 +26,4 @@ const Anchor = ({ isExternal, href, children, className }: Props) => {
       {children}
     </Link>
   );
-};
-
-export default Anchor;
+}

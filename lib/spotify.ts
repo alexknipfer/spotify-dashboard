@@ -1,4 +1,4 @@
-import { appConfig } from '@/lib/appConfig';
+import { appConfig } from '@/config/app-config';
 import {
   PlaylistTrack,
   SpotifyArtist,
@@ -12,7 +12,7 @@ import {
   SpotifyTimeRange,
   SpotifyTokenResponse,
   SpotifyTrack,
-} from '@/models/Spotify';
+} from '@/types/spotify.interface';
 import { Fetch } from '@/lib/fetch';
 
 class SpotifyService {

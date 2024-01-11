@@ -1,8 +1,8 @@
 import { Fragment } from 'react';
 
-import { ArtistPreviewCard } from './components/ArtistPreviewCard';
+import { ArtistPreviewCard } from './components/artist-preview-card';
 
-import { SpotifyTimeRange } from '@/models/Spotify';
+import { SpotifyTimeRange } from '@/types/spotify.interface';
 import { isQueryParamValidSpotifyRange } from '@/lib/utils';
 import { spotifyService } from '@/lib/spotify';
 

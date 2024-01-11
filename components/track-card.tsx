@@ -1,9 +1,9 @@
 import Image from 'next/image';
 
-import { Artist, SpotifyAlbum } from '@/models/Spotify';
+import { Artist, SpotifyAlbum } from '@/types/spotify.interface';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
-import Anchor from '@/components/Anchor';
-import { RoutePath } from '@/models/RoutePath.enum';
+import Anchor from '@/components/anchor';
+import { RoutePath } from '@/types/route-path.enum';
 
 interface Props {
   id: string;

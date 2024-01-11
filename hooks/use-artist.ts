@@ -1,7 +1,7 @@
 import useSWR from 'swr';
 
-import { APIRoute } from '@/models/APIRoute.enum';
-import { SpotifyArtist } from '@/models/Spotify';
+import { APIRoute } from '@/types/api-route.enum';
+import { SpotifyArtist } from '@/types/spotify.interface';
 
 export function useArtist(artistId: string, shouldFetch = true) {
   const { data, isLoading, error } = useSWR<SpotifyArtist>(

@@ -3,7 +3,7 @@
 import { Fragment, useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
-import { SpotifyAudioFeatures } from '@/models/Spotify';
+import { SpotifyAudioFeatures } from '@/types/spotify.interface';
 
 const keys = [
   'acousticness',

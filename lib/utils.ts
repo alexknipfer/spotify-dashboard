@@ -1,23 +1,11 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
-import { SpotifyTimeRange } from '@/models/Spotify';
+import { SpotifyTimeRange } from '@/types/spotify.interface';
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-export function pick<T, K extends keyof T>(obj: T, ...keys: K[]): Pick<T, K> {
-  const ret: any = {};
-  keys.forEach((key) => {
-    ret[key] = obj[key];
-  });
-
-  return ret;
-}
-
-export const isBadStatusCode = (res: Response) =>
-  res.status === 204 || res.status > 400;
 
 export const millisToMinutesAndSeconds = (millis: number) => {
   const minutes = Math.floor(millis / 60000);

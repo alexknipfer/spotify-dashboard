@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 
-import Button from '@/components/Button';
-import { SpotifyArtist } from '@/models/Spotify';
-import Heading from '@/components/Heading';
+import Button from '@/components/button';
+import { SpotifyArtist } from '@/types/spotify.interface';
+import Heading from '@/components/heading';
 
 interface Props {
   artist: SpotifyArtist;

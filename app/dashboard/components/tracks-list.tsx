@@ -1,5 +1,8 @@
-import TrackCard from '@/components/TrackCard';
-import { SpotifyPaginatedResponse, SpotifyTrack } from '@/models/Spotify';
+import TrackCard from '@/components/track-card';
+import {
+  SpotifyPaginatedResponse,
+  SpotifyTrack,
+} from '@/types/spotify.interface';
 
 interface Props {
   promise: Promise<SpotifyPaginatedResponse<SpotifyTrack>>;

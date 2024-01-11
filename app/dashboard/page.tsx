@@ -1,13 +1,13 @@
 import { Fragment, Suspense } from 'react';
 
-import ArtistsList from './components/ArtistsList';
-import TracksList from './components/TracksList';
-import { ArtistCardSkeleton } from './components/ArtistCard';
+import ArtistsList from './components/artists-list';
+import TracksList from './components/tracks-list';
+import { ArtistCardSkeleton } from './components/artist-card';
 
-import SkeletonList from '@/components/SkeletonList';
-import Button from '@/components/Button';
-import { RoutePath } from '@/models/RoutePath.enum';
-import { TrackCardSkeleton } from '@/components/TrackCard';
+import SkeletonList from '@/components/skeleton-list';
+import Button from '@/components/button';
+import { RoutePath } from '@/types/route-path.enum';
+import { TrackCardSkeleton } from '@/components/track-card';
 import { spotifyService } from '@/lib/spotify';
 
 export const dynamic = 'force-dynamic';

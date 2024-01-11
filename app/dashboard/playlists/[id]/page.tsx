@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 
-import Tracks from './components/Tracks';
-import PlaylistDetails from './components/PlaylistDetails';
+import Tracks from './components/tracks';
+import PlaylistDetails from './components/playlist-details';
 
 import { spotifyService } from '@/lib/spotify';
 

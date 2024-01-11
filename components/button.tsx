@@ -1,8 +1,9 @@
 'use client';
 
-import classnames from 'classnames';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+
+import { cn } from '@/lib/utils';
 
 interface CustomProps {
   variant: 'primary' | 'outline' | 'unstyled';
@@ -26,7 +27,7 @@ const Button = ({
   isLogout,
   ...props
 }: Props) => {
-  const classes = classnames(
+  const classes = cn(
     `transition duration-200 text-white rounded-full uppercase tracking-widest ${className}`,
     {
       'py-3 px-6 text-xs font-bold':

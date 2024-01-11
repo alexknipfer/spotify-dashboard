@@ -1,4 +1,4 @@
-import { RoutePath } from '@/models/RoutePath.enum';
+import { RoutePath } from '@/types/route-path.enum';
 
 export const navItems = {
   [RoutePath.DASHBOARD]: {

@@ -7,8 +7,8 @@ import { useState } from 'react';
 import SpotifyLogo from '../../public/static/icons/spotify_logo.svg';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '../ui/sheet';
 
-import { navItems } from '@/lib/navItems';
-import { RoutePath } from '@/models/RoutePath.enum';
+import { navItems } from '@/config/nav';
+import { RoutePath } from '@/types/route-path.enum';
 
 export default function MobileNavSheet() {
   const [isOpen, setOpen] = useState(false);

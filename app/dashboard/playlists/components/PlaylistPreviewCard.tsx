@@ -2,9 +2,9 @@
 
 import Image from 'next/image';
 
-import { SpotifyPlaylist } from '@/models/Spotify';
-import Anchor from '@/components/Anchor';
-import { RoutePath } from '@/models/RoutePath.enum';
+import { SpotifyPlaylist } from '@/types/spotify.interface';
+import Anchor from '@/components/anchor';
+import { RoutePath } from '@/types/route-path.enum';
 
 interface Props {
   playlist: SpotifyPlaylist;
