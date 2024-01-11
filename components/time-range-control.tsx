@@ -1,13 +1,13 @@
 'use client';
 
 import { startTransition } from 'react';
-import classnames from 'classnames';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { LayoutGroup, motion } from 'framer-motion';
 
 import Button from '@/components/button';
 import { SpotifyTimeRange } from '@/types/spotify.interface';
 import { RoutePath } from '@/types/route-path.enum';
+import { cn } from '@/lib/utils';
 
 interface TimeRange {
   label: string;
@@ -61,7 +61,7 @@ export default function TimeRangeControl({ route, className }: Props) {
             aria-pressed={value === currentTimeFilter}
           >
             <span
-              className={classnames(
+              className={cn(
                 'relative hover:text-white transition duration-200 text-xs md:text-sm pb-1',
                 {
                   'text-gray-400': value !== currentTimeFilter,
