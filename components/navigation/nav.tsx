@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
+import { navItems } from '@/config/nav';
 import { cn } from '@/lib/utils';
-import { navItems } from 'config/nav';
 
 export default function Nav() {
   const pathname = usePathname();
