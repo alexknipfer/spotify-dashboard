@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { TrackDetailsSkeleton } from './components/TrackDetails';
+import { TrackDetailsSkeleton } from './components/track-details';
 
 import { HeadlineStatisticSkeleton } from '@/components/headline-statistic';
 import SkeletonList from '@/components/skeleton-list';

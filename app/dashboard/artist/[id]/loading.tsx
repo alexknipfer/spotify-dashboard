@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import { ArtistDetailsSkeleton } from './components/ArtistDetails';
+import { ArtistDetailsSkeleton } from './components/artist-details';
 
 import { HeadlineStatisticSkeleton } from '@/components/headline-statistic';
 

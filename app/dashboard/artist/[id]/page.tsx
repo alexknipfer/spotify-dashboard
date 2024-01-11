@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 
-import ArtistDetails from './components/ArtistDetails';
+import ArtistDetails from './components/artist-details';
 
 import HeadlineStatistic from '@/components/headline-statistic';
 import { spotifyService } from '@/lib/spotify';

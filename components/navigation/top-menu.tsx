@@ -3,8 +3,8 @@ import Link from 'next/link';
 import SpotifyLogo from '../../public/static/icons/spotify_logo.svg';
 import NavProfileMenu from '../nav-profile-menu';
 
-import Nav from './Nav';
-import MobileNavSheet from './MobileNavSheet';
+import Nav from './nav';
+import MobileNavSheet from './mobile-nav-sheet';
 
 import { RoutePath } from '@/types/route-path.enum';
 

@@ -1,8 +1,8 @@
 import { Fragment, Suspense } from 'react';
 
-import ArtistsList from './components/ArtistsList';
-import TracksList from './components/TracksList';
-import { ArtistCardSkeleton } from './components/ArtistCard';
+import ArtistsList from './components/artists-list';
+import TracksList from './components/tracks-list';
+import { ArtistCardSkeleton } from './components/artist-card';
 
 import SkeletonList from '@/components/skeleton-list';
 import Button from '@/components/button';

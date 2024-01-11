@@ -1,4 +1,4 @@
-import { ArtistPreviewCardSkeleton } from './components/ArtistPreviewCard';
+import { ArtistPreviewCardSkeleton } from './components/artist-preview-card';
 
 import SkeletonList from '@/components/skeleton-list';
 
