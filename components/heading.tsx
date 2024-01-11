@@ -6,7 +6,7 @@ interface Props {
   className?: string;
 }
 
-const Heading = ({ level, children, className }: Props) => {
+export default function Heading({ level, children, className }: Props) {
   const Tag = level;
 
   return (
@@ -21,6 +21,4 @@ const Heading = ({ level, children, className }: Props) => {
       {children}
     </Tag>
   );
-};
-
-export default Heading;
+}
