@@ -5,9 +5,9 @@ import classnames from 'classnames';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { LayoutGroup, motion } from 'framer-motion';
 
-import Button from '@/components/Button';
-import { SpotifyTimeRange } from '@/models/Spotify';
-import { RoutePath } from '@/models/RoutePath.enum';
+import Button from '@/components/button';
+import { SpotifyTimeRange } from '@/types/spotify.interface';
+import { RoutePath } from '@/types/route-path.enum';
 
 interface TimeRange {
   label: string;
@@ -34,7 +34,7 @@ interface Props {
   className?: string;
 }
 
-export default function TimeRangeControls({ route, className }: Props) {
+export default function TimeRangeControl({ route, className }: Props) {
   const { replace } = useRouter();
   const searchParams = useSearchParams();
   const currentTimeFilter =

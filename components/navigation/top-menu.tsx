@@ -1,12 +1,12 @@
 import Link from 'next/link';
 
 import SpotifyLogo from '../../public/static/icons/spotify_logo.svg';
-import NavProfileMenu from '../NavProfileMenu';
+import NavProfileMenu from '../nav-profile-menu';
 
 import Nav from './Nav';
 import MobileNavSheet from './MobileNavSheet';
 
-import { RoutePath } from '@/models/RoutePath.enum';
+import { RoutePath } from '@/types/route-path.enum';
 
 export default async function TopMenu() {
   return (
