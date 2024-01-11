@@ -10,6 +10,9 @@ export const navItems = {
   [RoutePath.ARTISTS]: {
     name: 'Top Artists',
   },
+  [RoutePath.PLAYLISTS]: {
+    name: 'Playlists',
+  },
   [RoutePath.RECENT]: {
     name: 'Recent',
   },

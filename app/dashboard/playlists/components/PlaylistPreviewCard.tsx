@@ -23,7 +23,7 @@ export default function PlaylistPreviewCard({ playlist }: Props) {
         />
       )}
       <Anchor
-        href={`${RoutePath.PLAYLIST}/${playlist.id}`}
+        href={`${RoutePath.PLAYLISTS}/${playlist.id}`}
         className="block truncate"
       >
         {playlist.name}
