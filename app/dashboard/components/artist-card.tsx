@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import ArtistDrawerContent from './ArtistDrawerContent';
+import ArtistDrawerContent from './artist-drawer-content';
 
 import { SpotifyArtist } from '@/types/spotify.interface';
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer';
