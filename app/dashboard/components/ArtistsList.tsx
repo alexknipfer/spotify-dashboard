@@ -1,6 +1,9 @@
 import ArtistCard from './ArtistCard';
 
-import { SpotifyArtist, SpotifyPaginatedResponse } from '@/models/Spotify';
+import {
+  SpotifyArtist,
+  SpotifyPaginatedResponse,
+} from '@/types/spotify.interface';
 
 interface Props {
   promise: Promise<SpotifyPaginatedResponse<SpotifyArtist>>;

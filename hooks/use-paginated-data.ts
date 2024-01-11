@@ -1,7 +1,7 @@
 import { useMemo, useCallback } from 'react';
 import useSWRInfinite from 'swr/infinite';
 
-import { SpotifyPaginatedResponse } from '@/models/Spotify';
+import { SpotifyPaginatedResponse } from '@/types/spotify.interface';
 
 export interface PaginationConfig {
   url: string;

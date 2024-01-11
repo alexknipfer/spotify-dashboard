@@ -2,8 +2,8 @@ import { Fragment } from 'react';
 
 import { TrackDetailsSkeleton } from './components/TrackDetails';
 
-import { HeadlineStatisticSkeleton } from '@/components/HeadlineStatistic';
-import SkeletonList from '@/components/SkeletonList';
+import { HeadlineStatisticSkeleton } from '@/components/headline-statistic';
+import SkeletonList from '@/components/skeleton-list';
 
 export default function Loading() {
   return (

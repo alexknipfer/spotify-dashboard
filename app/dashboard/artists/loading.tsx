@@ -1,6 +1,6 @@
 import { ArtistPreviewCardSkeleton } from './components/ArtistPreviewCard';
 
-import SkeletonList from '@/components/SkeletonList';
+import SkeletonList from '@/components/skeleton-list';
 
 export default function Loading() {
   return (

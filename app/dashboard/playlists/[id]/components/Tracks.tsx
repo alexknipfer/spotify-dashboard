@@ -2,12 +2,12 @@
 
 import { Fragment } from 'react';
 
-import Button from '@/components/Button';
-import SkeletonList from '@/components/SkeletonList';
-import TrackCard, { TrackCardSkeleton } from '@/components/TrackCard';
-import usePaginatedData from '@/lib/usePaginatedData';
-import { APIRoute } from '@/models/APIRoute.enum';
-import { PlaylistTrack } from '@/models/Spotify';
+import Button from '@/components/button';
+import SkeletonList from '@/components/skeleton-list';
+import TrackCard, { TrackCardSkeleton } from '@/components/track-card';
+import usePaginatedData from '@/hooks/use-paginated-data';
+import { APIRoute } from '@/types/api-route.enum';
+import { PlaylistTrack } from '@/types/spotify.interface';
 
 interface Props {
   playlistId: string;

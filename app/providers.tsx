@@ -2,7 +2,7 @@
 
 import { SessionProvider } from 'next-auth/react';
 
-import CustomSWRConfig from '@/components/CustomSWRConfig';
+import CustomSWRConfig from '@/components/custom-swr-config';
 
 interface Props {
   children: React.ReactNode;

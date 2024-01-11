@@ -1,8 +1,8 @@
 import Image from 'next/image';
 
-import { SpotifyTrack } from '@/models/Spotify';
-import Heading from '@/components/Heading';
-import Button from '@/components/Button';
+import { SpotifyTrack } from '@/types/spotify.interface';
+import Heading from '@/components/heading';
+import Button from '@/components/button';
 
 interface Props {
   track: SpotifyTrack;

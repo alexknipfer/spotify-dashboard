@@ -1,5 +1,5 @@
-import { SpotifyTimeRange } from '@/models/Spotify';
-import TrackCard from '@/components/TrackCard';
+import { SpotifyTimeRange } from '@/types/spotify.interface';
+import TrackCard from '@/components/track-card';
 import { isQueryParamValidSpotifyRange } from '@/lib/utils';
 import { spotifyService } from '@/lib/spotify';
 

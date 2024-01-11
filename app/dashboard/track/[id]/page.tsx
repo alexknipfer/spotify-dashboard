@@ -3,7 +3,7 @@ import { Fragment } from 'react';
 import AudioFeaturesChart from './components/AudioFeaturesChart';
 import TrackDetails from './components/TrackDetails';
 
-import HeadlineStatistic from '@/components/HeadlineStatistic';
+import HeadlineStatistic from '@/components/headline-statistic';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
 import { spotifyService } from '@/lib/spotify';
 

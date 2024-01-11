@@ -1,6 +1,6 @@
 'use client';
 
-import Heading from '@/components/Heading';
+import Heading from '@/components/heading';
 
 interface Props {
   error: Error;

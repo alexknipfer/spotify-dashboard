@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 import { ArtistDetailsSkeleton } from './components/ArtistDetails';
 
-import { HeadlineStatisticSkeleton } from '@/components/HeadlineStatistic';
+import { HeadlineStatisticSkeleton } from '@/components/headline-statistic';
 
 export default function Loading() {
   return (

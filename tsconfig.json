@@ -21,7 +21,9 @@
       "@/lib/*": ["lib/*"],
       "@/models/*": ["models/*"],
       "@/styles/*": ["styles/*"],
-      "@/hoc/*": ["hoc/*"]
+      "@/hoc/*": ["hoc/*"],
+      "@/types/*": ["types/*"],
+      "@/hooks/*": ["hooks/*"]
     },
     "incremental": true,
     "plugins": [

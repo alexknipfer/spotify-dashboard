@@ -1,12 +1,12 @@
 import { redirect } from 'next/navigation';
 import { getServerSession } from 'next-auth/next';
 
-import { RoutePath } from '../../models/RoutePath.enum';
+import { RoutePath } from '../../@/types/route-path.enum';
 import { authOptions } from '../../pages/api/auth/[...nextauth]';
 
 import LoginButton from './components/LoginButton';
 
-import Heading from '@/components/Heading';
+import Heading from '@/components/heading';
 
 export default async function Login() {
   const session = await getServerSession(authOptions);

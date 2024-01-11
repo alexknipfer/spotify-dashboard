@@ -2,7 +2,7 @@ import { Fragment } from 'react';
 
 import ArtistDetails from './components/ArtistDetails';
 
-import HeadlineStatistic from '@/components/HeadlineStatistic';
+import HeadlineStatistic from '@/components/headline-statistic';
 import { spotifyService } from '@/lib/spotify';
 
 interface Props {
