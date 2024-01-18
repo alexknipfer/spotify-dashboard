@@ -5,14 +5,14 @@ import { authOptions } from '../../pages/api/auth/[...nextauth]';
 
 import LoginButton from './components/login-button';
 
-import { RoutePath } from '@/types/route-path.enum';
 import Heading from '@/components/heading';
+import { DashboardRoutes } from '@/config/route-config';
 
 export default async function Login() {
   const session = await getServerSession(authOptions);
 
   if (session) {
-    redirect(RoutePath.DASHBOARD);
+    redirect(DashboardRoutes.base.template);
   }
 
   return (

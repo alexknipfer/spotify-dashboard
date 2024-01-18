@@ -6,9 +6,9 @@ import { ArtistCardSkeleton } from './components/artist-card';
 
 import SkeletonList from '@/components/skeleton-list';
 import Button from '@/components/button';
-import { RoutePath } from '@/types/route-path.enum';
 import { TrackCardSkeleton } from '@/components/track-card';
 import { spotifyService } from '@/lib/spotify';
+import { DashboardRoutes } from '@/config/route-config';
 
 export const dynamic = 'force-dynamic';
 
@@ -27,7 +27,7 @@ export default async function Dashboard() {
             <Button
               variant="outline"
               buttonSize="small"
-              hrefInternal={RoutePath.ARTISTS}
+              hrefInternal={DashboardRoutes.artists.template}
             >
               See More
             </Button>
@@ -48,7 +48,7 @@ export default async function Dashboard() {
             <Button
               variant="outline"
               buttonSize="small"
-              hrefInternal={RoutePath.TRACKS}
+              hrefInternal={DashboardRoutes.tracks.template}
             >
               See More
             </Button>

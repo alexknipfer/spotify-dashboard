@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
-import { navItems } from '@/config/nav';
+import { NavigationHeaderRoutes } from '@/config/route-config';
 import { cn } from '@/lib/utils';
 
 export default function Nav() {
@@ -11,12 +11,12 @@ export default function Nav() {
 
   return (
     <nav className="hidden md:block space-x-4">
-      {Object.entries(navItems).map(([path, { name }]) => (
+      {NavigationHeaderRoutes.map(({ template, name }) => (
         <Link
-          key={path}
-          href={path}
+          key={template}
+          href={template}
           className={cn('text-zinc-50 font-medium text-sm', {
-            'text-zinc-400': pathname !== path,
+            'text-zinc-400': pathname !== template,
           })}
         >
           {name}

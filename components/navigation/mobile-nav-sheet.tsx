@@ -7,8 +7,7 @@ import { useState } from 'react';
 import SpotifyLogo from '../../public/static/icons/spotify_logo.svg';
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from '../ui/sheet';
 
-import { navItems } from '@/config/nav';
-import { RoutePath } from '@/types/route-path.enum';
+import { DashboardRoutes, NavigationHeaderRoutes } from '@/config/route-config';
 
 export default function MobileNavSheet() {
   const [isOpen, setOpen] = useState(false);
@@ -26,7 +25,7 @@ export default function MobileNavSheet() {
       <SheetContent side="left">
         <SheetHeader>
           <Link
-            href={RoutePath.DASHBOARD}
+            href={DashboardRoutes.base.template}
             className="w-24 mr-6"
             aria-label="Return to dashboard"
             onClick={() => {
@@ -37,10 +36,10 @@ export default function MobileNavSheet() {
           </Link>
         </SheetHeader>
         <nav className="flex flex-col space-y-3 px-3 py-8">
-          {Object.entries(navItems).map(([path, { name }]) => (
+          {NavigationHeaderRoutes.map(({ template, name }) => (
             <Link
-              key={path}
-              href={path}
+              key={template}
+              href={template}
               className="text-zinc-50"
               onClick={() => {
                 setOpen(false);
