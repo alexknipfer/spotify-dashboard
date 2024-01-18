@@ -6,7 +6,6 @@ import { LayoutGroup, motion } from 'framer-motion';
 
 import Button from '@/components/button';
 import { SpotifyTimeRange } from '@/types/spotify.interface';
-import { RoutePath } from '@/types/route-path.enum';
 import { cn } from '@/lib/utils';
 
 interface TimeRange {
@@ -30,7 +29,7 @@ const timeRanges: TimeRange[] = [
 ];
 
 interface Props {
-  route: RoutePath;
+  route: string;
   className?: string;
 }
 

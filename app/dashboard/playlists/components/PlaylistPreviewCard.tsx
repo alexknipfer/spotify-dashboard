@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 import { SpotifyPlaylist } from '@/types/spotify.interface';
 import Anchor from '@/components/anchor';
-import { RoutePath } from '@/types/route-path.enum';
+import { DashboardRoutes } from '@/config/route-config';
 
 interface Props {
   playlist: SpotifyPlaylist;
@@ -23,7 +23,7 @@ export default function PlaylistPreviewCard({ playlist }: Props) {
         />
       )}
       <Anchor
-        href={`${RoutePath.PLAYLISTS}/${playlist.id}`}
+        href={DashboardRoutes.playlists.make({ playlistId: playlist.id })}
         className="block truncate"
       >
         {playlist.name}

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { Artist, SpotifyAlbum } from '@/types/spotify.interface';
 import { millisToMinutesAndSeconds } from '@/lib/utils';
 import Anchor from '@/components/anchor';
-import { RoutePath } from '@/types/route-path.enum';
+import { DashboardRoutes } from '@/config/route-config';
 
 interface Props {
   id: string;
@@ -34,7 +34,10 @@ export default function TrackCard({
       </div>
       <div className="ml-5 truncate w-full">
         <div className="flex justify-between">
-          <Anchor href={`${RoutePath.TRACK}/${id}`} className="truncate mr-2">
+          <Anchor
+            href={DashboardRoutes.track.make({ trackId: id })}
+            className="truncate mr-2"
+          >
             {name}
           </Anchor>
           <span className="text-gray-400 text-sm">
